@@ -2,14 +2,19 @@
 <head>
 	<title>Se faire une toile - Home</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<header>
 		<img src="">
 	</header>
 	<form action="#">
-		<input type="text" id="autocomplete" placeholder="Entrez une adresse" onFocus="geolocate()">
-		<input type="text" id="movie">
+		<input type="text" id="autocomplete" placeholder="Entrez une adresse">
+		OU
+		<input type="button" id="geolocaliseMoi" value="Geolocalisez-moi">
+		<br />
+		<br />
+		<input type="text" id="movie" placeholder="Entrez un film (facultatif)">
 		<input type="submit" value="Chercher">
 	</form>
 	<div id="map"></div>
@@ -21,10 +26,3 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEIF4I4xIgInAxD6qxo52UzbTvi6KlO1k&signed_in=true&libraries=places"
     async defer></script>
 </html>
-
-<!--
-<div id="locationField">
-      <input id="autocomplete" placeholder="Enter your address"
-             onFocus="geolocate()" type="text"></input>
-    </div>
-	-->
