@@ -1,9 +1,25 @@
 
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 100%;
-      }
+html, body {
+	height: 100%;
+    margin: 0;
+    padding: 0;
+	background: url('images/background.jpg') no-repeat center;
+	height: 100%;
+	-webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  	background-size: cover; /* version standardisée */
+}
+#map {
+    height: 100%;
+}
+
+header {
+	background-color: rgba(0,0,0,0.5);
+
+}
+main {
+	
+}
+footer {
+	background-color: black;
+	height: 70px;
+	}
