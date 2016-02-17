@@ -42,4 +42,14 @@ footer {
 
 p {
 	color : white;
+	display: inline-block;
+}
+
+#copyright {
+
+}
+
+#MadeBy {
+	position: relative;
+	left: 800px;
 }
