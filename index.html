@@ -1,28 +1,39 @@
 <html>
 <head>
-	<title>Se faire une toile - Home</title>
+	<title>Une toile ensemble - Home</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 </head>
 <body>
 	<header>
-		<img src="">
+		<img src="css/images/Une-toile-ensemble-white.png" alt="Logo Une toile ensemble, partageons nos émotions" height="70px">
 	</header>
+
+	<main>
+	<div id='container'>	
+	<div id='recherche'>
 	<form action="#">
-		<input type="text" id="autocomplete" placeholder="Entrez une adresse">
-		OU
-		<input type="button" id="geolocaliseMoi" value="Geolocalisez-moi">
-		<br />
-		<br />
-		<input type="text" id="movie" placeholder="Entrez un film (facultatif)">
-		<input type="submit" id="chercher" value="Chercher">
+		<ul>
+			<li><input type="text" id="autocomplete" placeholder="Entrez une adresse"></li>
+			<li><input type="button" id="geolocaliseMoi" value="Geolocalisez-moi"></li>
+			<li><input type="text" id="movie" placeholder="Entrez un film (facultatif)"></li>
+			<li><input type="submit" id="chercher" value="Chercher"></li>
+		</ul>
 	</form>
+	</div>
+</div>
+
 	<ul id="movie_list">
 	<div id="map"></div>
+	</main>
+
 	<footer>
-		Baseline avec un petit copyright
-	</footer>
+		<p id="copyright">© 2016 UNE TOILE ENSEMBLE</p>
+		<div id="MadeBy">Made with love by Mathilde | Ophélie | Julien | Vincent</div>
+ 	</footer>
 </body>
 	<script type="text/javascript" src="js/javascript.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEIF4I4xIgInAxD6qxo52UzbTvi6KlO1k&signed_in=true&libraries=places"
