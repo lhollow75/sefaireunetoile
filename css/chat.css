@@ -12,7 +12,7 @@ html, body {
 #chatroom{
 	height: 400px;
 	width: 230px;
-	background-color: black;
+	background-color: black !important;
 }
 
 
