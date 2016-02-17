@@ -1,0 +1,21 @@
+
+html, body {
+	height: 100%;
+    margin: 0;
+    padding: 0;
+	background: url('images/background.jpg') no-repeat center;
+	height: 100%;
+	-webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  	background-size: cover; /* version standardisée */
+}
+
+#chatroom{
+	height: 400px;
+	width: 230px;
+	background-color: black;
+}
+
+
+#formulaire_chat{
+	bottom:0px;
+}
