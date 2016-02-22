@@ -21,17 +21,20 @@ elt_geolocalisation.addEventListener("click", geolocalisation);
 elt_movie.addEventListener("keyup", movieFinder);
 elt_chercher.addEventListener("click", recherche);
 
+document.getElementById('section2').style.display="block";
+document.getElementById('section3').style.display="none";
+document.getElementById('section4').style.display="none";
+document.getElementById('section5').style.display="none";
 
 // Lance la récupération de la liste des films dès la chargement de la page
 recup_liste_films_en_salle();
 
-function affiche_tab(){
-	console.log(tab_filmsEnSalle);
-	console.log("longueur: "+tab_filmsEnSalle.length);
-}
-
+// Initialisation de la carte lors du clique sur le bouton recherche
 function recherche(){
+	geolocalisation();
 	initMap(latitude, longitude);
+	document.getElementById('section2').style.display="none";
+	document.getElementById('section3').style.display="block";
 }
 
 // Géolocalise l'utilisateur à partir des données du navigateur
@@ -80,7 +83,7 @@ function geolocate() {
 		longitude = place.geometry.location.lng();
 		// initMap(place.geometry.location.lat(), place.geometry.location.lng());
 	});
-	console.log(latitude+"/"+longitude);
+	// console.log(latitude+"/"+longitude);
 	
 }
 
