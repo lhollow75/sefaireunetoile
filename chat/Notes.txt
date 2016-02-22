@@ -1,0 +1,28 @@
+Notes DEV - Intégration au site terminé
+
+//Intégration des chatrooms :
+var roomNumber = document.getElementsByClassName(‘horaires-liste’)[0],
+    roomsAdd = roomNumber.getElementsByTagName(‘li’);
+
+for (i = 0 ; i < roomsAdd.length ; i++){
+	[boutonsearch].addEventListener(‘click’,function(){
+		//BLabla connection à la chatroom par le biais de :
+		socket.on('connect', function(){
+		// Store the username in the socket session for this client.
+        var username = prompt('Quel est votre nom ?');
+		socket.username = username;
+		// Store the room name in the socket session for this client.
+		socket.room = '[roomchoisie][i]';
+		// Add the client's username to the global list.
+		usernames[username] = username;
+		// Send client to room 1 (WILL BE SELECTED ROOM (FILM SHOW SELECTED), PREVIOUSLY CHOSEN BY THE USER.)
+		socket.join('[roomchoisie][i]');
+		// Emit to client they've connected
+		socket.emit('updatechat', 'Chat', 'Vous êtes connecté à la room[i]');
+		// Emit to room 1 that a person has connected to their room
+		socket.broadcast.to('room[i]').emit('updatechat', 'Chat', username + ' est connecté à cette conversation.');
+        //Call for the 'updaterooms' event, send var rooms, event appearing in room 1 
+		socket.emit('updaterooms', rooms, 'room[i]');
+	});
+}
+
