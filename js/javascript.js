@@ -84,7 +84,7 @@ function geolocate() {
 
 // Lance la recherche du film dans la tableau à chaque ajout d'une lettre
 function movieFinder(){
-	$('li').remove();
+	$(".movie-results").remove();
 	if (elt_movie.value.length >= 3){
 		recherche = traitementChaine(elt_movie.value);
 		// console.log(recherche);
@@ -135,13 +135,13 @@ function searchStringInArray (str, strArray) {
 
 function afficheFilm(film){
 	movie.value = film.toElement.innerHTML;
-	$('li').remove();
+	$(".movie-results").remove();
 }
 
 // Affichage des films
 var template = function(list, id){
 	var _tpl = [
-		'<li>',
+		'<li class="movie-results">',
 			'<span id="'+id+'">'+list+'</span>',
 		'</li>'
 	]
