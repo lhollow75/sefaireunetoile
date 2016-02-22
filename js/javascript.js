@@ -87,11 +87,9 @@ function geolocate() {
 // Lance la recherche du film dans la tableau à chaque ajout d'une lettre
 function movieFinder(){
 	$(".movie-results").remove();
-	if (elt_movie.value.length >= 3){
+	if (elt_movie.value.length >= 2){
 		recherche = traitementChaine(elt_movie.value);
-		// console.log(recherche);
 		searchStringInArray(recherche,tab_filmsEnSalle);	
-		// affiche_tab();
 	}
 }
 
@@ -135,8 +133,14 @@ function searchStringInArray (str, strArray) {
 	return -1;
 }
 
+// Affiche le film dans le champs de recherche en fonction de l'endroit cliqué
 function afficheFilm(film){
-	movie.value = film.toElement.innerHTML;
+	if (film.toElement.innerHTML == ""){
+		film = film.srcElement.alt;
+	} else {
+		film = film.toElement.innerHTML;
+	}
+	movie.value = film;
 	$(".movie-results").remove();
 }
 
@@ -179,22 +183,25 @@ function recup_liste_films(recup_film){
 		code_film = recup_film.feed.movie[k].code;
 		tab_filmsEnSalle.push(code_film+";"+film);
 		
-		if (film_recent<2){
+		if (film_recent<6){
 			synopsisShort = recup_film.feed.movie[k].synopsisShort;
-			pressRate = (Math.round(recup_film.feed.movie[k].statistics.pressRating * 2)*0.5);
-			userRate = (Math.round(recup_film.feed.movie[k].statistics.userRating * 2)*0.5);
+			pressRate = (Math.round(recup_film.feed.movie[k].statistics.pressRating * 2)*0.5)*10;
+			userRate = (Math.round(recup_film.feed.movie[k].statistics.userRating * 2)*0.5)*10;
 
 			// Affichage des éléments du film
 			document.getElementById('titre'+film_recent).innerHTML = film;
+			document.getElementById('affiche'+film_recent).alt = film;
 			document.getElementById('synopsis'+film_recent).innerHTML = synopsisShort;
-			document.getElementById('note-presse'+film_recent).className = "note-presse note-"+pressRate*10;
-			document.getElementById('note-spectateurs'+film_recent).className = "note-spectateurs note-"+userRate*10;
+			document.getElementById('note-presse'+film_recent).className = "note-presse note-"+pressRate;
+			document.getElementById('note-spectateurs'+film_recent).className = "note-spectateurs note-"+userRate;
+			document.getElementById('affiche'+film_recent).addEventListener('click', afficheFilm);
 			
 			var allocine_api_recherche = "http://api.allocine.fr/rest/v3/movie?partner="+key_allocine+"&code="+code_film+"&profile=large&format=json";
 			(function(fr){ $.getJSON(allocine_api_recherche, function(d){ recup_info_films(d, fr) }); })(film_recent)
 		}
 	}
 }
+
 
 function recup_info_films(recup_info, fr){
 	document.getElementById('affiche'+fr).src = recup_info.movie.media[0].thumbnail.href;
