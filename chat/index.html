@@ -149,7 +149,7 @@ abbr,acronym { border:0;
 
 	// Listener, whenever the server emits 'updatechat', this updates the chat body :
 	socket.on('updatechat', function (username, data) {
-		$('#zone_chat').append('<p class="test"><span class="contact_nickname">'+username + '</span><span class="arrow"></span><span class="contact_message">' + data + '</p>');
+        $('#zone_chat').append('<p class="test"><span class="contact_nickname">'+username + '</span><span class="arrow"></span><span class="contact_message">' + data + '</p>');
 	});
 
 	// When the server emits 'updaterooms', this updates the room the client is in :
