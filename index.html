@@ -3,35 +3,238 @@
 	<title>Une toile ensemble - Home</title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,600,600italic,700italic,700' rel='stylesheet' type='text/css'>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 </head>
 <body>
 	<header>
-		<img src="css/images/Une-toile-ensemble-white.png" alt="Logo Une toile ensemble, partageons nos émotions" height="70px">
+		<div class="icon-logo"></div>
 	</header>
 
-	<main>
-	<div id='container'>	
-	<div id='recherche'>
-	<form action="#">
-		<input type="text" id="autocomplete" placeholder="Entrez une adresse">
-		<input type="button" id="geolocaliseMoi" value="Geolocalisez-moi">
-		<input type="text" id="movie" placeholder="Entrez un film (facultatif)">
-		<input type="submit" id="chercher" value="Chercher">
-	</form>
+	<div class="section1">
+		<div id="footer_section1">	
+			<div id="searchbar">
+				<div class="case-input searchbar_location">
+					<input type="text" id="autocomplete" placeholder="Entrez une adresse">
+				</div>
+				<div class="case-input">
+					<button type="button" id="geolocaliseMoi" class="btn-location">
+						<span class="icon-location-pin"></span>
+					</button>
+				</div>
+				<div class="case-input searchbar_movies">
+					<input type="text" id="movie" placeholder="Entrez un film (facultatif)">
+				</div>
+				<div class="case-input search_button btn">
+					<button type="submit" id="chercher">Chercher</button>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
 
 	<ul id="movie_list">
 	</ul>
-	<div id="map"></div>
-	</main>
+
+	<div class="section2">
+		<div id="map"></div>
+	</div>
+
+
+	<div class="section3">
+		<div id="movies">
+			<div class="title-section">
+				<div class="bordure"></div>
+				<div class="title-main">À l'affiche</div>
+				<div class="title-sub">Sélectionner un film actuellement en salle</div>
+			</div>
+			 <ul class="ca-menu-movies">
+                    <li>
+                        <a href="#">
+                            <img class="ca-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                                <div class="ca-content">
+                                <h3 class="ca-title">Alvin et les chipmunks - À fond la caisse</h3>
+                                <div class="ca-presse">Presse
+                                	<span class="note-presse"></span>
+                                </div>
+                                <div class="ca-spectateurs">Spectateurs
+                                	<span class="note-spectateurs"></span>
+                                </div>
+                                <p class="synopsis">Après une série de malentendus, Alvin, Simon et Théodore comprennent que Dave va demander sa petite amie en mariage à Miami et risque de les abandonner. Ils ont trois jours pour le retrouver et empêcher ce mariage. Ils se lancent alors dans un road trip à travers l'Amérique : aventure, musique et grosses bêtises.</p>
+                                <!--<button>Sélectionner</button>-->
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="ca-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                                <div class="ca-content">
+                                <h3 class="ca-title">Alvin et les chipmunks - À fond la caisse</h3>
+                                <div class="ca-presse">Presse
+                                	<span class="note-presse"></span>
+                                </div>
+                                <div class="ca-spectateurs">Spectateurs
+                                	<span class="note-spectateurs"></span>
+                                </div>
+                                <p class="synopsis">Après une série de malentendus, Alvin, Simon et Théodore comprennent que Dave va demander sa petite amie en mariage à Miami et risque de les abandonner. Ils ont trois jours pour le retrouver et empêcher ce mariage. Ils se lancent alors dans un road trip à travers l'Amérique : aventure, musique et grosses bêtises.</p>
+                                <!--<button>Sélectionner</button>-->
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="ca-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                                <div class="ca-content">
+                                <h3 class="ca-title">Alvin et les chipmunks - À fond la caisse</h3>
+                                <div class="ca-presse">Presse
+                                	<span class="note-presse"></span>
+                                </div>
+                                <div class="ca-spectateurs">Spectateurs
+                                	<span class="note-spectateurs"></span>
+                                </div>
+                                <p class="synopsis">Après une série de malentendus, Alvin, Simon et Théodore comprennent que Dave va demander sa petite amie en mariage à Miami et risque de les abandonner. Ils ont trois jours pour le retrouver et empêcher ce mariage. Ils se lancent alors dans un road trip à travers l'Amérique : aventure, musique et grosses bêtises.</p>
+                                <!--<button>Sélectionner</button>-->
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="ca-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                                <div class="ca-content">
+                                <h3 class="ca-title">Alvin et les chipmunks - À fond la caisse</h3>
+                                <div class="ca-presse">Presse
+                                	<span class="note-presse"></span>
+                                </div>
+                                <div class="ca-spectateurs">Spectateurs
+                                	<span class="note-spectateurs"></span>
+                                </div>
+                                <p class="synopsis">Après une série de malentendus, Alvin, Simon et Théodore comprennent que Dave va demander sa petite amie en mariage à Miami et risque de les abandonner. Ils ont trois jours pour le retrouver et empêcher ce mariage. Ils se lancent alors dans un road trip à travers l'Amérique : aventure, musique et grosses bêtises.</p>
+                                <!--<button>Sélectionner</button>-->
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="lien-affiche" href="#">
+                            <img class="ca-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                                <div class="ca-content">
+	                                <h3 class="ca-title">Alvin et les chipmunks - À fond la caisse</h3>
+	                                <div class="ca-presse">Presse
+	                                	<span class="note-presse note-0"></span>
+	                                </div>
+	                                <div class="ca-spectateurs">Spectateurs
+	                                	<span class="note-spectateurs note-0"></span>
+	                                </div>
+	                                <p class="synopsis">Après une série de malentendus, Alvin, Simon et Théodore comprennent que Dave va demander sa petite amie en mariage à Miami et risque de les abandonner. Ils ont trois jours pour le retrouver et empêcher ce mariage. Ils se lancent alors dans un road trip à travers l'Amérique : aventure, musique et grosses bêtises.</p>
+	                                <!--<button>Sélectionner</button>-->
+                            	</div>
+                        </a>
+                    </li>
+                </ul>
+		</div>
+	</div>
+
+	<div class="section4">
+		<div id="movies">
+			<div class="title-section">
+				<div class="bordure"></div>
+				<div class="title-main">Les séances</div>
+				<div class="title-sub">Sélectionner un horaire pour votre film</div>
+			</div>
+			<div class="seance">
+			<!-- infos film -->
+			<div class="chosen_movie">
+				
+				<img class="ca-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                <div class="ca-content">
+                                <h3 class="ca-title">Alvin et les chipmunks - À fond la caisse</h3>
+                                <div class="ca-presse">Presse
+                                	<span class="note-presse"></span>
+                                </div>
+                                <div class="ca-spectateurs">Spectateurs
+                                	<span class="note-spectateurs"></span>
+                                </div>
+                                <p class="synopsis">Après une série de malentendus, Alvin, Simon et Théodore comprennent que Dave va demander sa petite amie en mariage à Miami et risque de les abandonner. Ils ont trois jours pour le retrouver et empêcher ce mariage. Ils se lancent alors dans un road trip à travers l'Amérique : aventure, musique et grosses bêtises.</p>
+                                <!--<button>Sélectionner</button>-->
+                </div>
+            
+			</div>
+			<!-- Fin infos film -->
+		<div class="liste-seances">
+			<ul class="horaires-liste">
+				<li>
+					<h3 class="horaires-title">Horaires</h3>
+					<div class="horaires-text"><span>Début : <span><span>22h30<span></div>
+					<div class="horaires-text"><span>Fin : <span><span>22h30<span></div>
+					
+					<button class="horaires-btn">Rejoindre le groupe</button>
+					<div class="circle">
+						<span data-notification="88" class="notifications"></span>
+					</div>
+				</li>
+				<li>
+					<h3 class="horaires-title">Horaires</h3>
+					<div class="horaires-text"><span>Début : <span><span>22h30<span></div>
+					<div class="horaires-text"><span>Fin : <span><span>22h30<span></div>
+					
+					<button class="horaires-btn">Rejoindre le groupe</button>
+					<div class="circle">
+						<span data-notification="88" class="notifications"></span>
+					</div>
+				</li>
+				<li>
+					<h3 class="horaires-title">Horaires</h3>
+					<div class="horaires-text"><span>Début : <span><span>22h30<span></div>
+					<div class="horaires-text"><span>Fin : <span><span>22h30<span></div>
+					
+					<button class="horaires-btn">Rejoindre le groupe</button>
+					<div class="circle">
+						<span data-notification="88" class="notifications"></span>
+					</div>
+				</li>
+				<li>
+					<h3 class="horaires-title">Horaires</h3>
+					<div class="horaires-text"><span>Début : <span><span>22h30<span></div>
+					<div class="horaires-text"><span>Fin : <span><span>22h30<span></div>
+					
+					<button class="horaires-btn">Rejoindre le groupe</button>
+					<div class="circle">
+						<span data-notification="88" class="notifications"></span>
+					</div>
+				</li>
+				<li>
+					<h3 class="horaires-title">Horaires</h3>
+					<div class="horaires-text"><span>Début : <span><span>22h30<span></div>
+					<div class="horaires-text"><span>Fin : <span><span>22h30<span></div>
+					
+					<button class="horaires-btn">Rejoindre le groupe</button>
+					<div class="circle">
+						<span data-notification="88" class="notifications"></span>
+					</div>
+				</li>
+				<li>
+					<h3 class="horaires-title">Horaires</h3>
+					<div class="horaires-text"><span>Début : <span><span>22h30<span></div>
+					<div class="horaires-text"><span>Fin : <span><span>22h30<span></div>
+					
+					<button class="horaires-btn">Rejoindre le groupe</button>
+					<div class="circle">
+						<span data-notification="88" class="notifications"></span>
+					</div>
+				</li>
+			</ul>
+
+		</div>
+
+</div>
+
+		</div>
+	</div>
+
+
 
 	<footer>
-		<p id="copyright">© 2016 UNE TOILE ENSEMBLE</p>
-		<p id="MadeBy">Made with love by Mathilde | Ophélie | Julien | Vincent</p>
+		<div id="copyright">© 2016 Une toile ensemble</div>
+		<div id="MadeBy">Made with love by Mathilde | Ophélie | Julien | Vincent</div>
  	</footer>
 </body>
 	<script type="text/javascript" src="js/javascript.js"></script>
