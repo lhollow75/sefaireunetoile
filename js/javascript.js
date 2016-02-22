@@ -10,6 +10,8 @@ var elt_movie_list = document.getElementById('movie_list');
 var google_search_api = "http://suggestqueries.google.com/complete/search?client=firefox&q=";
 var key_allocine = "YW5kcm9pZC12Mg";
 var tab_filmsEnSalle = [];
+var tab_filmsSansNom = [];
+var tab_split = [" Bande-annonce"," - BANDE-ANNONCE", " Teaser", " TEASER", " - EXTRAIT", " - Extrait", " Extrait"];
 var nb_pages;
 
 elt_autocomplete.addEventListener("focus", geolocate);
@@ -23,6 +25,7 @@ recup_liste_films_en_salle();
 
 function affiche_tab(){
 	console.log(tab_filmsEnSalle);
+	console.log("longueur: "+tab_filmsEnSalle.length);
 }
 
 function recherche(){
@@ -86,6 +89,7 @@ function movieFinder(){
 		recherche = traitementChaine(elt_movie.value);
 		// console.log(recherche);
 		searchStringInArray(recherche,tab_filmsEnSalle);	
+		// affiche_tab();
 	}
 }
 
@@ -118,6 +122,9 @@ function searchStringInArray (str, strArray) {
 			trouve = tab_filmsEnSalle[index_film].split(";");
 			titre_film = trouve[1];
 			id_film = trouve[0];
+			// console.log(id_film);
+			// console.log(titre_film);
+			
 			$("#movie_list").append(template(titre_film, id_film));
 			document.getElementById(id_film).addEventListener('click', afficheFilm);
 			fin++;
@@ -149,7 +156,7 @@ function recup_liste_films_en_salle(){
 
 // Appel à l'api allociné en fonction du nombre de page
 function recup_liste(recup_movie){
-	console.log(recup_movie.feed);
+	// console.log(recup_movie.feed);
 	
 	if (recup_movie.feed.totalResults > 0) {
 		nb_pages = Math.ceil(recup_movie.feed.totalResults/10);
@@ -163,12 +170,18 @@ function recup_liste(recup_movie){
 
 // Récupère sur chaque page la liste de film et l'ajoute dans le tableau tab_filmsEnSalle
 function recup_liste_films(recup_film){
-	for(var k=0; k< recup_film.feed.movie.length; k++){
-		// console.log(typeof recup_film.feed.movie[k].keywords);
-		if (recup_film.feed.movie[k].keywords != undefined ) {
-			tab_filmsEnSalle.push(recup_film.feed.movie[k].code+";"+recup_film.feed.movie[k].keywords);
-		} else if (recup_film.feed.movie[k].originalTitle != "Mise à jour sur Google play" ){
-			tab_filmsEnSalle.push(recup_film.feed.movie[k].code+";"+recup_film.feed.movie[k].originalTitle);
-		}		
+	for(var k=0; k< recup_film.feed.movie.length; k++){	
+		film = recup_film.feed.movie[k].defaultMedia.media.title;
+		tab_filmsEnSalle.push(recup_film.feed.movie[k].code+";"+splitNom(film));
 	}
+}
+
+// Récupère le nom du film dans le titre de la Bande-annonce
+function splitNom(titre){
+	var trouve = 0;
+	for (k=0; k < tab_split.length && trouve == 0; k++){
+		tab_decoupe_film = titre.split(tab_split[k]);
+		if (tab_decoupe_film.length > 1) trouve = 1;
+	}
+	return tab_decoupe_film[0];
 }
