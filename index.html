@@ -25,6 +25,9 @@
 				</div>
 				<div class="case-input searchbar_movies">
 					<input type="text" id="movie" placeholder="Entrez un film (facultatif)">
+						<ul id="movie_list">
+
+						</ul>
 				</div>
 				<div class="case-input search_button btn">
 					<button type="submit" id="chercher">Chercher</button>
@@ -33,16 +36,135 @@
 		</div>
 	</div>
 
-	<ul id="movie_list">
-	</ul>
+	<!--<ul id="movie_list">
+		<li>Film 1</li>
+		<li>Film 2</li>
+		<li>Film 3</li>
+	</ul>-->
 
+
+	<div class="section3">
+		<div class="movies">
+			<div class="title-section">
+				<div class="bordure"></div>
+				<div class="title-main">Sorties de la semaine</div>
+				<div class="title-sub">Nouveaux films</div>
+			</div>
+			 <ul class="ca-menu-movies">
+                    <li>
+                        <a href="#">
+                        	<!-- affiche du film (ajouter le titre du film en alt)-->
+                            <img class="ca-affiche" src="img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="Deadpool">
+
+                                <div class="ca-content">
+                                <h3 class="ca-title">Deadpool</h3>
+
+                                <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
+                                <div class="ca-presse">Presse
+                                	<span class="note-presse note-6"></span>
+                                </div>
+                                <div class="ca-spectateurs">Spectateurs
+                                	<span class="note-spectateurs note-9"></span>
+                                </div>
+                                <!-- Fin Notations -->
+
+                                <p class="synopsis">A l'origine, il s'appelle Wade Wilson : un ancien militaire des Forces Spéciales devenu mercenaire. Après avoir subi une expérimentation hors norme qui va accélérer ses pouvoirs de guérison, il va devenir Deadpool. Armé de ses nouvelles capacités et d'un humour noir survolté, Deadpool va traquer l'homme qui a bien failli anéantir sa vie.</p>
+                                <!--<button>Sélectionner</button>-->
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="ca-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                                <div class="ca-content">
+                                <h3 class="ca-title">Alvin et les chipmunks - À fond la caisse</h3>
+
+                                <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
+                                <div class="ca-presse">Presse
+                                	<span class="note-presse note-4"></span>
+                                </div>
+                                <div class="ca-spectateurs">Spectateurs
+                                	<span class="note-spectateurs note-7"></span>
+                                </div>
+                                <!-- Fin Notations -->
+
+                                <p class="synopsis">Après une série de malentendus, Alvin, Simon et Théodore comprennent que Dave va demander sa petite amie en mariage à Miami et risque de les abandonner. Ils ont trois jours pour le retrouver et empêcher ce mariage. Ils se lancent alors dans un road trip à travers l'Amérique : aventure, musique et grosses bêtises.</p>
+                                <!--<button>Sélectionner</button>-->
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="ca-affiche" src="img/affiches/531725.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                                <div class="ca-content">
+                                <h3 class="ca-title">La 5ème vague</h3>
+
+                                <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
+                                <div class="ca-presse">Presse
+                                	<span class="note-presse note-4"></span>
+                                </div>
+                                <div class="ca-spectateurs">Spectateurs
+                                	<span class="note-spectateurs note-7"></span>
+                                </div>
+                                <!-- Fin Notations -->
+
+                                <p class="synopsis">Quatre vagues d’attaques, chacune plus mortelle que la précédente, ont décimé la presque totalité de la Terre. Terrifiée, se méfiant de tout, Cassie est en fuite et tente désespérément de sauver son jeune frère. Alors qu’elle se prépare à affronter la cinquième vague, aussi inévitable que fatale, elle va faire équipe avec un jeune homme qui pourrait bien représenter son dernier espoir – si toutefois elle peut lui faire confiance…</p>
+                                <!--<button>Sélectionner</button>-->
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img class="ca-affiche" src="img/affiches/280851.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                                <div class="ca-content">
+                                <h3 class="ca-title">Zootopie</h3>
+
+                                <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
+                                <div class="ca-presse">Presse
+                                	<span class="note-presse note-8"></span>
+                                </div>
+                                <div class="ca-spectateurs">Spectateurs
+                                	<span class="note-spectateurs note-9"></span>
+                                </div>
+                                <!-- Fin Notations -->
+
+                                <p class="synopsis">Zootopia est une ville qui ne ressemble à aucune autre : seuls les animaux y habitent ! Lorsque l'adorable lapine Judy Hopps fait son entrée dans la police, elle s’attaque à une épineuse affaire, l'obligeant à faire équipe avec Nick Wilde, un renard à la langue bien pendue et véritable virtuose de l’arnaque…</p>
+                                <!--<button>Sélectionner</button>-->
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="lien-affiche" href="#">
+                            <img class="ca-affiche" src="img/affiches/165611.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                                <div class="ca-content">
+	                                <h3 class="ca-title">The revenant</h3>
+	                                <div class="ca-presse">Presse
+	                                	<span class="note-presse note-8"></span>
+	                                </div>
+	                                <div class="ca-spectateurs">Spectateurs
+	                                	<span class="note-spectateurs note-10"></span>
+	                                </div>
+	                                <p class="synopsis">Dans une Amérique profondément sauvage, Hugh Glass, un trappeur, est attaqué par un ours et grièvement blessé. Abandonné par ses équipiers, il est laissé pour mort. Mais Glass refuse de mourir. Seul, armé de sa volonté et porté par l’amour qu’il voue à sa femme et à leur fils, Glass entreprend un voyage de plus de 300 km dans un environnement hostile, sur la piste de l’homme qui l’a trahi. Sa soif de vengeance va se transformer en une lutte héroïque pour braver tous les obstacles, revenir chez lui et trouver la rédemption.</p>
+	                                <!--<button>Sélectionner</button>-->
+                            	</div>
+                        </a>
+                    </li>
+                </ul>
+		</div>
+	</div>
 	<div class="section2">
+			<div class="title-section">
+				<div class="bordure"></div>
+				<div class="title-main">Cinémas à proximité</div>
+				<div class="title-sub">Sélectionner un cinéma proche de chez vous</div>
+			</div>
+
 		<div id="map"></div>
 	</div>
 
 
 	<div class="section3">
-		<div id="movies">
+		<div class="movies">
 			<div class="title-section">
 				<div class="bordure"></div>
 				<div class="title-main">À l'affiche</div>
@@ -51,16 +173,22 @@
 			 <ul class="ca-menu-movies">
                     <li>
                         <a href="#">
-                            <img class="ca-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                        	<!-- affiche du film (ajouter le titre du film en alt)-->
+                            <img class="ca-affiche" src="img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="Deadpool">
+
                                 <div class="ca-content">
-                                <h3 class="ca-title">Alvin et les chipmunks - À fond la caisse</h3>
+                                <h3 class="ca-title">Deadpool</h3>
+
+                                <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
                                 <div class="ca-presse">Presse
-                                	<span class="note-presse"></span>
+                                	<span class="note-presse note-6"></span>
                                 </div>
                                 <div class="ca-spectateurs">Spectateurs
-                                	<span class="note-spectateurs"></span>
+                                	<span class="note-spectateurs note-9"></span>
                                 </div>
-                                <p class="synopsis">Après une série de malentendus, Alvin, Simon et Théodore comprennent que Dave va demander sa petite amie en mariage à Miami et risque de les abandonner. Ils ont trois jours pour le retrouver et empêcher ce mariage. Ils se lancent alors dans un road trip à travers l'Amérique : aventure, musique et grosses bêtises.</p>
+                                <!-- Fin Notations -->
+
+                                <p class="synopsis">A l'origine, il s'appelle Wade Wilson : un ancien militaire des Forces Spéciales devenu mercenaire. Après avoir subi une expérimentation hors norme qui va accélérer ses pouvoirs de guérison, il va devenir Deadpool. Armé de ses nouvelles capacités et d'un humour noir survolté, Deadpool va traquer l'homme qui a bien failli anéantir sa vie.</p>
                                 <!--<button>Sélectionner</button>-->
                             </div>
                         </a>
@@ -70,12 +198,16 @@
                             <img class="ca-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
                                 <div class="ca-content">
                                 <h3 class="ca-title">Alvin et les chipmunks - À fond la caisse</h3>
+
+                                <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
                                 <div class="ca-presse">Presse
-                                	<span class="note-presse"></span>
+                                	<span class="note-presse note-4"></span>
                                 </div>
                                 <div class="ca-spectateurs">Spectateurs
-                                	<span class="note-spectateurs"></span>
+                                	<span class="note-spectateurs note-7"></span>
                                 </div>
+                                <!-- Fin Notations -->
+
                                 <p class="synopsis">Après une série de malentendus, Alvin, Simon et Théodore comprennent que Dave va demander sa petite amie en mariage à Miami et risque de les abandonner. Ils ont trois jours pour le retrouver et empêcher ce mariage. Ils se lancent alors dans un road trip à travers l'Amérique : aventure, musique et grosses bêtises.</p>
                                 <!--<button>Sélectionner</button>-->
                             </div>
@@ -83,48 +215,56 @@
                     </li>
                     <li>
                         <a href="#">
-                            <img class="ca-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                            <img class="ca-affiche" src="img/affiches/531725.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
                                 <div class="ca-content">
-                                <h3 class="ca-title">Alvin et les chipmunks - À fond la caisse</h3>
+                                <h3 class="ca-title">La 5ème vague</h3>
+
+                                <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
                                 <div class="ca-presse">Presse
-                                	<span class="note-presse"></span>
+                                	<span class="note-presse note-4"></span>
                                 </div>
                                 <div class="ca-spectateurs">Spectateurs
-                                	<span class="note-spectateurs"></span>
+                                	<span class="note-spectateurs note-7"></span>
                                 </div>
-                                <p class="synopsis">Après une série de malentendus, Alvin, Simon et Théodore comprennent que Dave va demander sa petite amie en mariage à Miami et risque de les abandonner. Ils ont trois jours pour le retrouver et empêcher ce mariage. Ils se lancent alors dans un road trip à travers l'Amérique : aventure, musique et grosses bêtises.</p>
+                                <!-- Fin Notations -->
+
+                                <p class="synopsis">Quatre vagues d’attaques, chacune plus mortelle que la précédente, ont décimé la presque totalité de la Terre. Terrifiée, se méfiant de tout, Cassie est en fuite et tente désespérément de sauver son jeune frère. Alors qu’elle se prépare à affronter la cinquième vague, aussi inévitable que fatale, elle va faire équipe avec un jeune homme qui pourrait bien représenter son dernier espoir – si toutefois elle peut lui faire confiance…</p>
                                 <!--<button>Sélectionner</button>-->
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <img class="ca-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                            <img class="ca-affiche" src="img/affiches/280851.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
                                 <div class="ca-content">
-                                <h3 class="ca-title">Alvin et les chipmunks - À fond la caisse</h3>
+                                <h3 class="ca-title">Zootopie</h3>
+
+                                <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
                                 <div class="ca-presse">Presse
-                                	<span class="note-presse"></span>
+                                	<span class="note-presse note-8"></span>
                                 </div>
                                 <div class="ca-spectateurs">Spectateurs
-                                	<span class="note-spectateurs"></span>
+                                	<span class="note-spectateurs note-9"></span>
                                 </div>
-                                <p class="synopsis">Après une série de malentendus, Alvin, Simon et Théodore comprennent que Dave va demander sa petite amie en mariage à Miami et risque de les abandonner. Ils ont trois jours pour le retrouver et empêcher ce mariage. Ils se lancent alors dans un road trip à travers l'Amérique : aventure, musique et grosses bêtises.</p>
+                                <!-- Fin Notations -->
+
+                                <p class="synopsis">Zootopia est une ville qui ne ressemble à aucune autre : seuls les animaux y habitent ! Lorsque l'adorable lapine Judy Hopps fait son entrée dans la police, elle s’attaque à une épineuse affaire, l'obligeant à faire équipe avec Nick Wilde, un renard à la langue bien pendue et véritable virtuose de l’arnaque…</p>
                                 <!--<button>Sélectionner</button>-->
                             </div>
                         </a>
                     </li>
                     <li>
                         <a class="lien-affiche" href="#">
-                            <img class="ca-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                            <img class="ca-affiche" src="img/affiches/165611.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
                                 <div class="ca-content">
-	                                <h3 class="ca-title">Alvin et les chipmunks - À fond la caisse</h3>
+	                                <h3 class="ca-title">The revenant</h3>
 	                                <div class="ca-presse">Presse
-	                                	<span class="note-presse note-0"></span>
+	                                	<span class="note-presse note-8"></span>
 	                                </div>
 	                                <div class="ca-spectateurs">Spectateurs
-	                                	<span class="note-spectateurs note-0"></span>
+	                                	<span class="note-spectateurs note-10"></span>
 	                                </div>
-	                                <p class="synopsis">Après une série de malentendus, Alvin, Simon et Théodore comprennent que Dave va demander sa petite amie en mariage à Miami et risque de les abandonner. Ils ont trois jours pour le retrouver et empêcher ce mariage. Ils se lancent alors dans un road trip à travers l'Amérique : aventure, musique et grosses bêtises.</p>
+	                                <p class="synopsis">Dans une Amérique profondément sauvage, Hugh Glass, un trappeur, est attaqué par un ours et grièvement blessé. Abandonné par ses équipiers, il est laissé pour mort. Mais Glass refuse de mourir. Seul, armé de sa volonté et porté par l’amour qu’il voue à sa femme et à leur fils, Glass entreprend un voyage de plus de 300 km dans un environnement hostile, sur la piste de l’homme qui l’a trahi. Sa soif de vengeance va se transformer en une lutte héroïque pour braver tous les obstacles, revenir chez lui et trouver la rédemption.</p>
 	                                <!--<button>Sélectionner</button>-->
                             	</div>
                         </a>
@@ -144,16 +284,20 @@
 			<!-- infos film -->
 			<div class="chosen_movie">
 				
-				<img class="ca-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+				<img class="ca-affiche" src="img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
                 <div class="ca-content">
-                                <h3 class="ca-title">Alvin et les chipmunks - À fond la caisse</h3>
+                                <h3 class="ca-title">Deadpool</h3>
+
+                                <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
                                 <div class="ca-presse">Presse
-                                	<span class="note-presse"></span>
+                                	<span class="note-presse note-8"></span>
                                 </div>
                                 <div class="ca-spectateurs">Spectateurs
-                                	<span class="note-spectateurs"></span>
+                                	<span class="note-spectateurs note-9"></span>
                                 </div>
-                                <p class="synopsis">Après une série de malentendus, Alvin, Simon et Théodore comprennent que Dave va demander sa petite amie en mariage à Miami et risque de les abandonner. Ils ont trois jours pour le retrouver et empêcher ce mariage. Ils se lancent alors dans un road trip à travers l'Amérique : aventure, musique et grosses bêtises.</p>
+                                <!-- Fin Notations -->
+
+                                <p class="synopsis">A l'origine, il s'appelle Wade Wilson : un ancien militaire des Forces Spéciales devenu mercenaire. Après avoir subi une expérimentation hors norme qui va accélérer ses pouvoirs de guérison, il va devenir Deadpool. Armé de ses nouvelles capacités et d'un humour noir survolté, Deadpool va traquer l'homme qui a bien failli anéantir sa vie.</p>
                                 <!--<button>Sélectionner</button>-->
                 </div>
             
@@ -167,8 +311,28 @@
 					<div class="horaires-text"><span>Fin : <span><span>22h30<span></div>
 					
 					<button class="horaires-btn">Rejoindre le groupe</button>
+					<!--<div class="circle">
+						<span data-notification="0" class="notifications"></span>
+					</div>-->
+				</li>
+				<li>
+					<h3 class="horaires-title">Horaires</h3>
+					<div class="horaires-text"><span>Début : <span><span>22h30<span></div>
+					<div class="horaires-text"><span>Fin : <span><span>22h30<span></div>
+					
+					<button class="horaires-btn">Rejoindre le groupe</button>
+					<!--<div class="circle">
+						<span data-notification="0" class="notifications"></span>
+					</div>-->
+				</li>
+				<li>
+					<h3 class="horaires-title">Horaires</h3>
+					<div class="horaires-text"><span>Début : <span><span>22h30<span></div>
+					<div class="horaires-text"><span>Fin : <span><span>22h30<span></div>
+					
+					<button class="horaires-btn">Rejoindre le groupe</button>
 					<div class="circle">
-						<span data-notification="88" class="notifications"></span>
+						<span data-notification="7" class="notifications"></span>
 					</div>
 				</li>
 				<li>
@@ -178,7 +342,7 @@
 					
 					<button class="horaires-btn">Rejoindre le groupe</button>
 					<div class="circle">
-						<span data-notification="88" class="notifications"></span>
+						<span data-notification="1" class="notifications"></span>
 					</div>
 				</li>
 				<li>
@@ -188,7 +352,7 @@
 					
 					<button class="horaires-btn">Rejoindre le groupe</button>
 					<div class="circle">
-						<span data-notification="88" class="notifications"></span>
+						<span data-notification="5" class="notifications"></span>
 					</div>
 				</li>
 				<li>
@@ -198,27 +362,7 @@
 					
 					<button class="horaires-btn">Rejoindre le groupe</button>
 					<div class="circle">
-						<span data-notification="88" class="notifications"></span>
-					</div>
-				</li>
-				<li>
-					<h3 class="horaires-title">Horaires</h3>
-					<div class="horaires-text"><span>Début : <span><span>22h30<span></div>
-					<div class="horaires-text"><span>Fin : <span><span>22h30<span></div>
-					
-					<button class="horaires-btn">Rejoindre le groupe</button>
-					<div class="circle">
-						<span data-notification="88" class="notifications"></span>
-					</div>
-				</li>
-				<li>
-					<h3 class="horaires-title">Horaires</h3>
-					<div class="horaires-text"><span>Début : <span><span>22h30<span></div>
-					<div class="horaires-text"><span>Fin : <span><span>22h30<span></div>
-					
-					<button class="horaires-btn">Rejoindre le groupe</button>
-					<div class="circle">
-						<span data-notification="88" class="notifications"></span>
+						<span data-notification="8" class="notifications"></span>
 					</div>
 				</li>
 			</ul>

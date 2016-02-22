@@ -4,6 +4,7 @@ html, body {
   	background-size: cover; /* version standardisée */
 }
 
+/* Importation des polices de caractères */
 @font-face {
     font-family: 'icomoon';
     src:    url('../fonts/cine/icomoon.eot?6w9915');
@@ -30,6 +31,8 @@ html, body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+
+/* icone du logo ciné dans le header*/
 .icon-logo:before {
     content: "\e931";
     color: #fff;
@@ -39,6 +42,7 @@ html, body {
     margin-left: 10px;
 }
 
+/* icone du picto de géolocalisation dans la searchbar */
 .icon-location-pin:before {
     content: "\e930";
     color: #999;
@@ -46,8 +50,7 @@ html, body {
     line-height: 30px;
 }
 
-
-
+/* Header */
 header {
 	background-color: rgba(0,0,0,0.5);
 	width: 100%;
@@ -57,12 +60,37 @@ header {
 	z-index: 10;
 }
 
+/* Section 1 = recherche */
+/* Section 2 = Films à l'affiche actuellement */
+/* Section 3 = cinémas à proximité */
+/* Section 4 = Affichage des films à l'affiche actuellement dans la salle sélectionnée */
+/* Section 5 = Affichage des séances pour un film dans un cinéma */
+
 .section1{
 	height: 400px;
 	position: relative;
 	width: 100%;
+    margin: 0px auto 0px auto;
 	background: url('../img/background.jpg') no-repeat left;
 }
+
+
+.section2{
+    position: relative;
+    margin: 0px auto 50px auto;
+    width: 960px;
+    text-align: center;
+}
+
+
+
+.section3, .section4{
+    position: relative;
+    margin: 50px auto;
+    width: 960px;
+    text-align: center;
+}
+
 
 .case-input{
     position: relative;
@@ -104,7 +132,7 @@ header {
 
 .search_button{
 	width: 106px;
-	margin-left: -5px;
+	margin-left: -4px;
 }
 
 #geolocaliseMoi{
@@ -205,8 +233,10 @@ footer{
 }
 
 #map{
-	width:100%;
-	height: 300px;
+    width: 840px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
 }
 
 #copyright, #MadeBy{
@@ -233,6 +263,7 @@ footer{
     margin-left: 60px; 
     margin-top: 20px; 
     margin-bottom: 10px;
+    text-align: left;
 }
 
 .bordure {
@@ -257,6 +288,7 @@ footer{
     width: 130px;
     margin: 0px 20px;
     text-align: left;
+    vertical-align: top;
 }
 
 
@@ -408,6 +440,7 @@ ul.ca-menu-movies li a:hover .ca-affiche{
 .liste-seances{
     display: inline-block; 
     vertical-align: top;
+    text-align: left;
     width: 700px;
 }
 
@@ -418,5 +451,20 @@ ul.ca-menu-movies li a:hover .ca-affiche{
 
 .seance li{
     text-align: left;
-
+    vertical-align: top;
 }
+
+ul#movie_list{
+    width: 289px;
+    padding: 0px !important;
+}
+
+
+
+ul#movie_list li{
+    display: block !important;
+    text-align: left;
+    font-size: 12px;
+}
+
+
