@@ -66,7 +66,7 @@ header {
 /* Section 4 = Affichage des films à l'affiche actuellement dans la salle sélectionnée */
 /* Section 5 = Affichage des séances pour un film dans un cinéma */
 
-.section1{
+#section1{
 	height: 400px;
 	position: relative;
 	width: 100%;
@@ -75,7 +75,7 @@ header {
 }
 
 
-.section2{
+#section2{
     position: relative;
     margin: 0px auto 50px auto;
     width: 960px;
@@ -84,7 +84,7 @@ header {
 
 
 
-.section3, .section4{
+#section3, #section4{
     position: relative;
     margin: 50px auto;
     width: 960px;
@@ -365,17 +365,17 @@ ul.ca-menu-movies li a:hover .ca-affiche{
     height: 11px;
     background: url(../img/stars.png) 0px 0px no-repeat;
 }
-.note-0{background: url(../img/stars.png) 0px 0px no-repeat;}
-.note-1{background: url(../img/stars.png) 0px -11px no-repeat;}
-.note-2{background: url(../img/stars.png) 0px -22px no-repeat;}
-.note-3{background: url(../img/stars.png) 0px -33px no-repeat;}
-.note-4{background: url(../img/stars.png) 0px -44px no-repeat;}
-.note-5{background: url(../img/stars.png) 0px -55px no-repeat;}
-.note-6{background: url(../img/stars.png) 0px -66px no-repeat;}
-.note-7{background: url(../img/stars.png) 0px -77px no-repeat;}
-.note-8{background: url(../img/stars.png) 0px -88px no-repeat;}
-.note-9{background: url(../img/stars.png) 0px -99px no-repeat;}
-.note-10{background: url(../img/stars.png) 0px -110px no-repeat;}
+.note-00{background: url(../img/stars.png) 0px 0px no-repeat;}
+.note-05{background: url(../img/stars.png) 0px -11px no-repeat;}
+.note-10{background: url(../img/stars.png) 0px -22px no-repeat;}
+.note-15{background: url(../img/stars.png) 0px -33px no-repeat;}
+.note-20{background: url(../img/stars.png) 0px -44px no-repeat;}
+.note-25{background: url(../img/stars.png) 0px -55px no-repeat;}
+.note-30{background: url(../img/stars.png) 0px -66px no-repeat;}
+.note-35{background: url(../img/stars.png) 0px -77px no-repeat;}
+.note-40{background: url(../img/stars.png) 0px -88px no-repeat;}
+.note-45{background: url(../img/stars.png) 0px -99px no-repeat;}
+.note-50{background: url(../img/stars.png) 0px -110px no-repeat;}
 
 .synopsis{
     font-size: 10px;
