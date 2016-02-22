@@ -13,6 +13,8 @@ var tab_filmsEnSalle = [];
 var tab_filmsSansNom = [];
 var tab_split = [" Bande-annonce"," - BANDE-ANNONCE", " Teaser", " TEASER", " - EXTRAIT", " - Extrait", " Extrait"];
 var nb_pages;
+var film_recent=0;
+var k;
 
 elt_autocomplete.addEventListener("focus", geolocate);
 elt_geolocalisation.addEventListener("click", geolocalisation);
@@ -150,19 +152,19 @@ var template = function(list, id){
 
 // Appel à l'api allociné pour récupérer le nombre de pages de films en salle
 function recup_liste_films_en_salle(){
-	var allocine_api = "http://api.allocine.fr/rest/v3/movielist?partner="+key_allocine+"&filter=nowshowing&format=json";
+	var allocine_api = "http://api.allocine.fr/rest/v3/movielist?partner="+key_allocine+"&filter=nowshowing&format=json&order=datedesc";
 	$.getJSON(allocine_api, recup_liste);
 }
 
 // Appel à l'api allociné en fonction du nombre de page
 function recup_liste(recup_movie){
-	// console.log(recup_movie.feed);
+	console.log(recup_movie.feed);
 	
 	if (recup_movie.feed.totalResults > 0) {
 		nb_pages = Math.ceil(recup_movie.feed.totalResults/10);
 		
 		for(var j=1; j<= nb_pages; j++){	
-			var allocine_api_page = "http://api.allocine.fr/rest/v3/movielist?partner="+key_allocine+"&filter=nowshowing&format=json&page="+j;
+			var allocine_api_page = "http://api.allocine.fr/rest/v3/movielist?partner="+key_allocine+"&filter=nowshowing&order=datedesc&format=json&page="+j;
 			$.getJSON(allocine_api_page, recup_liste_films);
 		}
 	}
@@ -170,17 +172,39 @@ function recup_liste(recup_movie){
 
 // Récupère sur chaque page la liste de film et l'ajoute dans le tableau tab_filmsEnSalle
 function recup_liste_films(recup_film){
-	for(var k=0; k< recup_film.feed.movie.length; k++){	
-		film = recup_film.feed.movie[k].defaultMedia.media.title;
-		tab_filmsEnSalle.push(recup_film.feed.movie[k].code+";"+splitNom(film));
+	for(k=0; k< recup_film.feed.movie.length; k++){	
+		film_recent++;
+		film = splitNom(recup_film.feed.movie[k].defaultMedia.media.title);
+		
+		code_film = recup_film.feed.movie[k].code;
+		tab_filmsEnSalle.push(code_film+";"+film);
+		
+		if (film_recent<2){
+			synopsisShort = recup_film.feed.movie[k].synopsisShort;
+			pressRate = (Math.round(recup_film.feed.movie[k].statistics.pressRating * 2)*0.5);
+			userRate = (Math.round(recup_film.feed.movie[k].statistics.userRating * 2)*0.5);
+
+			// Affichage des éléments du film
+			document.getElementById('titre'+film_recent).innerHTML = film;
+			document.getElementById('synopsis'+film_recent).innerHTML = synopsisShort;
+			document.getElementById('note-presse'+film_recent).className = "note-presse note-"+pressRate*10;
+			document.getElementById('note-spectateurs'+film_recent).className = "note-spectateurs note-"+userRate*10;
+			
+			var allocine_api_recherche = "http://api.allocine.fr/rest/v3/movie?partner="+key_allocine+"&code="+code_film+"&profile=large&format=json";
+			(function(fr){ $.getJSON(allocine_api_recherche, function(d){ recup_info_films(d, fr) }); })(film_recent)
+		}
 	}
+}
+
+function recup_info_films(recup_info, fr){
+	document.getElementById('affiche'+fr).src = recup_info.movie.media[0].thumbnail.href;
 }
 
 // Récupère le nom du film dans le titre de la Bande-annonce
 function splitNom(titre){
 	var trouve = 0;
-	for (k=0; k < tab_split.length && trouve == 0; k++){
-		tab_decoupe_film = titre.split(tab_split[k]);
+	for (n=0; n < tab_split.length && trouve == 0; n++){
+		tab_decoupe_film = titre.split(tab_split[n]);
 		if (tab_decoupe_film.length > 1) trouve = 1;
 	}
 	return tab_decoupe_film[0];
