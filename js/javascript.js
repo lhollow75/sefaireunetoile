@@ -32,9 +32,33 @@ recup_liste_films_en_salle();
 // Initialisation de la carte lors du clique sur le bouton recherche
 function recherche(){
 	geolocalisation();
+	
+	// Récupération des cinémas aux alentours
+	var api_allocine_cinema = "http://api.allocine.fr/rest/v3/theaterlist?partner="+key_allocine+"&count=5&page=1&lat="+latitude+"&long="+longitude+"&format=json&radius=5";
+	$.getJSON(api_allocine_cinema, recup_liste_cinema);
+	
 	initMap(latitude, longitude);
 	document.getElementById('section2').style.display="none";
 	document.getElementById('section3').style.display="block";
+	if (document.getElementById('movie').value != "") {
+		// console.log(document.getElementById('movie').value);
+		document.getElementById('section5').style.display="block";
+	} else {
+		document.getElementById('section4').style.display="block";
+	}
+}
+
+function recup_liste_cinema(liste_cinema){
+	console.log(liste_cinema.feed);
+	for (var c = 0; c < liste_cinema.feed.totalResults; c++){
+		myLatLng = {lat: liste_cinema.feed.theater[c].geoloc.lat, lng: liste_cinema.feed.theater[c].geoloc.long};
+		marker = new google.maps.Marker({
+			position: myLatLng,
+			label: (c+1).toString(),
+			map: map,
+			title: 'Carte'
+		});
+	}
 }
 
 // Géolocalise l'utilisateur à partir des données du navigateur
@@ -47,7 +71,7 @@ function geolocalisation() {
   };
   navigator.geolocation.getCurrentPosition(geoSuccess);
   // console.log(position);
-  console.log(latitude+"/"+longitude);
+  // console.log(latitude+"/"+longitude);
 };
 
 // Affichage de la map et du marqueur de position en fonction de la géolocalisation ou de l'adresse tapée
@@ -165,7 +189,7 @@ function recup_liste_films_en_salle(){
 
 // Appel à l'api allociné en fonction du nombre de page
 function recup_liste(recup_movie){
-	console.log(recup_movie.feed);
+	// console.log(recup_movie.feed);
 	
 	if (recup_movie.feed.totalResults > 0) {
 		nb_pages = Math.ceil(recup_movie.feed.totalResults/10);
