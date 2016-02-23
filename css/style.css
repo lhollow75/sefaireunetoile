@@ -497,7 +497,10 @@ li.movie-results:hover{
 }
 
 .pac-container{
-    width: 406px !important;
+    width: 370px !important;
     margin-left: -10px;
 }
 
+.hdpi.pac-logo:after{
+    display: none;
+}
