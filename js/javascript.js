@@ -17,6 +17,8 @@ var k;
 var position;
 var bounds;
 
+var tab_rates = [];
+
 elt_autocomplete.addEventListener("focus", geolocate);
 elt_geolocalisation.addEventListener("click", geolocalisation);
 elt_movie.addEventListener("keyup", movieFinder);
@@ -193,6 +195,8 @@ function geolocate() {
 function movieFinder(){
 	$(".movie-results").remove();
 	if (elt_movie.value.length >= 2){
+		console.log(tab_rates.length);
+		console.log(tab_filmsEnSalle.length);
 		recherche = traitementChaine(elt_movie.value);
 		searchStringInArray(recherche,tab_filmsEnSalle);	
 	}
@@ -283,27 +287,34 @@ function recup_liste(recup_movie){
 function recup_liste_films(recup_film){
 	for(k=0; k< recup_film.feed.movie.length; k++){	
 		film_recent++;
-		film = splitNom(recup_film.feed.movie[k].defaultMedia.media.title);
+		console.log(recup_film.feed.movie[k]);
 		
-		code_film = recup_film.feed.movie[k].code;
-		tab_filmsEnSalle.push(code_film+";"+film);
-		
-		if (film_recent<6){
-			synopsisShort = recup_film.feed.movie[k].synopsisShort;
-			pressRate = (Math.round(recup_film.feed.movie[k].statistics.pressRating * 2)*0.5)*10;
-			userRate = (Math.round(recup_film.feed.movie[k].statistics.userRating * 2)*0.5)*10;
-
-			// Affichage des éléments du film
-			document.getElementById('titre'+film_recent).innerHTML = film;
-			document.getElementById('affiche'+film_recent).alt = film;
-			document.getElementById('synopsis'+film_recent).innerHTML = synopsisShort;
-			document.getElementById('note-presse'+film_recent).className = "note-presse note-"+pressRate;
-			document.getElementById('note-spectateurs'+film_recent).className = "note-spectateurs note-"+userRate;
-			document.getElementById('affiche'+film_recent).addEventListener('click', afficheFilm);
+		if ((recup_film.feed.movie[k].defaultMedia != undefined) && (recup_film.feed.movie[k].defaultMedia.media.title != undefined)) {
+			film = splitNom(recup_film.feed.movie[k].defaultMedia.media.title);
 			
-			var allocine_api_recherche = "http://api.allocine.fr/rest/v3/movie?partner="+key_allocine+"&code="+code_film+"&profile=large&format=json";
-			(function(fr){ $.getJSON(allocine_api_recherche, function(d){ showMoviePicture(d, fr) }); })(film_recent)
+			code_film = recup_film.feed.movie[k].code;
+			tab_filmsEnSalle.push(code_film+";"+film);
+			
+			if (film_recent<6){
+				synopsisShort = recup_film.feed.movie[k].synopsisShort;
+				pressRate = (Math.round(recup_film.feed.movie[k].statistics.pressRating * 2)*0.5)*10;
+				userRate = (Math.round(recup_film.feed.movie[k].statistics.userRating * 2)*0.5)*10;
+
+				// Affichage des éléments du film
+				document.getElementById('titre'+film_recent).innerHTML = film;
+				document.getElementById('affiche'+film_recent).alt = film;
+				document.getElementById('synopsis'+film_recent).innerHTML = synopsisShort;
+				document.getElementById('note-presse'+film_recent).className = "note-presse note-"+pressRate;
+				document.getElementById('note-spectateurs'+film_recent).className = "note-spectateurs note-"+userRate;
+				document.getElementById('affiche'+film_recent).addEventListener('click', afficheFilm);
+				
+				var allocine_api_recherche = "http://api.allocine.fr/rest/v3/movie?partner="+key_allocine+"&code="+code_film+"&profile=large&format=json";
+				(function(fr){ $.getJSON(allocine_api_recherche, function(d){ showMoviePicture(d, fr) }); })(film_recent)
+			}	
+		} else {
+			tab_rates.push(recup_film.feed.movie[k].code);
 		}
+		
 	}
 }
 
