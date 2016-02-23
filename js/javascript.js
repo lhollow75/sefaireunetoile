@@ -7,10 +7,9 @@ var elt_geolocalisation = document.getElementById('geolocaliseMoi');
 var elt_movie = document.getElementById('movie');
 var elt_chercher = document.getElementById('chercher');
 var elt_movie_list = document.getElementById('movie_list');
-var google_search_api = "http://suggestqueries.google.com/complete/search?client=firefox&q=";
+var elt_listFilmEnSalle = document.getElementById('listFilmEnSalle');
 var key_allocine = "YW5kcm9pZC12Mg";
 var tab_filmsEnSalle = [];
-var tab_filmsSansNom = [];
 var tab_split = [" Bande-annonce"," - BANDE-ANNONCE", " Teaser", " TEASER", " - EXTRAIT", " - Extrait", " Extrait"];
 var nb_pages;
 var film_recent=0;
@@ -25,7 +24,7 @@ elt_chercher.addEventListener("click", recherche);
 
 document.getElementById('section2').style.display="block";
 document.getElementById('section3').style.display="none";
-// document.getElementById('section4').style.display="none";
+document.getElementById('section4').style.display="none";
 document.getElementById('section5').style.display="none";
 
 // Lance la récupération de la liste des films dès la chargement de la page
@@ -42,21 +41,15 @@ function recherche(){
 	initMap(latitude, longitude);
 	document.getElementById('section2').style.display="none";
 	document.getElementById('section3').style.display="block";
-	if (document.getElementById('movie').value != "") {
-		// console.log(document.getElementById('movie').value);
-		document.getElementById('section5').style.display="block";
-	} else {
-		document.getElementById('section4').style.display="block";
-	}
 }
 
 // Récupère et place sur la carte les cinémas à proximité du lieu cherché
 function recup_liste_cinema(liste_cinema){
 	bounds = new google.maps.LatLngBounds();
 	
-	console.log(liste_cinema.feed);
+	// console.log(liste_cinema.feed);
 	for (var c = 0; ((c < liste_cinema.feed.totalResults) && (c < liste_cinema.feed.count)) ; c++){
-		console.log(c);
+		// console.log(c);
 		nom = liste_cinema.feed.theater[c].name;
 		
 		// Affichage des markers
@@ -70,7 +63,7 @@ function recup_liste_cinema(liste_cinema){
 			title: nom
 		});
 		
-		// Composition du contenu de l'information à chaque clique sur le marker
+		// Composition du contenu de l'information pour l'événement click
 		address = liste_cinema.feed.theater[c].address
 		code = liste_cinema.feed.theater[c].code
 		city = liste_cinema.feed.theater[c].city
@@ -78,16 +71,48 @@ function recup_liste_cinema(liste_cinema){
 		
 		// Affiche les informations dans les infobulles
 		var infoWindow = new google.maps.InfoWindow(), marker, c;
-		google.maps.event.addListener(marker, 'click', (function(marker, _c) {
+		google.maps.event.addListener(marker, 'click', (function(marker, _c, _code) {
+			
             return function() {
                 infoWindow.setContent(_c);
                 infoWindow.open(map, marker);
+				$(".en-salle").remove();
+				document.getElementById('section4').style.display="block";
+				var api_allocine_rechercheFilmSalle = "http://api.allocine.fr/rest/v3/showtimelist?partner="+key_allocine+"&q=&format=json&theaters="+_code;
+				$.getJSON(api_allocine_rechercheFilmSalle, recup_horaire_cinema);
             }
-        })(marker, contenu));
+        })(marker, contenu, code));
 	}
 	map.fitBounds(bounds);
 }
 
+// Récupération des horaires de cinéma
+function recup_horaire_cinema(horaires){
+	var tab_moviesList = [];
+	console.log(horaires.feed.theaterShowtimes[0]);
+	showtimes = horaires.feed.theaterShowtimes[0];
+	for (h=0; h < showtimes.movieShowtimes.length; h++){
+		// console.log(showtimes.movieShowtimes[h].onShow.movie.code);
+		onShow = showtimes.movieShowtimes[h].onShow.movie;
+		console.log(tab_moviesList.indexOf(onShow.code));
+		console.log(tab_moviesList);
+		if (tab_moviesList.indexOf(onShow.code) == -1){
+			$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href));
+		}
+		tab_moviesList.push(onShow.code);
+	}
+}
+
+// Affichage des films
+var template_filmEnSalle = function(code, title, source){
+	var _tpl = [
+		'<li id="filmEnSalle'+code+'" class="en-salle">',
+				'<img class="da-affiche" src="'+source+'" alt="'+title+'">',
+				'<h3 class="da-title">'+title+'</h3>',
+		'</li>'
+	]
+	return _tpl.join('');
+}
 
 // Géolocalise l'utilisateur à partir des données du navigateur
 function geolocalisation() {
