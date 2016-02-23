@@ -475,7 +475,6 @@ ul.ca-menu-movies li a:hover .ca-affiche{
     position: absolute!important;
     z-index: 1000;
     border-radius: 2px;
-    border-top: 1px solid #d9d9d9;
     font-family: Arial,sans-serif;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     -moz-box-sizing: border-box;
@@ -491,6 +490,12 @@ ul#movie_list{
     left: 10px;
     background-color: #ffffff;
     position: absolute;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+
+}
+
+ul#movie_list li:first-child{
+    border-top: 2px solid #d9d9d9;
 }
 
 ul#movie_list li{

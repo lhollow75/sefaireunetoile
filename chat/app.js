@@ -53,7 +53,7 @@ io.sockets.on('connection', function (socket) {
 	
 	// When a user sends a message :
 	socket.on('sendchat', function (data) {
-        //If there is a message :
+        //If there is a message typed:
         if(data != ''){
 		  // Calling 'updatechat', displaying the message with 2 parameters, username and date = message.
           io.sockets.in(socket.room).emit('updatechat', socket.username, data);
