@@ -1,11 +1,16 @@
 <html>
 <head>
-	<title>Une toile ensemble - Home</title>
+	<title>Une toile ensemble</title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/lightbox.css">
+
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,600,600italic,700italic,700' rel='stylesheet' type='text/css'>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/html5lightbox.js"></script>
+
 </head>
 <body>
 	<header>
@@ -46,33 +51,26 @@
 			</div>
 			 <ul class="ca-menu-movies">
                     <li>
-                        <a id="lienfilm1" href="#">
-                        	<!-- affiche du film (ajouter le titre du film en alt)-->
-                            <img id="affiche1" class="ca-affiche" src="" alt="">
+                        <!-- affiche du film (ajouter le titre du film en alt)-->
+                        <img id="affiche1" class="ca-affiche" src="" alt="">
+                            <!-- Titre du film -->
+                            <h3 id="titre1" class="ca-title"></h3>
 
-                                <div class="ca-content">
-                                    <!-- Titre du film -->
-                                    <h3 id="titre1" class="ca-title"></h3>
-
-                                    <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
-                                    <div class="ca-presse">Presse
-                                    	<span id="note-presse1" class="note-presse"></span>
-                                    </div>
-                                    <div class="ca-spectateurs">Spectateurs
-                                    	<span id="note-spectateurs1" class="note-spectateurs"></span>
-                                    </div>
-                                    <!-- Fin Notations -->
-
-                                    <p id="synopsis1" class="synopsis"></p>
-                                </div>
-                        </a>
+                            <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
+                            <div class="ca-presse">Presse
+                                <span id="note-presse1" class="note-presse"></span>
+                            </div>
+                            <div class="ca-spectateurs">Spectateurs
+                                <span id="note-spectateurs1" class="note-spectateurs"></span>
+                            </div>
+                            <!-- Fin Notations -->
+                            <p id="synopsis1" class="synopsis"></p>
+                            <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
                     </li>
                     <li>
-                        <a id="lienfilm2" href="#">
                             <!-- affiche du film (ajouter le titre du film en alt)-->
                             <img id="affiche2" class="ca-affiche" src="" alt="">
 
-                                <div class="ca-content">
                                     <!-- Titre du film -->
                                     <h3 id="titre2" class="ca-title"></h3>
 
@@ -86,15 +84,12 @@
                                     <!-- Fin Notations -->
 
                                     <p id="synopsis2" class="synopsis"></p>
-                                </div>
-                        </a>
+                                    <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
                     </li>
                     <li>
-                        <a id="lienfilm3" href="#">
                             <!-- affiche du film (ajouter le titre du film en alt)-->
                             <img id="affiche3" class="ca-affiche" src="" alt="">
 
-                                <div class="ca-content">
                                     <!-- Titre du film -->
                                     <h3 id="titre3" class="ca-title"></h3>
 
@@ -108,11 +103,9 @@
                                     <!-- Fin Notations -->
 
                                     <p id="synopsis3" class="synopsis"></p>
-                                </div>
-                        </a>
+                                    <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
                     </li>
                     <li>
-                        <a id="lienfilm4" href="#">
                             <!-- affiche du film (ajouter le titre du film en alt)-->
                             <img id="affiche4" class="ca-affiche" src="" alt="">
 
@@ -130,11 +123,10 @@
                                     <!-- Fin Notations -->
 
                                     <p id="synopsis4" class="synopsis"></p>
+                                    <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
                                 </div>
-                        </a>
                     </li>
                     <li>
-                        <a id="lienfilm5" href="#">
                             <!-- affiche du film (ajouter le titre du film en alt)-->
                             <img id="affiche5" class="ca-affiche" src="" alt="">
 
@@ -152,8 +144,8 @@
                                     <!-- Fin Notations -->
 
                                     <p id="synopsis5" class="synopsis"></p>
+                                    <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
                                 </div>
-                        </a>
                     </li>
                 </ul>
 		</div>
@@ -384,6 +376,18 @@
 
 		</div>
 	</div>
+
+
+    <div id="section6">
+            <div class="title-section">
+                <div class="bordure"></div>
+                <div class="title-main">Nous contacter</div>
+                <div class="title-sub">Nous sommes à votre écoute</div>
+             </div>
+
+
+    </div>
+
 
 
 

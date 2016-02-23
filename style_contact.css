@@ -1,0 +1,71 @@
+form {
+  /* Just to center the form on the page */
+  margin: 0 auto;
+  width: 400px;
+  position: relative;
+}
+
+.div_contact {
+/*To set space between contact form fields*/
+  margin-top: 1em;
+}
+
+.label_contact {
+  /* To make sure that all labels have the same size and are properly align */
+  display: inline-block;
+  width: 90px;
+  text-align: right;
+}
+
+.input_contact, .textarea_contact {
+  /* To give bigger size to font in input (same than labels) */
+  font: 1em sans-serif;
+  width: 300px;
+  /* To harmonize text field border */
+  border: 1px solid #999;
+  outline: none;
+  margin:0px;
+  /*height: 44px;*/
+  font-size: 14px;
+  color: #435f71;
+  /*border: none;*/
+}
+
+
+.textarea_contact {
+  /* To put label at top of textarea*/
+  vertical-align: top;
+  height: 5em;
+  /*To give posibility to resize verticaly field*/
+  resize: vertical;
+}
+
+.button_contact {
+  outline: none;
+  margin:0px 0px 0px 0px;
+    height: 44px;
+    font-size: 14px;
+    color: #ffffff;
+    border: none;
+    width: 370px;
+    background-color: #ff7e00;
+    -webkit-appearance: button;
+    cursor: pointer;
+    text-transform: none;
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    transition: all 200ms linear;
+    position: relative; 
+    left:25px;
+}
+
+.button_contact:hover{
+    background-color: #ff5a00;
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    transition: all 200ms linear; 
+}
