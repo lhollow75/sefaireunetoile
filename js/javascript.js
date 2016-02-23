@@ -34,8 +34,12 @@ recup_liste_films_en_salle();
 
 // Initialisation de la carte lors du clique sur le bouton recherche
 function recherche(){
-	geolocalisation();
 	
+	// Si on clique sur la recherche sans avoir entré de localisation, lance la géolocalisation
+	if (elt_autocomplete.value == ""){
+		geolocalisation();
+	}
+
 	// Récupération des cinémas aux alentours
 	var api_allocine_cinema = "http://api.allocine.fr/rest/v3/theaterlist?partner="+key_allocine+"&count=5&page=1&lat="+latitude+"&long="+longitude+"&format=json&radius=5";
 	$.getJSON(api_allocine_cinema, recup_liste_cinema);
@@ -109,6 +113,7 @@ function recup_liste_cinema(liste_cinema){
 // Récupération des horaires de cinéma
 function recup_horaire_cinema(horaires){
 	var tab_moviesList = [];
+	var noMovies = true;
 	// console.log(horaires.feed.theaterShowtimes[0]);
 	showtimes = horaires.feed.theaterShowtimes[0];
 	if (showtimes.movieShowtimes != undefined){
@@ -119,16 +124,22 @@ function recup_horaire_cinema(horaires){
 			console.log(showtimes.movieShowtimes[h]);
 			if (tab_moviesList.indexOf(onShow.code) == -1){
 				if (isTodaysDate(showtimes.movieShowtimes[h].scr[0].d)){
+					document.getElementById('filmEnSalle').innerHTML = "Sélectionnez un film actuellement en salle"
 					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href));
 					tab_moviesList.push(onShow.code);
+					noMovies = false;
 				} else {
-					console.log("Pas de film à l'affiche aujourd'hui");
+					console.log("Pas de séances aujourd'hui");
 				}
 			} else  {
 				console.log("Ce film est déjà affiché");
 			}
 			
 		}
+	}
+	if (noMovies){
+		document.getElementById('filmEnSalle').innerHTML = "Pas de films dans ce cinéma aujourd'hui"
+		console.log("Pas de films dans ce cinéma aujourd'hui");
 	}
 	
 }
@@ -287,7 +298,7 @@ function recup_liste(recup_movie){
 function recup_liste_films(recup_film){
 	for(k=0; k< recup_film.feed.movie.length; k++){	
 		film_recent++;
-		console.log(recup_film.feed.movie[k]);
+		// console.log(recup_film.feed.movie[k]);
 		
 		if ((recup_film.feed.movie[k].defaultMedia != undefined) && (recup_film.feed.movie[k].defaultMedia.media.title != undefined)) {
 			film = splitNom(recup_film.feed.movie[k].defaultMedia.media.title);
