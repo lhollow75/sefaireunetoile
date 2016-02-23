@@ -44,9 +44,9 @@ io.sockets.on('connection', function (socket) {
 		// Send client to room 1 (WILL BE SELECTED ROOM (FILM SHOW SELECTED), PREVIOUSLY CHOSEN BY THE USER.)
 		socket.join('room1');
 		// Emit to client they've connected
-		socket.emit('updatechat', 'Chat', 'Vous êtes connecté à la room1');
+		socket.emit('updatechat', 'Chat', 'Vous avez rejoint la room1');
 		// Emit to room 1 that a person has connected to their room
-		socket.broadcast.to('room1').emit('updatechat', 'Chat', username + ' est connecté à cette conversation.');
+		socket.broadcast.to('room1').emit('updatechat', 'Chat', username + ' a rejoint la conversation.');
         //Call for the 'updaterooms' event, send var rooms, event appearing in room 1 
 		socket.emit('updaterooms', rooms, 'room1');
 	});
@@ -67,7 +67,7 @@ io.sockets.on('connection', function (socket) {
         //We define a variable, 'newroom' which is the new room selected.
 		socket.join(newroom);
         //We display a message for the user
-		socket.emit('updatechat', 'SERVER', 'Vous êtes connecté à la '+ newroom);
+		socket.emit('updatechat', 'SERVER', 'Vous avez rejoint à la '+ newroom);
 		// We send a message to the OLD room, broadcasted for all users.
 		socket.broadcast.to(socket.room).emit('updatechat', 'Chat', socket.username+' a quitté cette conversation.');
 		// Update socket session room title
@@ -86,7 +86,7 @@ io.sockets.on('connection', function (socket) {
 		// Update list of users in chat, client-side :
 		io.sockets.emit('updateusers', usernames);
 		// Broadcast that this client has left :
-		socket.broadcast.emit('updatechat', 'Chat', socket.username + 'est déconnecté.');
+		socket.broadcast.emit('updatechat', 'Chat', socket.username + ' a quitté.');
         //Quitting the current room :
 		socket.leave(socket.room);
 	});

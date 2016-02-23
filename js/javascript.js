@@ -21,17 +21,51 @@ elt_geolocalisation.addEventListener("click", geolocalisation);
 elt_movie.addEventListener("keyup", movieFinder);
 elt_chercher.addEventListener("click", recherche);
 
+document.getElementById('section2').style.display="block";
+document.getElementById('section3').style.display="none";
+// document.getElementById('section4').style.display="none";
+document.getElementById('section5').style.display="none";
 
 // Lance la récupération de la liste des films dès la chargement de la page
 recup_liste_films_en_salle();
 
-function affiche_tab(){
-	console.log(tab_filmsEnSalle);
-	console.log("longueur: "+tab_filmsEnSalle.length);
+// Initialisation de la carte lors du clique sur le bouton recherche
+function recherche(){
+	geolocalisation();
+	
+	// Récupération des cinémas aux alentours
+	var api_allocine_cinema = "http://api.allocine.fr/rest/v3/theaterlist?partner="+key_allocine+"&count=5&page=1&lat="+latitude+"&long="+longitude+"&format=json&radius=5";
+	$.getJSON(api_allocine_cinema, recup_liste_cinema);
+	
+	initMap(latitude, longitude);
+	document.getElementById('section2').style.display="none";
+	document.getElementById('section3').style.display="block";
+	if (document.getElementById('movie').value != "") {
+		// console.log(document.getElementById('movie').value);
+		document.getElementById('section5').style.display="block";
+	} else {
+		document.getElementById('section4').style.display="block";
+	}
 }
 
-function recherche(){
-	initMap(latitude, longitude);
+function recup_liste_cinema(liste_cinema){
+	console.log(liste_cinema.feed);
+	for (var c = 0; c < liste_cinema.feed.totalResults, c < liste_cinema.feed.count; c++){
+		nom = liste_cinema.feed.theater[c].name;
+		myLatLng = {lat: liste_cinema.feed.theater[c].geoloc.lat, lng: liste_cinema.feed.theater[c].geoloc.long};
+		marker = new google.maps.Marker({
+			position: myLatLng,
+			label: (c+1).toString(),
+			map: map,
+			title: nom
+		});
+		var infowindow = new google.maps.InfoWindow({
+			content: nom
+		});
+		marker.addListener('click', function() {
+			infowindow.open(map, marker);
+		});
+	}
 }
 
 // Géolocalise l'utilisateur à partir des données du navigateur
@@ -40,11 +74,8 @@ function geolocalisation() {
   var geoSuccess = function(position) {
 	latitude = position.coords.latitude;
 	longitude = position.coords.longitude;
-	// console.log(startPos.coords.latitude+" / "+ startPos.coords.longitude);
   };
   navigator.geolocation.getCurrentPosition(geoSuccess);
-  // console.log(position);
-  console.log(latitude+"/"+longitude);
 };
 
 // Affichage de la map et du marqueur de position en fonction de la géolocalisation ou de l'adresse tapée
@@ -53,7 +84,7 @@ function initMap(latitude, longitude) {
 	
 	map = new google.maps.Map(document.getElementById('map'), {
 	  center: {lat: latitude, lng: longitude},
-	  zoom: 15
+	  zoom: 14
 	});
 		
 	marker = new google.maps.Marker({
@@ -80,18 +111,16 @@ function geolocate() {
 		longitude = place.geometry.location.lng();
 		// initMap(place.geometry.location.lat(), place.geometry.location.lng());
 	});
-	console.log(latitude+"/"+longitude);
+	// console.log(latitude+"/"+longitude);
 	
 }
 
 // Lance la recherche du film dans la tableau à chaque ajout d'une lettre
 function movieFinder(){
 	$(".movie-results").remove();
-	if (elt_movie.value.length >= 3){
+	if (elt_movie.value.length >= 2){
 		recherche = traitementChaine(elt_movie.value);
-		// console.log(recherche);
 		searchStringInArray(recherche,tab_filmsEnSalle);	
-		// affiche_tab();
 	}
 }
 
@@ -135,8 +164,14 @@ function searchStringInArray (str, strArray) {
 	return -1;
 }
 
+// Affiche le film dans le champs de recherche en fonction de l'endroit cliqué
 function afficheFilm(film){
-	movie.value = film.toElement.innerHTML;
+	if (film.toElement.innerHTML == ""){
+		film = film.srcElement.alt;
+	} else {
+		film = film.toElement.innerHTML;
+	}
+	movie.value = film;
 	$(".movie-results").remove();
 }
 
@@ -158,7 +193,7 @@ function recup_liste_films_en_salle(){
 
 // Appel à l'api allociné en fonction du nombre de page
 function recup_liste(recup_movie){
-	console.log(recup_movie.feed);
+	// console.log(recup_movie.feed);
 	
 	if (recup_movie.feed.totalResults > 0) {
 		nb_pages = Math.ceil(recup_movie.feed.totalResults/10);
@@ -179,22 +214,25 @@ function recup_liste_films(recup_film){
 		code_film = recup_film.feed.movie[k].code;
 		tab_filmsEnSalle.push(code_film+";"+film);
 		
-		if (film_recent<2){
+		if (film_recent<6){
 			synopsisShort = recup_film.feed.movie[k].synopsisShort;
-			pressRate = (Math.round(recup_film.feed.movie[k].statistics.pressRating * 2)*0.5);
-			userRate = (Math.round(recup_film.feed.movie[k].statistics.userRating * 2)*0.5);
+			pressRate = (Math.round(recup_film.feed.movie[k].statistics.pressRating * 2)*0.5)*10;
+			userRate = (Math.round(recup_film.feed.movie[k].statistics.userRating * 2)*0.5)*10;
 
 			// Affichage des éléments du film
 			document.getElementById('titre'+film_recent).innerHTML = film;
+			document.getElementById('affiche'+film_recent).alt = film;
 			document.getElementById('synopsis'+film_recent).innerHTML = synopsisShort;
-			document.getElementById('note-presse'+film_recent).className = "note-presse note-"+pressRate*10;
-			document.getElementById('note-spectateurs'+film_recent).className = "note-spectateurs note-"+userRate*10;
+			document.getElementById('note-presse'+film_recent).className = "note-presse note-"+pressRate;
+			document.getElementById('note-spectateurs'+film_recent).className = "note-spectateurs note-"+userRate;
+			document.getElementById('affiche'+film_recent).addEventListener('click', afficheFilm);
 			
 			var allocine_api_recherche = "http://api.allocine.fr/rest/v3/movie?partner="+key_allocine+"&code="+code_film+"&profile=large&format=json";
 			(function(fr){ $.getJSON(allocine_api_recherche, function(d){ recup_info_films(d, fr) }); })(film_recent)
 		}
 	}
 }
+
 
 function recup_info_films(recup_info, fr){
 	document.getElementById('affiche'+fr).src = recup_info.movie.media[0].thumbnail.href;
