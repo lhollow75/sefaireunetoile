@@ -470,6 +470,20 @@ ul.ca-menu-movies li a:hover .ca-affiche{
     vertical-align: top;
 }
 
+#movie_list{
+    background-color: #fff;
+    position: absolute!important;
+    z-index: 1000;
+    border-radius: 2px;
+    border-top: 1px solid #d9d9d9;
+    font-family: Arial,sans-serif;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
 ul#movie_list{
     width: 311px;
     padding: 0px !important;
@@ -481,10 +495,11 @@ ul#movie_list{
 
 ul#movie_list li{
     display: block !important;
+    border-bottom: 1px solid #d9d9d9;
     text-align: left;
     width: 291px;
     font-size: 12px;
-    padding: 0px 10px;
+    padding: 6px 10px;
     margin-left: 0px;
     line-height: 1.5;
     cursor: pointer;
@@ -492,7 +507,7 @@ ul#movie_list li{
 }
 
 li.movie-results:hover{
-    background-color: #ffbb78; /*#ff7e00*/
+    background-color: #fafafa; /*#ff7e00*/
     color: #222222 !important;
 }
 
