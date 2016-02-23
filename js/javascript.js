@@ -23,7 +23,7 @@ elt_chercher.addEventListener("click", recherche);
 
 document.getElementById('section2').style.display="block";
 document.getElementById('section3').style.display="none";
-document.getElementById('section4').style.display="none";
+// document.getElementById('section4').style.display="none";
 document.getElementById('section5').style.display="none";
 
 // Lance la récupération de la liste des films dès la chargement de la page
@@ -50,13 +50,20 @@ function recherche(){
 
 function recup_liste_cinema(liste_cinema){
 	console.log(liste_cinema.feed);
-	for (var c = 0; c < liste_cinema.feed.totalResults; c++){
+	for (var c = 0; c < liste_cinema.feed.totalResults, c < liste_cinema.feed.count; c++){
+		nom = liste_cinema.feed.theater[c].name;
 		myLatLng = {lat: liste_cinema.feed.theater[c].geoloc.lat, lng: liste_cinema.feed.theater[c].geoloc.long};
 		marker = new google.maps.Marker({
 			position: myLatLng,
 			label: (c+1).toString(),
 			map: map,
-			title: 'Carte'
+			title: nom
+		});
+		var infowindow = new google.maps.InfoWindow({
+			content: nom
+		});
+		marker.addListener('click', function() {
+			infowindow.open(map, marker);
 		});
 	}
 }
@@ -67,11 +74,8 @@ function geolocalisation() {
   var geoSuccess = function(position) {
 	latitude = position.coords.latitude;
 	longitude = position.coords.longitude;
-	// console.log(startPos.coords.latitude+" / "+ startPos.coords.longitude);
   };
   navigator.geolocation.getCurrentPosition(geoSuccess);
-  // console.log(position);
-  // console.log(latitude+"/"+longitude);
 };
 
 // Affichage de la map et du marqueur de position en fonction de la géolocalisation ou de l'adresse tapée
@@ -80,7 +84,7 @@ function initMap(latitude, longitude) {
 	
 	map = new google.maps.Map(document.getElementById('map'), {
 	  center: {lat: latitude, lng: longitude},
-	  zoom: 15
+	  zoom: 14
 	});
 		
 	marker = new google.maps.Marker({
