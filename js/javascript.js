@@ -58,6 +58,8 @@ function recup_liste_cinema(liste_cinema){
 	for (var c = 0; ((c < liste_cinema.feed.totalResults) && (c < liste_cinema.feed.count)) ; c++){
 		console.log(c);
 		nom = liste_cinema.feed.theater[c].name;
+		
+		// Affichage des markers
 		myLatLng = {lat: liste_cinema.feed.theater[c].geoloc.lat, lng: liste_cinema.feed.theater[c].geoloc.long};
 		position = new google.maps.LatLng(myLatLng);
 		bounds.extend(position);
@@ -67,7 +69,12 @@ function recup_liste_cinema(liste_cinema){
 			map: map,
 			title: nom
 		});
-		contenu = nom;
+		
+		// Composition du contenu de l'information à chaque clique sur le marker
+		address = liste_cinema.feed.theater[c].address
+		code = liste_cinema.feed.theater[c].code
+		city = liste_cinema.feed.theater[c].city
+		contenu = "<div id= 'theaterName"+c+"'>"+nom+"</div><div id= 'theaterAddress"+c+"'>"+address+"</div><div id= 'theaterCity"+c+"'>"+city+"</div><div id= 'theaterCode"+c+"' valeur = '"+code+"'></div>";
 		
 		// Affiche les informations dans les infobulles
 		var infoWindow = new google.maps.InfoWindow(), marker, c;
