@@ -15,6 +15,7 @@ var tab_split = [" Bande-annonce"," - BANDE-ANNONCE", " Teaser", " TEASER", " - 
 var nb_pages;
 var film_recent=0;
 var k;
+var position;
 
 elt_autocomplete.addEventListener("focus", geolocate);
 elt_geolocalisation.addEventListener("click", geolocalisation);
@@ -48,25 +49,35 @@ function recherche(){
 	}
 }
 
+// Récupère et place sur la carte les cinémas à proximité du lieu cherché
 function recup_liste_cinema(liste_cinema){
+	var bounds = new google.maps.LatLngBounds();
+	
 	console.log(liste_cinema.feed);
 	for (var c = 0; c < liste_cinema.feed.totalResults, c < liste_cinema.feed.count; c++){
+		console.log(c);
 		nom = liste_cinema.feed.theater[c].name;
 		myLatLng = {lat: liste_cinema.feed.theater[c].geoloc.lat, lng: liste_cinema.feed.theater[c].geoloc.long};
+		position = new google.maps.LatLng(myLatLng);
+		bounds.extend(position);
 		marker = new google.maps.Marker({
 			position: myLatLng,
 			label: (c+1).toString(),
 			map: map,
 			title: nom
 		});
+		marker.metadata = {type: "point", id: "coucou"};
+		console.log(marker);
 		var infowindow = new google.maps.InfoWindow({
 			content: nom
 		});
-		marker.addListener('click', function() {
-			infowindow.open(map, marker);
+		marker.addListener('click', function(data) {
+			// infowindow.open(map, marker);
+			console.log(data);
 		});
 	}
 }
+
 
 // Géolocalise l'utilisateur à partir des données du navigateur
 function geolocalisation() {
@@ -81,7 +92,7 @@ function geolocalisation() {
 // Affichage de la map et du marqueur de position en fonction de la géolocalisation ou de l'adresse tapée
 function initMap(latitude, longitude) {
 	myLatLng = {lat: latitude, lng: longitude}
-	
+	bounds.extend(position);
 	map = new google.maps.Map(document.getElementById('map'), {
 	  center: {lat: latitude, lng: longitude},
 	  zoom: 14
@@ -95,7 +106,6 @@ function initMap(latitude, longitude) {
 }
 
 var autocomplete;
-
 
 
 // Autocomplete l'adresse lorsqu'on la tape
@@ -193,7 +203,7 @@ function recup_liste_films_en_salle(){
 
 // Appel à l'api allociné en fonction du nombre de page
 function recup_liste(recup_movie){
-	// console.log(recup_movie.feed);
+	console.log(recup_movie.feed);
 	
 	if (recup_movie.feed.totalResults > 0) {
 		nb_pages = Math.ceil(recup_movie.feed.totalResults/10);
@@ -228,13 +238,13 @@ function recup_liste_films(recup_film){
 			document.getElementById('affiche'+film_recent).addEventListener('click', afficheFilm);
 			
 			var allocine_api_recherche = "http://api.allocine.fr/rest/v3/movie?partner="+key_allocine+"&code="+code_film+"&profile=large&format=json";
-			(function(fr){ $.getJSON(allocine_api_recherche, function(d){ recup_info_films(d, fr) }); })(film_recent)
+			(function(fr){ $.getJSON(allocine_api_recherche, function(d){ showMoviePicture(d, fr) }); })(film_recent)
 		}
 	}
 }
 
-
-function recup_info_films(recup_info, fr){
+// Place l'affiche du film
+function showMoviePicture(recup_info, fr){
 	document.getElementById('affiche'+fr).src = recup_info.movie.media[0].thumbnail.href;
 }
 
