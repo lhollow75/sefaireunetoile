@@ -16,6 +16,7 @@ var nb_pages;
 var film_recent=0;
 var k;
 var position;
+var bounds;
 
 elt_autocomplete.addEventListener("focus", geolocate);
 elt_geolocalisation.addEventListener("click", geolocalisation);
@@ -51,10 +52,10 @@ function recherche(){
 
 // Récupère et place sur la carte les cinémas à proximité du lieu cherché
 function recup_liste_cinema(liste_cinema){
-	var bounds = new google.maps.LatLngBounds();
+	bounds = new google.maps.LatLngBounds();
 	
 	console.log(liste_cinema.feed);
-	for (var c = 0; c < liste_cinema.feed.totalResults, c < liste_cinema.feed.count; c++){
+	for (var c = 0; ((c < liste_cinema.feed.totalResults) && (c < liste_cinema.feed.count)) ; c++){
 		console.log(c);
 		nom = liste_cinema.feed.theater[c].name;
 		myLatLng = {lat: liste_cinema.feed.theater[c].geoloc.lat, lng: liste_cinema.feed.theater[c].geoloc.long};
@@ -66,16 +67,18 @@ function recup_liste_cinema(liste_cinema){
 			map: map,
 			title: nom
 		});
-		marker.metadata = {type: "point", id: "coucou"};
-		console.log(marker);
-		var infowindow = new google.maps.InfoWindow({
-			content: nom
-		});
-		marker.addListener('click', function(data) {
-			// infowindow.open(map, marker);
-			console.log(data);
-		});
+		contenu = nom;
+		
+		// Affiche les informations dans les infobulles
+		var infoWindow = new google.maps.InfoWindow(), marker, c;
+		google.maps.event.addListener(marker, 'click', (function(marker, _c) {
+            return function() {
+                infoWindow.setContent(_c);
+                infoWindow.open(map, marker);
+            }
+        })(marker, contenu));
 	}
+	map.fitBounds(bounds);
 }
 
 
@@ -92,7 +95,8 @@ function geolocalisation() {
 // Affichage de la map et du marqueur de position en fonction de la géolocalisation ou de l'adresse tapée
 function initMap(latitude, longitude) {
 	myLatLng = {lat: latitude, lng: longitude}
-	bounds.extend(position);
+
+	
 	map = new google.maps.Map(document.getElementById('map'), {
 	  center: {lat: latitude, lng: longitude},
 	  zoom: 14
