@@ -88,16 +88,18 @@ function recup_liste_cinema(liste_cinema){
 
 // Récupération des horaires de cinéma
 function recup_horaire_cinema(horaires){
+	var tab_moviesList = [];
 	console.log(horaires.feed.theaterShowtimes[0]);
 	showtimes = horaires.feed.theaterShowtimes[0];
-	var previousCode;
 	for (h=0; h < showtimes.movieShowtimes.length; h++){
 		// console.log(showtimes.movieShowtimes[h].onShow.movie.code);
 		onShow = showtimes.movieShowtimes[h].onShow.movie;
-		if (onShow.code != previousCode){
+		console.log(tab_moviesList.indexOf(onShow.code));
+		console.log(tab_moviesList);
+		if (tab_moviesList.indexOf(onShow.code) == -1){
 			$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href));
 		}
-		previousCode = onShow.code;
+		tab_moviesList.push(onShow.code);
 	}
 }
 
