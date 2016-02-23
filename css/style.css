@@ -293,6 +293,10 @@ footer{
     text-align: center;
 }
 
+.da-menu-movies{
+    width: 960px;
+    text-align: center;
+}
 
 .ca-menu-movies li{
     width: 130px;
@@ -301,6 +305,12 @@ footer{
     vertical-align: top;
 }
 
+.da-menu-movies li{
+    width: 110px;
+    margin: 0px 5px;
+    text-align: left;
+    vertical-align: top;
+}
 
 .title-main{
     font-size: 20px;
@@ -333,6 +343,48 @@ footer{
 }
 
 
+
+.da-affiche{
+    display: block;
+    width: 110px;
+    height: 147px;
+    box-shadow: 0px 0px 2px #888888;
+    margin: 10px auto;
+
+    /* Brightness effect */
+        filter: brightness(100%);
+        -webkit-filter: brightness(100%);
+        -moz-filter: brightness(50%);
+        -o-filter: brightness(50%);
+        -ms-filter: brightness(50%);
+
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+    -ms-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out; 
+
+}
+
+ul.da-menu-movies li a:hover .da-affiche{
+
+    /* Brightness effect */
+        filter: brightness(30%);
+        -webkit-filter: brightness(30%);
+        -moz-filter: brightness(30%);
+        -o-filter: brightness(30%);
+        -ms-filter: brightness(30%);
+
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+    -ms-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out; 
+}
+
+
+
+
 ul.ca-menu-movies li a:hover .ca-affiche{
     transform : scale(1.1,1.1);
     -webkit-transition: all 200ms linear;
@@ -343,6 +395,17 @@ ul.ca-menu-movies li a:hover .ca-affiche{
 }
 
 
+ul.da-menu-movies li a:hover .da-title{
+    opacity: 1 !important;
+    margin-top: -100px;
+    -webkit-transition: all 200ms ease-in;
+    -moz-transition: all 200ms ease-in;
+    -o-transition: all 200ms ease-in;
+    -ms-transition: all 200ms ease-in;
+    transition: all 200ms ease-in; 
+}
+
+
 .ca-title{
     font-size: 11px;
     text-transform: uppercase;
@@ -350,7 +413,28 @@ ul.ca-menu-movies li a:hover .ca-affiche{
     line-height: 1;
     margin: 10px 0px;
 }
-.ca-menu-movies a{
+
+.da-title{
+    opacity: 0;
+    font-size: 10px;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    display: block;
+    margin-top: -50px;
+    width: 110px;
+    position: absolute;
+    z-index: 10000;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    transition: all 200ms ease; 
+}
+
+.ca-menu-movies a, .da-menu-movies a{
     text-decoration: none;
     color:#000000;
 }
@@ -524,3 +608,5 @@ li.movie-results:hover{
 .hdpi.pac-logo:after{
     display: none;
 }
+
+
