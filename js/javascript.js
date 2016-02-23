@@ -55,6 +55,9 @@ function getTodaysDate(){
 
 function isTodaysDate(date){
 	todaysDate = getTodaysDate();
+	if (todaysDate == date){
+		return true;
+	} else return false;
 }
 
 // Récupère et place sur la carte les cinémas à proximité du lieu cherché
@@ -111,17 +114,18 @@ function recup_horaire_cinema(horaires){
 			// console.log(showtimes.movieShowtimes[h].onShow.movie.code);
 			onShow = showtimes.movieShowtimes[h].onShow.movie;
 			// console.log(tab_moviesList.indexOf(onShow.code));
-			// console.log(showtimes.movieShowtimes[h]);
+			console.log(showtimes.movieShowtimes[h]);
 			if (tab_moviesList.indexOf(onShow.code) == -1){
 				if (isTodaysDate(showtimes.movieShowtimes[h].scr[0].d)){
 					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href));
+					tab_moviesList.push(onShow.code);
 				} else {
 					console.log("Pas de film à l'affiche aujourd'hui");
 				}
 			} else  {
 				console.log("Ce film est déjà affiché");
 			}
-			tab_moviesList.push(onShow.code);
+			
 		}
 	}
 	
