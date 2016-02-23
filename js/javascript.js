@@ -107,10 +107,8 @@ function recup_horaire_cinema(horaires){
 var template_filmEnSalle = function(code, title, source){
 	var _tpl = [
 		'<li id="filmEnSalle'+code+'" class="en-salle">',
-			'<a href="#">',
-					'<img class="da-affiche" src="'+source+'" alt="'+title+'">',
-					'<h3 class="da-title">'+title+'</h3>',
-			'</a>',
+				'<img class="da-affiche" src="'+source+'" alt="'+title+'">',
+				'<h3 class="da-title">'+title+'</h3>',
 		'</li>'
 	]
 	return _tpl.join('');
