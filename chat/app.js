@@ -31,8 +31,15 @@ server.listen(1337);
 // Usernames which are currently connected to the chat.
 var usernames = {};
 
-// Rooms which are currently available in chat. (Will be the film shows list.)
-var rooms = ['room1','room2','room3'];
+var x = 3;
+
+// Rooms which are currently available in chat. (Will be the film shows list.)   
+var rooms = [];
+
+//Generating needed rooms
+for(var i = 0 ; i < x ; i++){
+    rooms.push('room'+i);
+}
 
 // When a socket is connected :
 io.sockets.on('connection', function (socket) {
@@ -41,17 +48,17 @@ io.sockets.on('connection', function (socket) {
 		// Store the username in the socket session for this client.
 		socket.username = username;
 		// Store the room name in the socket session for this client.
-		socket.room = 'room1';
+		socket.room = 'room0';
 		// Add the client's username to the global list.
 		usernames[username] = username;
 		// Send client to room 1 (WILL BE SELECTED ROOM (FILM SHOW SELECTED), PREVIOUSLY CHOSEN BY THE USER.)
-		socket.join('room1');
+		socket.join('room0');
 		// Emit to client they've connected
-		socket.emit('updatechat', 'Chat', 'Vous avez rejoint la room1');
+		socket.emit('updatechat', 'Chat', 'Vous avez rejoint la room !');
 		// Emit to room 1 that a person has connected to their room
-		socket.broadcast.to('room1').emit('updatechat', 'Chat', username + ' a rejoint la conversation.');
+		socket.broadcast.to('room0').emit('updatechat', 'Chat', username + ' a rejoint la conversation.');
         //Call for the 'updaterooms' event, send var rooms, event appearing in room 1 
-		socket.emit('updaterooms', rooms, 'room1');
+		socket.emit('updaterooms', rooms, 'room0');
 	});
 	
 	// When a user sends a message :
@@ -70,7 +77,7 @@ io.sockets.on('connection', function (socket) {
         //We define a variable, 'newroom' which is the new room selected.
 		socket.join(newroom);
         //We display a message for the user
-		socket.emit('updatechat', 'SERVER', 'Vous avez rejoint à la '+ newroom);
+		socket.emit('updatechat', 'SERVER', 'Vous avez changé de conversation.');
 		// We send a message to the OLD room, broadcasted for all users.
 		socket.broadcast.to(socket.room).emit('updatechat', 'Chat', socket.username+' a quitté cette conversation.');
 		// Update socket session room title
