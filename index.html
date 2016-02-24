@@ -181,7 +181,7 @@
 			<div class="title-section">
 				<div class="bordure"></div>
 				<div class="title-main">Cinémas à proximité</div>
-				<div class="title-sub">Sélectionner un cinéma proche de chez vous</div>
+				<div class="title-sub">Sélectionnez un cinéma proche de chez vous</div>
 			</div>
 
 		<div id="map"></div>
@@ -193,122 +193,20 @@
 			<div class="title-section">
 				<div class="bordure"></div>
 				<div class="title-main">À l'affiche</div>
-				<div class="title-sub">Sélectionner un film actuellement en salle</div>
+				<div id = "filmEnSalle" class="title-sub">Sélectionnez un film actuellement en salle</div>
 			</div>
-			 <ul id="listFilmEnSalle" class="da-menu-movies">
-			 <!--
-                    <li>
-                        <a href="#">
-                                <img class="da-affiche" src="img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="Deadpool">
-                                <h3 class="da-title">Deadpool</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
-                            <h3 class="da-title">Alvin et les chipmunks - À fond la caisse</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/531725.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
-                            <h3 class="da-title">La 5ème vague</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/280851.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
-                            <h3 class="da-title">Zootopie</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/165611.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
-	                        <h3 class="da-title">The revenant</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="Deadpool">
-                            <h3 class="da-title">Deadpool</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
-                            <h3 class="da-title">Alvin et les chipmunks - À fond la caisse</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/531725.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
-                            <h3 class="da-title">La 5ème vague</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/280851.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
-                            <h3 class="da-title">Zootopie</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/165611.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
-                            <h3 class="da-title">The revenant</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/280851.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
-                            <h3 class="da-title">Zootopie</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/165611.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
-                            <h3 class="da-title">The revenant</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="Deadpool">
-                            <h3 class="da-title">Deadpool</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/429065.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
-                            <h3 class="da-title">Alvin et les chipmunks - À fond la caisse</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/531725.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
-                            <h3 class="da-title">La 5ème vague</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/280851.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
-                            <h3 class="da-title">Zootopie</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img class="da-affiche" src="img/affiches/165611.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
-                            <h3 class="da-title">The revenant</h3>
-                        </a>
-                    </li>-->
-                </ul>
+			<ul id="listFilmEnSalle" class="da-menu-movies">
+            </ul>
 		</div>
 	</div>
+	
 
 	<div id="section5">
 		<div id="movies">
 			<div class="title-section">
 				<div class="bordure"></div>
 				<div class="title-main">Les séances</div>
-				<div class="title-sub">Sélectionner un horaire pour votre film</div>
+				<div class="title-sub">Sélectionnez un horaire pour votre film</div>
 			</div>
 			<div class="seance">
 			<!-- infos film -->

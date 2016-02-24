@@ -17,6 +17,8 @@ var k;
 var position;
 var bounds;
 
+var tab_rates = [];
+
 elt_autocomplete.addEventListener("focus", geolocate);
 elt_geolocalisation.addEventListener("click", geolocalisation);
 elt_movie.addEventListener("keyup", movieFinder);
@@ -32,8 +34,12 @@ recup_liste_films_en_salle();
 
 // Initialisation de la carte lors du clique sur le bouton recherche
 function recherche(){
-	geolocalisation();
 	
+	// Si on clique sur la recherche sans avoir entré de localisation, lance la géolocalisation
+	if (elt_autocomplete.value == ""){
+		geolocalisation();
+	}
+
 	// Récupération des cinémas aux alentours
 	var api_allocine_cinema = "http://api.allocine.fr/rest/v3/theaterlist?partner="+key_allocine+"&count=5&page=1&lat="+latitude+"&long="+longitude+"&format=json&radius=5";
 	$.getJSON(api_allocine_cinema, recup_liste_cinema);
@@ -41,6 +47,23 @@ function recherche(){
 	initMap(latitude, longitude);
 	document.getElementById('section2').style.display="none";
 	document.getElementById('section3').style.display="block";
+}
+
+function getTodaysDate(){
+	var ladate = new Date();
+	// ladate.getDate()+"/"+(ladate.getMonth()+1)+"/"+ladate.getFullYear()
+	year = ladate.getFullYear();
+	month = (ladate.getMonth()+1<10 ? '0' : '')+(ladate.getMonth()+1);
+	day = ladate.getDate()<10 ? '0' : ''+ladate.getDate();
+	ladate = year+"-"+month+"-"+day;
+	return ladate;
+}
+
+function isTodaysDate(date){
+	todaysDate = getTodaysDate();
+	if (todaysDate == date){
+		return true;
+	} else return false;
 }
 
 // Récupère et place sur la carte les cinémas à proximité du lieu cherché
@@ -51,6 +74,7 @@ function recup_liste_cinema(liste_cinema){
 	for (var c = 0; ((c < liste_cinema.feed.totalResults) && (c < liste_cinema.feed.count)) ; c++){
 		// console.log(c);
 		nom = liste_cinema.feed.theater[c].name;
+		
 		
 		// Affichage des markers
 		myLatLng = {lat: liste_cinema.feed.theater[c].geoloc.lat, lng: liste_cinema.feed.theater[c].geoloc.long};
@@ -89,18 +113,35 @@ function recup_liste_cinema(liste_cinema){
 // Récupération des horaires de cinéma
 function recup_horaire_cinema(horaires){
 	var tab_moviesList = [];
-	console.log(horaires.feed.theaterShowtimes[0]);
+	var noMovies = true;
+	// console.log(horaires.feed.theaterShowtimes[0]);
 	showtimes = horaires.feed.theaterShowtimes[0];
-	for (h=0; h < showtimes.movieShowtimes.length; h++){
-		// console.log(showtimes.movieShowtimes[h].onShow.movie.code);
-		onShow = showtimes.movieShowtimes[h].onShow.movie;
-		console.log(tab_moviesList.indexOf(onShow.code));
-		console.log(tab_moviesList);
-		if (tab_moviesList.indexOf(onShow.code) == -1){
-			$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href));
+	if (showtimes.movieShowtimes != undefined){
+		for (h=0; h < showtimes.movieShowtimes.length; h++){
+			// console.log(showtimes.movieShowtimes[h].onShow.movie.code);
+			onShow = showtimes.movieShowtimes[h].onShow.movie;
+			// console.log(tab_moviesList.indexOf(onShow.code));
+			console.log(showtimes.movieShowtimes[h]);
+			if (tab_moviesList.indexOf(onShow.code) == -1){
+				if (isTodaysDate(showtimes.movieShowtimes[h].scr[0].d)){
+					document.getElementById('filmEnSalle').innerHTML = "Sélectionnez un film actuellement en salle"
+					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href));
+					tab_moviesList.push(onShow.code);
+					noMovies = false;
+				} else {
+					console.log("Pas de séances aujourd'hui");
+				}
+			} else  {
+				console.log("Ce film est déjà affiché");
+			}
+			
 		}
-		tab_moviesList.push(onShow.code);
 	}
+	if (noMovies){
+		document.getElementById('filmEnSalle').innerHTML = "Pas de films dans ce cinéma aujourd'hui"
+		console.log("Pas de films dans ce cinéma aujourd'hui");
+	}
+	
 }
 
 // Affichage des films
@@ -165,6 +206,8 @@ function geolocate() {
 function movieFinder(){
 	$(".movie-results").remove();
 	if (elt_movie.value.length >= 2){
+		console.log(tab_rates.length);
+		console.log(tab_filmsEnSalle.length);
 		recherche = traitementChaine(elt_movie.value);
 		searchStringInArray(recherche,tab_filmsEnSalle);	
 	}
@@ -255,27 +298,34 @@ function recup_liste(recup_movie){
 function recup_liste_films(recup_film){
 	for(k=0; k< recup_film.feed.movie.length; k++){	
 		film_recent++;
-		film = splitNom(recup_film.feed.movie[k].defaultMedia.media.title);
+		// console.log(recup_film.feed.movie[k]);
 		
-		code_film = recup_film.feed.movie[k].code;
-		tab_filmsEnSalle.push(code_film+";"+film);
-		
-		if (film_recent<6){
-			synopsisShort = recup_film.feed.movie[k].synopsisShort;
-			pressRate = (Math.round(recup_film.feed.movie[k].statistics.pressRating * 2)*0.5)*10;
-			userRate = (Math.round(recup_film.feed.movie[k].statistics.userRating * 2)*0.5)*10;
-
-			// Affichage des éléments du film
-			document.getElementById('titre'+film_recent).innerHTML = film;
-			document.getElementById('affiche'+film_recent).alt = film;
-			document.getElementById('synopsis'+film_recent).innerHTML = synopsisShort;
-			document.getElementById('note-presse'+film_recent).className = "note-presse note-"+pressRate;
-			document.getElementById('note-spectateurs'+film_recent).className = "note-spectateurs note-"+userRate;
-			document.getElementById('affiche'+film_recent).addEventListener('click', afficheFilm);
+		if ((recup_film.feed.movie[k].defaultMedia != undefined) && (recup_film.feed.movie[k].defaultMedia.media.title != undefined)) {
+			film = splitNom(recup_film.feed.movie[k].defaultMedia.media.title);
 			
-			var allocine_api_recherche = "http://api.allocine.fr/rest/v3/movie?partner="+key_allocine+"&code="+code_film+"&profile=large&format=json";
-			(function(fr){ $.getJSON(allocine_api_recherche, function(d){ showMoviePicture(d, fr) }); })(film_recent)
+			code_film = recup_film.feed.movie[k].code;
+			tab_filmsEnSalle.push(code_film+";"+film);
+			
+			if (film_recent<6){
+				synopsisShort = recup_film.feed.movie[k].synopsisShort;
+				pressRate = (Math.round(recup_film.feed.movie[k].statistics.pressRating * 2)*0.5)*10;
+				userRate = (Math.round(recup_film.feed.movie[k].statistics.userRating * 2)*0.5)*10;
+
+				// Affichage des éléments du film
+				document.getElementById('titre'+film_recent).innerHTML = film;
+				document.getElementById('affiche'+film_recent).alt = film;
+				document.getElementById('synopsis'+film_recent).innerHTML = synopsisShort;
+				document.getElementById('note-presse'+film_recent).className = "note-presse note-"+pressRate;
+				document.getElementById('note-spectateurs'+film_recent).className = "note-spectateurs note-"+userRate;
+				document.getElementById('affiche'+film_recent).addEventListener('click', afficheFilm);
+				
+				var allocine_api_recherche = "http://api.allocine.fr/rest/v3/movie?partner="+key_allocine+"&code="+code_film+"&profile=large&format=json";
+				(function(fr){ $.getJSON(allocine_api_recherche, function(d){ showMoviePicture(d, fr) }); })(film_recent)
+			}	
+		} else {
+			tab_rates.push(recup_film.feed.movie[k].code);
 		}
+		
 	}
 }
 
