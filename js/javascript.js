@@ -131,12 +131,7 @@ function recup_horaire_cinema(horaires){
 					
 					(function(donnees){
 						document.getElementById('afficheEnSalle'+onShow.code).addEventListener('click', function(){
-							console.log("la");
 							console.log(donnees);
-							//afficheEnSalle182266
-							// id = donnees.srcElement.id;
-							// id = id.split('afficheEnSalle');
-							// id = id[1];
 							document.getElementById('section5').style.display="block";
 						});
 					})(showtimes.movieShowtimes[h])
