@@ -31,6 +31,9 @@ html, body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+a{
+    text-decoration: none;
+}
 
 /* icone du logo ciné dans le header*/
 .icon-logo:before {
@@ -86,6 +89,14 @@ header {
     margin: 50px auto;
     width: 960px;
     text-align: center;
+}
+
+#section6{
+    position: relative;
+    margin: 50px auto;
+    width: 960px;
+    text-align: center;
+    background-color: red;
 }
 
 .searchbar{
@@ -386,7 +397,7 @@ ul.da-menu-movies li:hover .da-affiche{
 
 
 
-ul.ca-menu-movies li:hover .ca-affiche{
+.ca-content:hover .ca-affiche{
     cursor: pointer;
     transform : scale(1.1,1.1);
     -webkit-transition: all 200ms linear;
@@ -562,6 +573,8 @@ ul.da-menu-movies li:hover .da-title{
     position: absolute!important;
     z-index: 1000;
     border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
     font-family: Arial,sans-serif;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     -moz-box-sizing: border-box;
@@ -599,7 +612,7 @@ ul#movie_list li{
 }
 
 li.movie-results:hover{
-    background-color: #fafafa; /*#ff7e00*/
+    background-color: #fafafa; 
     color: #222222 !important;
 }
 
@@ -610,6 +623,102 @@ li.movie-results:hover{
 
 .hdpi.pac-logo:after{
     display: none;
+}
+
+.btn-preview{
+    background-color: #ff7e00;
+    color: #ffffff !important;
+    padding: 4px 10px;
+    display: block;
+    font-size: 10px;
+    text-align: center;
+}
+
+.btn-preview:hover{
+    background-color: #ff5a00 !important;
+}
+
+
+
+
+form {
+  /* Just to center the form on the page */
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
+
+.div_contact {
+/*To set space between contact form fields*/
+  margin-top: 1em;
+}
+
+.label_contact {
+  /* To make sure that all labels have the same size and are properly align */
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: right;
+  background-color: #ff5a00;
+  border: none;
+    border-radius: 2px 0 0 2px;
+    -webkit-border-radius: 2px 0 0 2px;
+    -moz-border-radius: 2px 0 0 2px;
+}
+
+.input_contact, .textarea_contact {
+  /* To give bigger size to font in input (same than labels) */
+  font: 1em sans-serif;
+  width: 300px;
+  /* To harmonize text field border */
+  outline: none;
+  margin:0px;
+  height: 30px !important;
+  font-size: 14px;
+  color: #435f71;
+  border: none;
+    border-radius: 0 2px 2px 0;
+    -webkit-border-radius: 0 2px 2px 0;
+    -moz-border-radius: 0 2px 2px 0;
+}
+
+
+.textarea_contact {
+  /* To put label at top of textarea*/
+  vertical-align: top;
+  height: 5em;
+  /*To give posibility to resize verticaly field*/
+  resize: vertical;
+}
+
+.button_contact {
+  outline: none;
+  margin:0px 0px 0px 0px;
+    height: 44px;
+    font-size: 14px;
+    color: #ffffff;
+    border: none;
+    width: 370px;
+    background-color: #ff7e00;
+    -webkit-appearance: button;
+    cursor: pointer;
+    text-transform: none;
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    transition: all 200ms linear;
+    position: relative; 
+    left:25px;
+}
+
+.button_contact:hover{
+    background-color: #ff5a00;
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    transition: all 200ms linear; 
 }
 
 

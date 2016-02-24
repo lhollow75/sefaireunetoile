@@ -18,12 +18,15 @@ var express = require('express'),
     server = http.createServer(app),
     io = require('socket.io').listen(server);
 
-server.listen(1337);
+//Importing distant files, css, img, js
+app.use('/static', express.static('public'));
 
 // Routing to the Chat index.html file for testing purposes.
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
+
+server.listen(1337);
 
 // Usernames which are currently connected to the chat.
 var usernames = {};

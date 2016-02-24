@@ -1,6 +1,10 @@
 <html>
 <head>
 	<title>Une toile ensemble</title>
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /><![endif]-->
+
+
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/lightbox.css">
@@ -10,11 +14,28 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/html5lightbox.js"></script>
+    <script>
 
+    /*Fonction smooth scrolldown*/
+  $(function() {
+    $('a[href*="#"]:not([href="#"])').click(function() {
+      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+        if (target.length) {
+          $('html, body').animate({
+            scrollTop: target.offset().top
+          }, 1000);
+          return false;
+        }
+      }
+    });
+  });
+    </script>
 </head>
 <body>
 	<header>
-		<div class="icon-logo"></div>
+		<a href="javascript:window.location.reload()"><div class="icon-logo"></div></a>
 	</header>
 
 	<div id="section1">
@@ -51,6 +72,7 @@
 			</div>
 			 <ul class="ca-menu-movies">
                     <li>
+                        <div class="ca-content">
                         <!-- affiche du film (ajouter le titre du film en alt)-->
                         <img id="affiche1" class="ca-affiche" src="" alt="">
                             <!-- Titre du film -->
@@ -65,9 +87,11 @@
                             </div>
                             <!-- Fin Notations -->
                             <p id="synopsis1" class="synopsis"></p>
-                            <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
+                        </div>
+                            <a  href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
                     </li>
                     <li>
+                        <div class="ca-content">
                             <!-- affiche du film (ajouter le titre du film en alt)-->
                             <img id="affiche2" class="ca-affiche" src="" alt="">
 
@@ -84,9 +108,12 @@
                                     <!-- Fin Notations -->
 
                                     <p id="synopsis2" class="synopsis"></p>
-                                    <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
+                                </div>
+                                    <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
                     </li>
                     <li>
+                        <div class="ca-content">
+
                             <!-- affiche du film (ajouter le titre du film en alt)-->
                             <img id="affiche3" class="ca-affiche" src="" alt="">
 
@@ -103,13 +130,15 @@
                                     <!-- Fin Notations -->
 
                                     <p id="synopsis3" class="synopsis"></p>
-                                    <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
+                                    </div>
+
+                                    <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
                     </li>
                     <li>
+                        <div class="ca-content">
                             <!-- affiche du film (ajouter le titre du film en alt)-->
                             <img id="affiche4" class="ca-affiche" src="" alt="">
 
-                                <div class="ca-content">
                                     <!-- Titre du film -->
                                     <h3 id="titre4" class="ca-title"></h3>
 
@@ -123,14 +152,15 @@
                                     <!-- Fin Notations -->
 
                                     <p id="synopsis4" class="synopsis"></p>
-                                    <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
-                                </div>
+                                    </div>
+                                    <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
+                                
                     </li>
                     <li>
+                        <div class="ca-content">
                             <!-- affiche du film (ajouter le titre du film en alt)-->
                             <img id="affiche5" class="ca-affiche" src="" alt="">
 
-                                <div class="ca-content">
                                     <!-- Titre du film -->
                                     <h3 id="titre5" class="ca-title"></h3>
 
@@ -144,7 +174,8 @@
                                     <!-- Fin Notations -->
 
                                     <p id="synopsis5" class="synopsis"></p>
-                                    <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
+                                </div>
+                                    <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
                                 </div>
                     </li>
                 </ul>
@@ -269,17 +300,36 @@
 		</div>
 	</div>
 
-
-    <div id="section6">
+<!-- FORMULAIRE EN COURS
+<div id="section6">
             <div class="title-section">
                 <div class="bordure"></div>
                 <div class="title-main">Nous contacter</div>
                 <div class="title-sub">Nous sommes à votre écoute</div>
              </div>
 
+            <form action="#" method="post">
+                <div class="div_contact">
+                    <span class="label_contact" for="name"></span>
+                    <input class="input_contact" type="text" id="name" name="user_name" value="Nom">
+                </div>
 
+                <div class="div_contact">
+                    <label class="label_contact" for="mail"></label>
+                    <input class="input_contact" type="email" id="mail" name="user_email" value="Email">
+                </div>
+
+                <div class="div_contact">
+                    <label class="label_contact" for="msg"></label>
+                    <textarea class="textarea_contact" id="msg" name="user_message">Votre message...</textarea>
+                </div>
+                 
+                <div class="div_contact">
+                    <button class="button_contact" type="submit">Envoyer</button>
+                </div>
+            </form>
     </div>
-
+FIN FORMULAIRE -->
 
 
 
