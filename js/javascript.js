@@ -29,6 +29,7 @@ document.getElementById('section3').style.display="none";
 document.getElementById('section4').style.display="none";
 document.getElementById('section5').style.display="none";
 // document.getElementById('section6').style.display="none";
+document.getElementById('section7').style.display="none";
 
 
 // Lance la récupération de la liste des films dès la chargement de la page
@@ -123,24 +124,22 @@ function recup_horaire_cinema(horaires){
 			// console.log(showtimes.movieShowtimes[h].onShow.movie.code);
 			onShow = showtimes.movieShowtimes[h].onShow.movie;
 			// console.log(tab_moviesList.indexOf(onShow.code));
-			// console.log(showtimes.movieShowtimes[h]);
-			if (tab_moviesList.indexOf(onShow.code) == -1){
-				if (isTodaysDate(showtimes.movieShowtimes[h].scr[0].d)){
-					document.getElementById('filmEnSalle').innerHTML = "Sélectionnez un film actuellement en salle"
-					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href));
+			console.log(showtimes.movieShowtimes[h]);
+			if (isTodaysDate(showtimes.movieShowtimes[h].scr[0].d)){ 
+				// if (tab_moviesList.indexOf(onShow.code) == -1){
+					
+					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href, VOVF(showtimes.movieShowtimes[h].version), num3d(showtimes.movieShowtimes[h].screenFormat.$)));
 					
 					(function(donnees){
 						document.getElementById('afficheEnSalle'+onShow.code).addEventListener('click', function(){
-							console.log(donnees);
 							document.getElementById('section5').style.display="block";
+							movieCard(donnees);
 						});
 					})(showtimes.movieShowtimes[h])
 					
 					tab_moviesList.push(onShow.code);
 					noMovies = false;
-				} else {
-					// console.log("Pas de séances aujourd'hui");
-				}
+				// } 
 			} else  {
 				// console.log("Ce film est déjà affiché");
 			}
@@ -148,18 +147,54 @@ function recup_horaire_cinema(horaires){
 		}
 	}
 	if (noMovies){
-		document.getElementById('filmEnSalle').innerHTML = "Pas de films dans ce cinéma aujourd'hui"
+		document.getElementById('filmEnSalle').innerHTML = "Pas de films dans ce cinéma aujourd'hui";
 		// console.log("Pas de films dans ce cinéma aujourd'hui");
+	} else {
+		document.getElementById('filmEnSalle').innerHTML = "Sélectionnez un film actuellement en salle";
 	}
 	
 }
 
+// Savoir si un film est en VO ou VF
+function VOVF(code){
+	langue = code.$;
+	original = code.original;
+
+	if (original == "false") return "VF";
+		else return "V0ST";
+}
+
+function num3d(code){
+	if (code == "Numérique") return " ";
+		else return "3D";
+}
+
+function movieCard(donnees){
+	console.log(donnees);
+	donnees = donnees.onShow.movie;
+	document.getElementById('moviePicture').src = donnees.poster.href;
+	document.getElementById('movieTitle').innerHTML = donnees.title;
+	if (donnees.statistics.pressRating != undefined){
+		document.getElementById('pressRate').className = "note-presse note-"+rateClass(donnees.statistics.pressRating);
+	}
+	if (donnees.statistics.userRating != undefined){
+		document.getElementById('userRate').className = "note-spectateurs note-"+rateClass(donnees.statistics.userRating);
+	} else document.getElementById('userRate').className = "";
+	
+	document.getElementById('movieTrailer').href = donnees.trailer.href;
+	document.getElementById('director').innerHTML = donnees.castingShort.directors;
+	document.getElementById('actors').innerHTML = donnees.castingShort.actors;
+	
+}
+
 // Affichage des films
-var template_filmEnSalle = function(code, title, source){
+var template_filmEnSalle = function(code, title, source, langue, format){
 	var _tpl = [
 		'<li id="filmEnSalle'+code+'" class="en-salle">',
 				'<img id = "afficheEnSalle'+code+'" class="da-affiche" src="'+source+'" alt="'+title+'">',
 				'<h3 class="da-title">'+title+'</h3>',
+				'<h4 class="da-langue">'+langue+'</h4>',
+				'<h4 class="da-langue">'+format+'</h4>',
 		'</li>'
 	]
 	
@@ -324,6 +359,11 @@ function recup_liste(recup_movie){
 	}
 }
 
+// Retourn la note arrondie à 0.5 près pour la mettre dans une classe
+function rateClass(rate){
+	return (Math.round(rate * 2)*0.5)*10;
+}
+
 // Récupère sur chaque page la liste de film et l'ajoute dans le tableau tab_filmsEnSalle
 function recup_liste_films(recup_film){
 	for(k=0; k< recup_film.feed.movie.length; k++){	
@@ -338,8 +378,8 @@ function recup_liste_films(recup_film){
 			
 			if (film_recent<6){
 				synopsisShort = recup_film.feed.movie[k].synopsisShort;
-				pressRate = (Math.round(recup_film.feed.movie[k].statistics.pressRating * 2)*0.5)*10;
-				userRate = (Math.round(recup_film.feed.movie[k].statistics.userRating * 2)*0.5)*10;
+				pressRate = rateClass(recup_film.feed.movie[k].statistics.pressRating);
+				userRate = rateClass(recup_film.feed.movie[k].statistics.userRating);
 
 				// Affichage des éléments du film
 				document.getElementById('titre'+film_recent).innerHTML = film;

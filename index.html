@@ -230,19 +230,19 @@ $(function() {
      <div class="chosen_movie">
 				<!--for chat integration
                 <img class="ca-affiche" src="static/img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">-->
-                <img class="ca-affiche" src="img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                <img id="moviePicture" class="ca-affiche" src="img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
                 <div class="ca-content">
-                    <h3 class="ca-title">Deadpool</h3>
+                    <h3 id="movieTitle" class="ca-title">Deadpool</h3>
 
                     <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
                     <div class="ca-presse">Presse
-                       <span class="note-presse note-8"></span>
+                       <span id="pressRate" class="note-presse note-8"></span>
                    </div>
                    <div class="ca-spectateurs">Spectateurs
-                       <span class="note-spectateurs note-9"></span>
+                       <span id="userRate" class="note-spectateurs note-9"></span>
                    </div>
                    <!-- Fin Notations -->
-                   <a  href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
+                   <a  id="movieTrailer" href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
 
                    <p class="synopsis">A l'origine, il s'appelle Wade Wilson : un ancien militaire des Forces Spéciales devenu mercenaire. Après avoir subi une expérimentation hors norme qui va accélérer ses pouvoirs de guérison, il va devenir Deadpool. Armé de ses nouvelles capacités et d'un humour noir survolté, Deadpool va traquer l'homme qui a bien failli anéantir sa vie.</p>
                    <!--<button>Sélectionner</button>-->
