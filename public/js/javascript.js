@@ -27,7 +27,8 @@ elt_chercher.addEventListener("click", recherche);
 document.getElementById('section2').style.display="block";
 document.getElementById('section3').style.display="none";
 document.getElementById('section4').style.display="none";
-document.getElementById('section5').style.display="none";
+// document.getElementById('section5').style.display="none";
+document.getElementById('section6').style.display="none";
 
 // Lance la récupération de la liste des films dès la chargement de la page
 recup_liste_films_en_salle();
@@ -121,25 +122,29 @@ function recup_horaire_cinema(horaires){
 			// console.log(showtimes.movieShowtimes[h].onShow.movie.code);
 			onShow = showtimes.movieShowtimes[h].onShow.movie;
 			// console.log(tab_moviesList.indexOf(onShow.code));
-			console.log(showtimes.movieShowtimes[h]);
+			// console.log(showtimes.movieShowtimes[h]);
 			if (tab_moviesList.indexOf(onShow.code) == -1){
 				if (isTodaysDate(showtimes.movieShowtimes[h].scr[0].d)){
 					document.getElementById('filmEnSalle').innerHTML = "Sélectionnez un film actuellement en salle"
 					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href));
+					document.getElementById('afficheEnSalle'+onShow.code).addEventListener('click', function(donnees){
+						console.log(donnees);
+						document.getElementById('section5').style.display="block";
+					});
 					tab_moviesList.push(onShow.code);
 					noMovies = false;
 				} else {
-					console.log("Pas de séances aujourd'hui");
+					// console.log("Pas de séances aujourd'hui");
 				}
 			} else  {
-				console.log("Ce film est déjà affiché");
+				// console.log("Ce film est déjà affiché");
 			}
 			
 		}
 	}
 	if (noMovies){
 		document.getElementById('filmEnSalle').innerHTML = "Pas de films dans ce cinéma aujourd'hui"
-		console.log("Pas de films dans ce cinéma aujourd'hui");
+		// console.log("Pas de films dans ce cinéma aujourd'hui");
 	}
 	
 }
@@ -148,10 +153,12 @@ function recup_horaire_cinema(horaires){
 var template_filmEnSalle = function(code, title, source){
 	var _tpl = [
 		'<li id="filmEnSalle'+code+'" class="en-salle">',
-				'<img class="da-affiche" src="'+source+'" alt="'+title+'">',
+				'<img id = "afficheEnSalle'+code+'" class="da-affiche" src="'+source+'" alt="'+title+'">',
 				'<h3 class="da-title">'+title+'</h3>',
 		'</li>'
 	]
+	
+	
 	return _tpl.join('');
 }
 
@@ -206,8 +213,8 @@ function geolocate() {
 function movieFinder(){
 	$(".movie-results").remove();
 	if (elt_movie.value.length >= 2){
-		console.log(tab_rates.length);
-		console.log(tab_filmsEnSalle.length);
+		// console.log(tab_rates.length);
+		// console.log(tab_filmsEnSalle.length);
 		recherche = traitementChaine(elt_movie.value);
 		searchStringInArray(recherche,tab_filmsEnSalle);	
 	}
@@ -274,6 +281,24 @@ var template = function(list, id){
 	return _tpl.join('');
 }
 
+// Affichage des scéances
+// var template_horaires = function(show, id){
+	// var _tpl = [
+		// '<li class="movie-results">',
+			// '<span id="'+id+'">'+list+'</span>',
+		// '</li>'
+	// ]
+	// return _tpl.join('');
+// }
+				// '<li>',
+					// '<h3 class="horaires-title">Horaires</h3>',
+					// '<div class="horaires-text"><span>Début : <span><span>"'+show+'"<span></div>',
+					// '<button class="horaires-btn">Rejoindre le groupe</button>',
+					// '<!--<div class="circle">',
+						// '<span data-notification="0" class="notifications"></span>',
+					// '</div>-->',
+				// '</li>'
+
 // Appel à l'api allociné pour récupérer le nombre de pages de films en salle
 function recup_liste_films_en_salle(){
 	var allocine_api = "http://api.allocine.fr/rest/v3/movielist?partner="+key_allocine+"&filter=nowshowing&format=json&order=datedesc";
@@ -282,7 +307,7 @@ function recup_liste_films_en_salle(){
 
 // Appel à l'api allociné en fonction du nombre de page
 function recup_liste(recup_movie){
-	console.log(recup_movie.feed);
+	// console.log(recup_movie.feed);
 	
 	if (recup_movie.feed.totalResults > 0) {
 		nb_pages = Math.ceil(recup_movie.feed.totalResults/10);
