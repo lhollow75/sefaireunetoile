@@ -1,10 +1,17 @@
 <html>
 <head>
 	<title>Une toile ensemble</title>
+    <!--for chat integration
+    <link rel="icon" type="image/png" href="static/img/favicon.png" />
+    -->
     <link rel="icon" type="image/png" href="img/favicon.png" />
     <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /><![endif]-->
 
-
+    <!--for chat integration
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/lightbox.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/chat2.css">-->
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/lightbox.css">
@@ -12,6 +19,12 @@
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,600,600italic,700italic,700' rel='stylesheet' type='text/css'>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <!--for chat integration
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/html5lightbox.js"></script>
+    <script type="text/javascript" src="/static/js/clientchat.js"></script>
+    -->
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/html5lightbox.js"></script>
     <script>
@@ -215,7 +228,8 @@
 			<div class="seance">
 			<!-- infos film -->
 			<div class="chosen_movie">
-				
+				<!--for chat integration
+                <img class="ca-affiche" src="static/img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">-->
 				<img class="ca-affiche" src="img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
                 <div class="ca-content">
                                 <h3 class="ca-title">Deadpool</h3>
@@ -409,6 +423,8 @@ FIN CGU -->
 		<div id="MadeBy">Made with love by Mathilde | Ophélie | Julien | Vincent</div>
  	</footer>
 </body>
+    <!--for chat integration
+    <script type="text/javascript" src="/static/js/javascript.js"></script>-->
 	<script type="text/javascript" src="js/javascript.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEIF4I4xIgInAxD6qxo52UzbTvi6KlO1k&signed_in=true&libraries=places"
     async defer></script>

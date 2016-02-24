@@ -1,0 +1,186 @@
+/* Masquer le halo bleu de l'autofocus dans les champs de saisie */
+input:focus, textarea:focus , button:focus{
+    outline: none;
+}
+
+/* Définition générale du chat */
+#chatroom{
+    font-family: Lato, helvetica;
+    font-size: 12px;
+    height: 400px;
+    width: 230px;
+    border: 1px solid #e6ecf1;
+}
+
+/* Liens vers les autres rooms */
+#rooms{
+    width: 100px;
+    border-right: 1px solid black;
+    height: 300px;
+    padding: 10px;
+    overflow:scroll-y;
+}
+
+    /* Header du chat */
+    #chat-header{
+        background-color: #28313e;
+        height: 80px;
+        color: #ffffff;
+    }
+
+    /* Affiche du film */
+    #chat-poster, #chat-poster img{
+        width: 60px;
+        height: 80px;
+        display: inline-block;
+    }
+
+    /* Chat informations */
+    #chat-infos{
+        width: 160px;
+        height: 80px;
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 2px;
+        margin-top: 2px;
+        position: relative;
+    }
+
+    /* Chat movie title */
+    #chat-movie-title{
+        font-size: 12px;
+        text-transform: uppercase;
+        line-height: 11px;
+        font-weight: bolder;
+    }
+
+    /* Chat movie schedule */
+    #chat-movie-schedule{
+        font-size: 11px;
+    }
+
+    /* Chat people */
+    #chat-people{
+        margin-bottom: 4px;
+        font-size: 10px;
+        line-height: 10px;
+        color: #919191;
+        position: absolute;
+        bottom: 0;
+    }
+
+    /* Chat people number */
+    #chat-people span{
+        color: #0ad9b2;
+    }
+
+/* Zone de conversation */
+#zone_chat {
+    color: #000000;
+    padding: 2px;
+    height: 316px;
+    background-color: #f6f9fd;
+    overflow: auto;
+}
+
+/* Dialogue 1 */
+.dialogue{
+    margin-bottom: 5px;
+}
+
+/* Dialogue 2 */
+.dialogue:nth-child(odd) .contact_message{
+    background-color: #28313e;
+    border: 1px solid #28313e;
+    color: #ffffff;
+}
+
+/* Fleche de conversation 2 */
+.dialogue:nth-child(odd) .arrow{
+    margin-left: 5px;
+    border-color: transparent transparent #28313e transparent;
+}
+
+/* Fleche de conversation */
+.dialogue:nth-child(odd) .arrow{
+    margin-left: 5px;
+    border-color: transparent transparent #28313e transparent;
+}
+
+/* Nom du contact */
+.contact_nickname{
+    font-family: helvetica;
+    font-size: 8px;
+    font-weight: bold;
+    width: 220px;
+    padding: 2px 0px;
+    margin-right: 5px;
+    color: #28313e; /* #3cb878;*/
+    display: block;
+    text-transform: lowercase;
+}
+
+/* Transformer la première lettre du nom en majuscule */
+.contact_nickname:first-letter {
+    text-transform: uppercase;
+}
+
+/* Fleche de conversation */
+.arrow{
+    margin-left: 5px;
+    margin-top: -2px;
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 3px 6px 3px;
+    border-color: transparent transparent #0ad9b2 transparent;
+}
+
+/* Bulle message */
+.contact_message{
+    color: #28313e;
+    display: inline-block;
+    max-width: 210px;
+    /* width: 200px; */
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #0ad9b2;
+    padding: 4px 7px;
+    border: 1px solid #0ad9b2;
+    margin-bottom: 10px;
+
+}
+
+/* Zone de saisie et d'envoi */
+#formulaire_chat{
+    position: relative;
+    bottom:0px;
+    margin-left: -1px;
+    display: table; 
+    width: 100%; 
+    table-layout: fixed; 
+    word-spacing: -2em;
+}
+
+/* Champs de saisie d'un message */
+#message{
+    width: 190px;
+    color: #28313e;
+    padding: 7px 4px;
+    border: 1px solid #ffffff;
+}
+
+/* Bouton d'envoi d'un message */
+#envoi_message{
+    border: 1px solid #ffffff;
+    background-color: #ffffff; 
+    width: 32px;
+    height: 31px;
+    vertical-align: top;
+    display: inline-block;
+    word-spacing: normal;
+    position: absolute;
+    cursor: pointer;
+}
