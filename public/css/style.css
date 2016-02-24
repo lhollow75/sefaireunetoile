@@ -63,27 +63,6 @@ header {
 	z-index: 10;
 }
 
-h2 {
-    font-size: 18px;
-    text-transform: uppercase;
-    font-weight: bold;
-    line-height: 0.7;
-    margin-top: 20px; 
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-h4 {
-    font-size: 16px;
-    text-transform: uppercase;
-    font-weight: bold;
-    line-height: 0.7;
-    margin-top: 20px; 
-    margin-bottom: 10px;
-    text-align: left;
-}
-
-
 /* Section 1 = recherche */
 /* Section 2 = Films à l'affiche actuellement */
 /* Section 3 = cinémas à proximité */
