@@ -27,8 +27,8 @@ elt_chercher.addEventListener("click", recherche);
 document.getElementById('section2').style.display="block";
 document.getElementById('section3').style.display="none";
 document.getElementById('section4').style.display="none";
-// document.getElementById('section5').style.display="none";
-document.getElementById('section6').style.display="none";
+document.getElementById('section5').style.display="none";
+// document.getElementById('section6').style.display="none";
 
 // Lance la récupération de la liste des films dès la chargement de la page
 recup_liste_films_en_salle();
@@ -127,10 +127,19 @@ function recup_horaire_cinema(horaires){
 				if (isTodaysDate(showtimes.movieShowtimes[h].scr[0].d)){
 					document.getElementById('filmEnSalle').innerHTML = "Sélectionnez un film actuellement en salle"
 					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href));
-					document.getElementById('afficheEnSalle'+onShow.code).addEventListener('click', function(donnees){
-						console.log(donnees);
-						document.getElementById('section5').style.display="block";
-					});
+					
+					(function(donnees){
+						document.getElementById('afficheEnSalle'+onShow.code).addEventListener('click', function(){
+							console.log("la");
+							console.log(donnees);
+							//afficheEnSalle182266
+							// id = donnees.srcElement.id;
+							// id = id.split('afficheEnSalle');
+							// id = id[1];
+							document.getElementById('section5').style.display="block";
+						});
+					})(showtimes.movieShowtimes[h])
+					
 					tab_moviesList.push(onShow.code);
 					noMovies = false;
 				} else {
