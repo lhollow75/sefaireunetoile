@@ -31,6 +31,9 @@ html, body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+a{
+    text-decoration: none;
+}
 
 /* icone du logo ciné dans le header*/
 .icon-logo:before {
@@ -656,11 +659,11 @@ form {
   width: 30px;
   height: 30px;
   text-align: right;
-  background-color: blue;
+  background-color: #ff5a00;
   border: none;
-    border-radius: 2px 0 0 ;
-    -webkit-border-radius: 2px 0 2px 0;
-    -moz-border-radius: 2px 0 2px 0;
+    border-radius: 2px 0 0 2px;
+    -webkit-border-radius: 2px 0 0 2px;
+    -moz-border-radius: 2px 0 0 2px;
 }
 
 .input_contact, .textarea_contact {
