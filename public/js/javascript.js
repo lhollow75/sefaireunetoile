@@ -11,7 +11,7 @@ var elt_listFilmEnSalle = document.getElementById('listFilmEnSalle');
 var key_allocine = "YW5kcm9pZC12Mg";
 var tab_filmsEnSalle = [];
 var tab_thisWeeksRelease = [];
-var tab_split = [" Bande-annonce"," - BANDE-ANNONCE", " Teaser", " TEASER", " - EXTRAIT", " - Extrait", " Extrait"];
+
 var nb_pages;
 var film_recent=0;
 var k;
@@ -43,27 +43,6 @@ document.getElementById('chatroom').style.display="none";
 // Lance la récupération de la liste des films dès la chargement de la page
 recup_liste_films_en_salle();
 
-
-
-
-// Return today's date (format: YYYY-MM-DD) 
-function getTodaysDate(){
-	var ladate = new Date();
-	// ladate.getDate()+"/"+(ladate.getMonth()+1)+"/"+ladate.getFullYear()
-	year = ladate.getFullYear();
-	month = (ladate.getMonth()+1<10 ? '0' : '')+(ladate.getMonth()+1);
-	day = ladate.getDate()<10 ? '0' : ''+ladate.getDate();
-	ladate = year+"-"+month+"-"+day;
-	return ladate;
-}
-
-// Return true if the date in parameter is today's date
-function isTodaysDate(date){
-	todaysDate = getTodaysDate();
-	if (todaysDate == date){
-		return true;
-	} else return false;
-}
 
 // Put theaters around the address on the map
 function recup_liste_cinema(liste_cinema){
@@ -156,22 +135,6 @@ function recup_horaire_cinema(horaires){
 		document.getElementById('filmEnSalle').innerHTML = "Sélectionnez un film actuellement en salle";
 	}
 	
-}
-
-// Return the language version of the movie (VF or VOST)
-function VOVF(code){
-	console.log(code);
-	langue = code.$;
-	original = code.original;
-
-	if (original == "false") return "VF";
-		else return "V0ST";
-}
-
-// Return if the movie is 3D or digital (return " " in this case)
-function num3d(code){
-	if (code == "Numérique") return " ";
-		else return "3D";
 }
 
 // Show all the informations about a movie when click on the poster
@@ -278,27 +241,7 @@ function movieFinder(){
 	}
 }
 
-// Enlève les accents et les majuscules pour la comparaison
-function traitementChaine(chaine){
-    var accent = [
-        /[\300-\306]/g, /[\340-\346]/g, // A, a
-        /[\310-\313]/g, /[\350-\353]/g, // E, e
-        /[\314-\317]/g, /[\354-\357]/g, // I, i
-        /[\322-\330]/g, /[\362-\370]/g, // O, o
-        /[\331-\334]/g, /[\371-\374]/g, // U, u
-        /[\321]/g, /[\361]/g, // N, n
-        /[\307]/g, /[\347]/g, // C, c
-    ];
-    var noaccent = ['A','a','E','e','I','i','O','o','U','u','N','n','C','c'];
-     
-    for(var i = 0; i < accent.length; i++){
-        chaine = chaine.replace(accent[i], noaccent[i]);
-    }
-     
-    return chaine.toLowerCase();
-}
-
-// Recherche le titre dans le tableau des films en salle
+// Search in the movie's array the title of the movie and add it to the movie list autocomplete
 function searchStringInArray (str, strArray) {
 	fin=0;
 	for (var j=0; j<strArray.length && fin<=10; j++) {
@@ -307,8 +250,6 @@ function searchStringInArray (str, strArray) {
 			trouve = tab_filmsEnSalle[index_film].split(";");
 			titre_film = trouve[1];
 			id_film = trouve[0];
-			// console.log(id_film);
-			// console.log(titre_film);
 			
 			$("#movie_list").append(template(titre_film, id_film));
 			document.getElementById(id_film).addEventListener('click', afficheFilm);
@@ -318,7 +259,7 @@ function searchStringInArray (str, strArray) {
 	return -1;
 }
 
-// Affiche le film dans le champs de recherche en fonction de l'endroit cliqué
+// Write the title of the movie into the search bar
 function afficheFilm(film){
 	if (film.toElement.innerHTML == ""){
 		film = film.srcElement.alt;
@@ -349,10 +290,6 @@ function recup_liste(recup_movie){
 	}
 }
 
-// Retourn la note arrondie à 0.5 près pour la mettre dans une classe
-function rateClass(rate){
-	return (Math.round(rate * 2)*0.5)*10;
-}
 
 // Récupère sur chaque page la liste de film et l'ajoute dans le tableau tab_filmsEnSalle
 function recup_liste_films(recup_film){
@@ -409,12 +346,7 @@ function showMeFiveMovies(array){
 }
 
 
-// Return a random number between 0 and max (include)
-function random(max){
-	return Math.floor(Math.random() * (max));
-}
-
-// Place l'affiche du film
+// Put the 5 movies on the home page
 function showMoviePicture(recup_info, _id, _titre){
 	// console.log(recup_info.movie);
 	info = recup_info.movie;
@@ -427,17 +359,3 @@ function showMoviePicture(recup_info, _id, _titre){
 	})(_id)
 }
 
-function giveUpTag(texte){
-	reg=new RegExp("<.[^>]*>", "gi" );
-	return texte.replace(reg, "" );
-}
-
-// Récupère le nom du film dans le titre de la Bande-annonce
-function splitNom(titre){
-	var trouve = 0;
-	for (n=0; n < tab_split.length && trouve == 0; n++){
-		tab_decoupe_film = titre.split(tab_split[n]);
-		if (tab_decoupe_film.length > 1) trouve = 1;
-	}
-	return tab_decoupe_film[0];
-}
