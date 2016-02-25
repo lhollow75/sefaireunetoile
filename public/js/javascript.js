@@ -16,6 +16,7 @@ var film_recent=0;
 var k;
 var position;
 var bounds;
+var firstGeneration = false;
 
 var tab_seances = [];
 var tab_rates = [];
@@ -233,14 +234,23 @@ function movieCard(donnees){
 		// console.log(seances.t[s].$);
 		$("#showtimesList").append(template_showtimes(seances.t[s].code, seances.t[s].$));
 		tab_seances.push(seances.t[s].code);
+		
 		(function(donnees){
 			document.getElementById('showtime-'+donnees).addEventListener('click', function(){
-				// console.log(tab_seances.length);
-				var numrooms = tab_seances.length;
-                console.log(numrooms);
-				socket.emit('generaterooms', numrooms);
-				socket.emit('adduser', prompt("Quel est votre nom ?"));
-				socket.emit('roomchoice', donnees);
+				console.log(firstGeneration);
+				
+				if (!firstGeneration){
+					var numrooms = tab_seances.length;
+					// console.log(numrooms);
+					socket.emit('generaterooms', numrooms);
+					socket.emit('adduser', prompt("Quel est votre nom ?"));
+					socket.emit('roomchoice', donnees);
+					firstGeneration = true;
+				} else {
+					switchRoom(donnees);
+				}
+				
+				
 			});
 		})(seances.t[s].code)
 	}
