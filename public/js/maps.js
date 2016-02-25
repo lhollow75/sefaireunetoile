@@ -1,3 +1,4 @@
+var elt_geolocalisation = document.getElementById('geolocaliseMoi');
 elt_geolocalisation.addEventListener("click", geolocalisation);
 elt_chercher.addEventListener("click", recherche);
 

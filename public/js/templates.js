@@ -36,3 +36,23 @@ var template = function(list, id){
 	]
 	return _tpl.join('');
 }
+
+var template_moviesOfTheWeek = function(id, titre, synopsis, press, users, href, picture){
+	var _tpl = [
+		'<li>',
+			'<div class="ca-content">',
+				'<img id="affiche'+id+'" class="ca-affiche" src="'+picture+'" alt="'+titre+'">',
+				'<h3 id="titre'+id+'" class="ca-title">'+titre+'</h3>',
+				'<div class="ca-presse">Presse',
+					'<span id="note-presse'+id+'" class="note-presse note-'+press+'"></span>',
+				'</div>',
+				'<div class="ca-spectateurs">Spectateurs',
+					'<span id="note-spectateurs'+id+'" class="note-spectateurs note-'+users+'"></span>',
+				'</div>',
+				'<p id="synopsis'+id+'" class="synopsis">'+synopsis+'</p>',
+			'</div>',
+			'<a  href="'+href+'" id = "b-a'+id+'" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a>',
+		'</li>'
+	]
+	return _tpl.join('');
+}

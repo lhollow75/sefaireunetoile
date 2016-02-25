@@ -3,13 +3,14 @@ var marker;
 var myLatLng;
 var startPos;
 var elt_autocomplete = document.getElementById('autocomplete');
-var elt_geolocalisation = document.getElementById('geolocaliseMoi');
+
 var elt_movie = document.getElementById('movie');
 var elt_chercher = document.getElementById('chercher');
 var elt_movie_list = document.getElementById('movie_list');
 var elt_listFilmEnSalle = document.getElementById('listFilmEnSalle');
 var key_allocine = "YW5kcm9pZC12Mg";
 var tab_filmsEnSalle = [];
+var tab_thisWeeksRelease = [];
 var tab_split = [" Bande-annonce"," - BANDE-ANNONCE", " Teaser", " TEASER", " - EXTRAIT", " - Extrait", " Extrait"];
 var nb_pages;
 var film_recent=0;
@@ -17,10 +18,11 @@ var k;
 var position;
 var bounds;
 var firstGeneration = false;
-
+var fin = false;
 var tab_seances = [];
 var tab_rates = [];
-
+var lastRelease;
+var tabIsOk = true;
 elt_autocomplete.addEventListener("focus", geolocate);
 
 elt_movie.addEventListener("keyup", movieFinder);
@@ -339,7 +341,7 @@ function recup_liste(recup_movie){
 	
 	if (recup_movie.feed.totalResults > 0) {
 		nb_pages = Math.ceil(recup_movie.feed.totalResults/10);
-		
+		lastRelease = recup_movie.feed.movie[0].release.releaseDate;
 		for(var j=1; j<= nb_pages; j++){	
 			var allocine_api_page = "http://api.allocine.fr/rest/v3/movielist?partner="+key_allocine+"&filter=nowshowing&order=datedesc&format=json&page="+j;
 			$.getJSON(allocine_api_page, recup_liste_films);
@@ -354,6 +356,7 @@ function rateClass(rate){
 
 // Récupère sur chaque page la liste de film et l'ajoute dans le tableau tab_filmsEnSalle
 function recup_liste_films(recup_film){
+
 	for(k=0; k< recup_film.feed.movie.length; k++){	
 		film_recent++;
 		// console.log(recup_film.feed.movie[k]);
@@ -364,30 +367,69 @@ function recup_liste_films(recup_film){
 			code_film = recup_film.feed.movie[k].code;
 			tab_filmsEnSalle.push(code_film+";"+film);
 			
-			if (film_recent<6){
-
-				// Affichage des éléments du film
-				document.getElementById('titre'+film_recent).innerHTML = film;
-				document.getElementById('affiche'+film_recent).alt = film;
-				document.getElementById('synopsis'+film_recent).innerHTML = recup_film.feed.movie[k].synopsisShort;
-				document.getElementById('note-presse'+film_recent).className = "note-presse note-"+rateClass(recup_film.feed.movie[k].statistics.pressRating);
-				document.getElementById('note-spectateurs'+film_recent).className = "note-spectateurs note-"+rateClass(recup_film.feed.movie[k].statistics.userRating);
-				document.getElementById('affiche'+film_recent).addEventListener('click', afficheFilm);
-				document.getElementById('b-a'+film_recent).href= recup_film.feed.movie[k].trailer.href;
-				
-				var allocine_api_recherche = "http://api.allocine.fr/rest/v3/movie?partner="+key_allocine+"&code="+code_film+"&profile=large&format=json";
-				(function(fr){ $.getJSON(allocine_api_recherche, function(d){ showMoviePicture(d, fr) }); })(film_recent)
-			}	
+			
+			if ((!fin) && (recup_film.feed.movie[k].release.releaseDate ==  lastRelease)){
+				// console.log(code_film);
+				tab_thisWeeksRelease.push(code_film+";"+film);
+			} else if(tabIsOk){
+				tabIsOk = false;
+				showMeFiveMovies(tab_thisWeeksRelease);
+				// console.log(tab_thisWeeksRelease);
+				fin = true;
+			}
+			
 		} else {
 			tab_rates.push(recup_film.feed.movie[k].code);
 		}
 		
 	}
+
+}
+
+function showMeFiveMovies(array){
+	// console.log(array);
+	var tab_alreadyThere = [];
+	
+	// We want to show 5 movies
+	for (w=0; w<5; w++){
+		// console.log(tab_alreadyThere);
+		// Return a random number to take a film into the array (while we haven't take it yet)
+		do {
+			id = random(array.length);
+			// console.log("random: "+id);
+		} while (tab_alreadyThere.indexOf(id) != -1)
+			
+		// console.log(array[id].split(";")[1]);
+		// console.log("final: "+id);
+		tab_alreadyThere.push(id);
+		
+		var allocine_api_recherche = "http://api.allocine.fr/rest/v3/movie?partner="+key_allocine+"&code="+array[id].split(";")[0]+"&profile=large&format=json";
+		(function(id, titre){ $.getJSON(allocine_api_recherche, function(d){ showMoviePicture(d, id, titre) }); })(array[id].split(";")[0], array[id].split(";")[1])
+	}
+}
+
+
+// Return a random number between 0 and max (include)
+function random(max){
+	return Math.floor(Math.random() * (max));
 }
 
 // Place l'affiche du film
-function showMoviePicture(recup_info, fr){
-	document.getElementById('affiche'+fr).src = recup_info.movie.media[0].thumbnail.href;
+function showMoviePicture(recup_info, _id, _titre){
+	// console.log(recup_info.movie);
+	info = recup_info.movie;
+	if (info.synopsisShort == undefined){
+		synopsis = info.synopsis;
+	} else synopsis = info.synopsisShort;
+	$("#movieOfTheWeek").append(template_moviesOfTheWeek(_id, _titre, giveUpTag(synopsis), rateClass(info.statistics.pressRating), rateClass(info.statistics.urserRating), info.trailer.href, info.media[0].thumbnail.href));
+	(function(donnees){
+		document.getElementById('affiche'+donnees).addEventListener('click', afficheFilm);
+	})(_id)
+}
+
+function giveUpTag(texte){
+	reg=new RegExp("<.[^>]*>", "gi" );
+	return texte.replace(reg, "" );
 }
 
 // Récupère le nom du film dans le titre de la Bande-annonce
