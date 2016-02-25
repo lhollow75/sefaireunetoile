@@ -415,8 +415,8 @@ footer{
 }
 
 .da-menu-movies{
-    width: 960px;
-    text-align: center;
+    width: 850px;
+    text-align: left;
 }
 
 .ca-menu-movies li{
@@ -690,7 +690,7 @@ ul.da-menu-movies li:hover .da-title{
     position: relative;
     z-index: 10px;
     top:-40px;
-    right: -120px;
+    right: -65px;
     color: #ffffff;
     background: #ed1d24;
     font-size: 10px;
@@ -735,7 +735,7 @@ ul.da-menu-movies li:hover .da-title{
     display: inline-block; 
     vertical-align: top;
     text-align: left;
-    margin-left: 40px;
+    margin-left: -17px;
 }
 
 .seance{
