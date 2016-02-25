@@ -212,7 +212,7 @@ function movieCard(donnees){
 		tab_seances.push(seances.t[s].code);
 	}
 	console.log(tab_seances);
-	
+	//socket.emit('addingkeyroom',tab_seances);
 }
 
 // Template of movie's showtime
