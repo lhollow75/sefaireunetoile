@@ -119,6 +119,7 @@ function recup_horaire_cinema(horaires){
 	var noMovies = true;
 	// console.log(horaires.feed.theaterShowtimes[0]);
 	showtimes = horaires.feed.theaterShowtimes[0];
+    console.log(showtimes);
 	if (showtimes.movieShowtimes != undefined){
 		for (h=0; h < showtimes.movieShowtimes.length; h++){
 			// console.log(showtimes.movieShowtimes[h].onShow.movie.code);
