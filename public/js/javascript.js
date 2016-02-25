@@ -31,7 +31,7 @@ document.getElementById('section4').style.display="none";
 document.getElementById('section5').style.display="none";
 document.getElementById('section6').style.display="none";
 document.getElementById('section7').style.display="none";
-document.getElementById('section8').style.display="none";
+// document.getElementById('section8').style.display="none";
 
 
 // Lance la récupération de la liste des films dès la chargement de la page

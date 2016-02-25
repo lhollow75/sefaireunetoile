@@ -13,7 +13,7 @@ var tab_filmsEnSalle = [];
 var tab_split = [" Bande-annonce"," - BANDE-ANNONCE", " Teaser", " TEASER", " - EXTRAIT", " - Extrait", " Extrait"];
 var nb_pages;
 var film_recent=0;
-var k;
+// var k;
 var position;
 var bounds;
 
@@ -31,7 +31,7 @@ document.getElementById('section4').style.display="none";
 document.getElementById('section5').style.display="none";
 document.getElementById('section6').style.display="none";
 document.getElementById('section7').style.display="none";
-document.getElementById('section8').style.display="none";
+document.getElementById('section8').style.display="block";
 
 
 // Lance la récupération de la liste des films dès la chargement de la page
