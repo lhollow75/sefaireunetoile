@@ -28,7 +28,7 @@ document.getElementById('section2').style.display="block";
 document.getElementById('section3').style.display="none";
 document.getElementById('section4').style.display="none";
 document.getElementById('section5').style.display="none";
-// document.getElementById('section6').style.display="none";
+document.getElementById('section6').style.display="none";
 document.getElementById('section7').style.display="none";
 
 
@@ -52,6 +52,8 @@ function recherche(){
 	document.getElementById('section3').style.display="block";
 }
 
+
+// Return today's date (format: YYYY-MM-DD) 
 function getTodaysDate(){
 	var ladate = new Date();
 	// ladate.getDate()+"/"+(ladate.getMonth()+1)+"/"+ladate.getFullYear()
@@ -62,6 +64,7 @@ function getTodaysDate(){
 	return ladate;
 }
 
+// Return true if the date in parameter is today's date
 function isTodaysDate(date){
 	todaysDate = getTodaysDate();
 	if (todaysDate == date){
@@ -69,7 +72,7 @@ function isTodaysDate(date){
 	} else return false;
 }
 
-// Récupère et place sur la carte les cinémas à proximité du lieu cherché
+// Put theaters around the address on the map
 function recup_liste_cinema(liste_cinema){
 	bounds = new google.maps.LatLngBounds();
 	
@@ -79,7 +82,7 @@ function recup_liste_cinema(liste_cinema){
 		nom = liste_cinema.feed.theater[c].name;
 		
 		
-		// Affichage des markers
+		// Showing of the markers
 		myLatLng = {lat: liste_cinema.feed.theater[c].geoloc.lat, lng: liste_cinema.feed.theater[c].geoloc.long};
 		position = new google.maps.LatLng(myLatLng);
 		bounds.extend(position);
@@ -90,13 +93,13 @@ function recup_liste_cinema(liste_cinema){
 			title: nom
 		});
 		
-		// Composition du contenu de l'information pour l'événement click
+		// Add information's card into the marker with we click on it
 		address = liste_cinema.feed.theater[c].address
 		code = liste_cinema.feed.theater[c].code
 		city = liste_cinema.feed.theater[c].city
 		contenu = "<div id= 'theaterName"+c+"'>"+nom+"</div><div id= 'theaterAddress"+c+"'>"+address+"</div><div id= 'theaterCity"+c+"'>"+city+"</div><div id= 'theaterCode"+c+"' valeur = '"+code+"'></div>";
 		
-		// Affiche les informations dans les infobulles
+		// Show informations in infowindow
 		var infoWindow = new google.maps.InfoWindow(), marker, c;
 		google.maps.event.addListener(marker, 'click', (function(marker, _c, _code) {
 			
@@ -113,20 +116,24 @@ function recup_liste_cinema(liste_cinema){
 	map.fitBounds(bounds);
 }
 
-// Récupération des horaires de cinéma
+// Collect movie's showtimes
 function recup_horaire_cinema(horaires){
 	var tab_moviesList = [];
 	var noMovies = true;
 	// console.log(horaires.feed.theaterShowtimes[0]);
 	showtimes = horaires.feed.theaterShowtimes[0];
-    console.log(showtimes);
 	if (showtimes.movieShowtimes != undefined){
+		
+		// Look all the movies showing in the theater
 		for (h=0; h < showtimes.movieShowtimes.length; h++){
-			// console.log(showtimes.movieShowtimes[h].onShow.movie.code);
+
 			onShow = showtimes.movieShowtimes[h].onShow.movie;
-			// console.log(tab_moviesList.indexOf(onShow.code));
+
 			console.log(showtimes.movieShowtimes[h]);
+			
+			// Show the informations only if there is showtimes on today's date
 			if (isTodaysDate(showtimes.movieShowtimes[h].scr[0].d)){ 
+				// Show the informations only if we haven't show them yet --> giving up for now
 				// if (tab_moviesList.indexOf(onShow.code) == -1){
 					
 					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href, VOVF(showtimes.movieShowtimes[h].version), num3d(showtimes.movieShowtimes[h].screenFormat.$)));
@@ -141,12 +148,11 @@ function recup_horaire_cinema(horaires){
 					tab_moviesList.push(onShow.code);
 					noMovies = false;
 				// } 
-			} else  {
-				// console.log("Ce film est déjà affiché");
 			}
-			
 		}
 	}
+	
+	// If noMovies is style true, there is no movies in this theater today so the title change
 	if (noMovies){
 		document.getElementById('filmEnSalle').innerHTML = "Pas de films dans ce cinéma aujourd'hui";
 		// console.log("Pas de films dans ce cinéma aujourd'hui");
@@ -156,7 +162,7 @@ function recup_horaire_cinema(horaires){
 	
 }
 
-// Savoir si un film est en VO ou VF
+// Return the language version of the movie (VF or VOST)
 function VOVF(code){
 	langue = code.$;
 	original = code.original;
@@ -165,16 +171,20 @@ function VOVF(code){
 		else return "V0ST";
 }
 
+// Return if the movie is 3D or digital (return " " in this case)
 function num3d(code){
 	if (code == "Numérique") return " ";
 		else return "3D";
 }
 
+// Show all the information about a movie when click on the poster
 function movieCard(donnees){
 	console.log(donnees);
 	donnees = donnees.onShow.movie;
 	document.getElementById('moviePicture').src = donnees.poster.href;
 	document.getElementById('movieTitle').innerHTML = donnees.title;
+	
+	// If there is no rate, show a ligne
 	if (donnees.statistics.pressRating != undefined){
 		document.getElementById('pressRate').className = "note-presse note-"+rateClass(donnees.statistics.pressRating);
 	}
@@ -188,7 +198,7 @@ function movieCard(donnees){
 	
 }
 
-// Affichage des films
+// Template of movie's on show in a theater
 var template_filmEnSalle = function(code, title, source, langue, format){
 	var _tpl = [
 		'<li id="filmEnSalle'+code+'" class="en-salle">',
@@ -203,7 +213,7 @@ var template_filmEnSalle = function(code, title, source, langue, format){
 	return _tpl.join('');
 }
 
-// Géolocalise l'utilisateur à partir des données du navigateur
+// Geolocates user based on the navigator position
 function geolocalisation() {
   elt_autocomplete.value = "Ma position";
   var geoSuccess = function(position) {
@@ -213,20 +223,23 @@ function geolocalisation() {
   navigator.geolocation.getCurrentPosition(geoSuccess);
 };
 
-// Affichage de la map et du marqueur de position en fonction de la géolocalisation ou de l'adresse tapée
+// Display the map and the user's position's marker/ address he choose
 function initMap(latitude, longitude) {
 	myLatLng = {lat: latitude, lng: longitude}
 
-	
+	// Creation of the map
 	map = new google.maps.Map(document.getElementById('map'), {
 	  center: {lat: latitude, lng: longitude},
 	  zoom: 14
 	});
 		
-	marker = new google.maps.Marker({
+	// Creation of the marker
+	var img = './img/location_me.png';
+	var marker = new google.maps.Marker({
 		position: myLatLng,
 		map: map,
-		title: 'Carte'
+		title: 'Carte',
+		icon: img
 	});
 }
 
