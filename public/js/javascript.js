@@ -223,7 +223,7 @@ function movieCard(donnees){
 		(function(donnees){
 			document.getElementById('showtime-'+donnees).addEventListener('click', function(){
 				console.log(firstGeneration);
-				
+				document.getElementById('chatroom').style.display="block";
 				if (!firstGeneration){
 					var numrooms = tab_seances.length;
 					// console.log(numrooms);
