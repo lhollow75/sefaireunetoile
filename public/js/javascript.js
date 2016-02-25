@@ -248,6 +248,7 @@ function movieCard(donnees){
 					firstGeneration = true;
 				} else {
 					switchRoom(donnees);
+                    
 				}
 				
 				

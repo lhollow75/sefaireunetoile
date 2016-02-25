@@ -120,7 +120,7 @@ io.sockets.on('connection', function (socket) {
         //We broadcast for all users, a notification for a new user incoming.
 		socket.broadcast.to(newroom).emit('updatechat', 'Chat', socket.username+' a rejoint la conversation.');
         //Call for the 'updaterooms' event, send var rooms, event appearing in the new selected room.
-		socket.emit('updaterooms', rooms, newroom);
+		socket.emit('updaterooms', socket.roomGeneration, newroom);
 	});
 	
 
