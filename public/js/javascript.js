@@ -234,15 +234,16 @@ function movieCard(donnees){
 		$("#showtimesList").append(template_showtimes(seances.t[s].code, seances.t[s].$));
 		tab_seances.push(seances.t[s].code);
 		(function(donnees){
-			document.getElementById('showtime-'+onShow.code).addEventListener('click', function(){
-				var numrooms = seances.t.length;
+			document.getElementById('showtime-'+donnees).addEventListener('click', function(){
+				// console.log(tab_seances.length);
+				var numrooms = tab_seances.length;
 				socket.emit('generaterooms', numrooms);
 				socket.emit('adduser', prompt("Quel est votre nom ?"));
 				socket.emit('roomchoice', donnees);
 			});
 		})(seances.t[s].code)
 	}
-	// console.log(tab_seances);
+	console.log(tab_seances);
 	//socket.emit('addingkeyroom',tab_seances);
 }
 
