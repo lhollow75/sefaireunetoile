@@ -202,6 +202,8 @@ function movieCard(donnees){
 	document.getElementById('director').innerHTML = donnees.castingShort.directors;
 	document.getElementById('actors').innerHTML = donnees.castingShort.actors;
 	
+	
+	// Collect showtime's informations
 	tab_seances = [];
 	// console.log("longueur: "+seances.t.length);
 	for (s=0; s<seances.t.length; s++){
