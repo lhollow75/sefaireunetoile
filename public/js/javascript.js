@@ -17,6 +17,7 @@ var k;
 var position;
 var bounds;
 
+var tab_seances = [];
 var tab_rates = [];
 
 elt_autocomplete.addEventListener("focus", geolocate);
@@ -27,8 +28,11 @@ elt_chercher.addEventListener("click", recherche);
 document.getElementById('section2').style.display="block";
 document.getElementById('section3').style.display="none";
 document.getElementById('section4').style.display="none";
-// document.getElementById('section5').style.display="none";
+document.getElementById('section5').style.display="none";
 document.getElementById('section6').style.display="none";
+document.getElementById('section7').style.display="none";
+document.getElementById('section8').style.display="none";
+
 
 // Lance la récupération de la liste des films dès la chargement de la page
 recup_liste_films_en_salle();
@@ -50,6 +54,8 @@ function recherche(){
 	document.getElementById('section3').style.display="block";
 }
 
+
+// Return today's date (format: YYYY-MM-DD) 
 function getTodaysDate(){
 	var ladate = new Date();
 	// ladate.getDate()+"/"+(ladate.getMonth()+1)+"/"+ladate.getFullYear()
@@ -60,6 +66,7 @@ function getTodaysDate(){
 	return ladate;
 }
 
+// Return true if the date in parameter is today's date
 function isTodaysDate(date){
 	todaysDate = getTodaysDate();
 	if (todaysDate == date){
@@ -67,7 +74,7 @@ function isTodaysDate(date){
 	} else return false;
 }
 
-// Récupère et place sur la carte les cinémas à proximité du lieu cherché
+// Put theaters around the address on the map
 function recup_liste_cinema(liste_cinema){
 	bounds = new google.maps.LatLngBounds();
 	
@@ -77,7 +84,7 @@ function recup_liste_cinema(liste_cinema){
 		nom = liste_cinema.feed.theater[c].name;
 		
 		
-		// Affichage des markers
+		// Showing of the markers
 		myLatLng = {lat: liste_cinema.feed.theater[c].geoloc.lat, lng: liste_cinema.feed.theater[c].geoloc.long};
 		position = new google.maps.LatLng(myLatLng);
 		bounds.extend(position);
@@ -88,13 +95,13 @@ function recup_liste_cinema(liste_cinema){
 			title: nom
 		});
 		
-		// Composition du contenu de l'information pour l'événement click
+		// Add information's card into the marker with we click on it
 		address = liste_cinema.feed.theater[c].address
 		code = liste_cinema.feed.theater[c].code
 		city = liste_cinema.feed.theater[c].city
 		contenu = "<div id= 'theaterName"+c+"'>"+nom+"</div><div id= 'theaterAddress"+c+"'>"+address+"</div><div id= 'theaterCity"+c+"'>"+city+"</div><div id= 'theaterCode"+c+"' valeur = '"+code+"'></div>";
 		
-		// Affiche les informations dans les infobulles
+		// Show informations in infowindow
 		var infoWindow = new google.maps.InfoWindow(), marker, c;
 		google.maps.event.addListener(marker, 'click', (function(marker, _c, _code) {
 			
@@ -111,50 +118,130 @@ function recup_liste_cinema(liste_cinema){
 	map.fitBounds(bounds);
 }
 
-// Récupération des horaires de cinéma
+// Collect movie's showtimes
 function recup_horaire_cinema(horaires){
 	var tab_moviesList = [];
 	var noMovies = true;
 	// console.log(horaires.feed.theaterShowtimes[0]);
 	showtimes = horaires.feed.theaterShowtimes[0];
+
 	if (showtimes.movieShowtimes != undefined){
+		
+		// Look all the movies showing in the theater
 		for (h=0; h < showtimes.movieShowtimes.length; h++){
-			// console.log(showtimes.movieShowtimes[h].onShow.movie.code);
+
 			onShow = showtimes.movieShowtimes[h].onShow.movie;
-			// console.log(tab_moviesList.indexOf(onShow.code));
+
 			// console.log(showtimes.movieShowtimes[h]);
-			if (tab_moviesList.indexOf(onShow.code) == -1){
-				if (isTodaysDate(showtimes.movieShowtimes[h].scr[0].d)){
-					document.getElementById('filmEnSalle').innerHTML = "Sélectionnez un film actuellement en salle"
-					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href));
-					document.getElementById('afficheEnSalle'+onShow.code).addEventListener('click', function(donnees){
-						console.log(donnees);
-						document.getElementById('section5').style.display="block";
-					});
+			
+			// Show the informations only if there is showtimes on today's date
+			if (isTodaysDate(showtimes.movieShowtimes[h].scr[0].d)){ 
+				// Show the informations only if we haven't show them yet --> giving up for now
+				// if (tab_moviesList.indexOf(onShow.code) == -1){
+					
+					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href, VOVF(showtimes.movieShowtimes[h].version), num3d(showtimes.movieShowtimes[h].screenFormat.$)));
+					
+					(function(donnees){
+						document.getElementById('afficheEnSalle'+onShow.code).addEventListener('click', function(){
+							document.getElementById('section5').style.display="block";
+							$(".showtime-btn").remove();
+							movieCard(donnees);
+						});
+					})(showtimes.movieShowtimes[h])
+					
 					tab_moviesList.push(onShow.code);
 					noMovies = false;
-				} else {
-					// console.log("Pas de séances aujourd'hui");
-				}
-			} else  {
-				// console.log("Ce film est déjà affiché");
+				// } 
 			}
-			
 		}
 	}
+	
+	// If noMovies is style true, there is no movies in this theater today so the title change
 	if (noMovies){
-		document.getElementById('filmEnSalle').innerHTML = "Pas de films dans ce cinéma aujourd'hui"
+		document.getElementById('filmEnSalle').innerHTML = "Pas de films dans ce cinéma aujourd'hui";
 		// console.log("Pas de films dans ce cinéma aujourd'hui");
+	} else {
+		document.getElementById('filmEnSalle').innerHTML = "Sélectionnez un film actuellement en salle";
 	}
 	
 }
 
-// Affichage des films
-var template_filmEnSalle = function(code, title, source){
+// Return the language version of the movie (VF or VOST)
+function VOVF(code){
+	console.log(code);
+	langue = code.$;
+	original = code.original;
+
+	if (original == "false") return "VF";
+		else return "V0ST";
+}
+
+// Return if the movie is 3D or digital (return " " in this case)
+function num3d(code){
+	if (code == "Numérique") return " ";
+		else return "3D";
+}
+
+// Show all the informations about a movie when click on the poster
+function movieCard(donnees){
+	
+	console.log(donnees);
+	_donnees = donnees;
+	seances = donnees.scr[0];
+	donnees = donnees.onShow.movie;
+	document.getElementById('moviePicture').src = donnees.poster.href;
+	document.getElementById('movieTitle').innerHTML = donnees.title;
+	
+	// If there is no rate, show a ligne
+	if (donnees.statistics.pressRating != undefined){
+		document.getElementById('pressRate').className = "note-presse note-"+rateClass(donnees.statistics.pressRating);
+	}
+	if (donnees.statistics.userRating != undefined){
+		document.getElementById('userRate').className = "note-spectateurs note-"+rateClass(donnees.statistics.userRating);
+	} else document.getElementById('userRate').className = "";
+	
+	document.getElementById('movieTrailer').href = donnees.trailer.href;
+	document.getElementById('director').innerHTML = donnees.castingShort.directors;
+	document.getElementById('actors').innerHTML = donnees.castingShort.actors;
+	document.getElementById('movieVersion').innerHTML = _donnees.screenFormat.$;
+	document.getElementById('movieFormat').innerHTML = VOVF(_donnees.version);
+	
+	
+	
+	// Collect showtime's informations
+	tab_seances = [];
+	// console.log("longueur: "+seances.t.length);
+	for (s=0; s<seances.t.length; s++){
+		// console.log(seances.t[s].$);
+		$("#showtimesList").append(template_showtimes(seances.t[s].code, seances.t[s].$));
+		tab_seances.push(seances.t[s].code);
+	}
+	// console.log(tab_seances);
+	//socket.emit('addingkeyroom',tab_seances);
+}
+
+// Template of movie's showtime
+var template_showtimes = function(id, showtime){
+	var _tpl = [
+		'<li class="showtime-btn">',
+		   '<button id="movie-schedule-'+id+'" class="horaires-btn">'+showtime+'</button>',
+
+			'<!--<div class="circle">',
+				'<span data-notification="0" class="notifications"></span>',
+			'</div>-->',
+		'</li>'
+	]
+	return _tpl.join('');
+}
+
+// Template of movie's on show in a theater
+var template_filmEnSalle = function(code, title, source, langue, format){
 	var _tpl = [
 		'<li id="filmEnSalle'+code+'" class="en-salle">',
 				'<img id = "afficheEnSalle'+code+'" class="da-affiche" src="'+source+'" alt="'+title+'">',
 				'<h3 class="da-title">'+title+'</h3>',
+				'<h4 class="da-langue">'+langue+'</h4>',
+				'<h4 class="da-langue">'+format+'</h4>',
 		'</li>'
 	]
 	
@@ -162,7 +249,7 @@ var template_filmEnSalle = function(code, title, source){
 	return _tpl.join('');
 }
 
-// Géolocalise l'utilisateur à partir des données du navigateur
+// Geolocates user based on the navigator position
 function geolocalisation() {
   elt_autocomplete.value = "Ma position";
   var geoSuccess = function(position) {
@@ -172,20 +259,23 @@ function geolocalisation() {
   navigator.geolocation.getCurrentPosition(geoSuccess);
 };
 
-// Affichage de la map et du marqueur de position en fonction de la géolocalisation ou de l'adresse tapée
+// Display the map and the user's position's marker/ address he choose
 function initMap(latitude, longitude) {
 	myLatLng = {lat: latitude, lng: longitude}
 
-	
+	// Creation of the map
 	map = new google.maps.Map(document.getElementById('map'), {
 	  center: {lat: latitude, lng: longitude},
 	  zoom: 14
 	});
 		
-	marker = new google.maps.Marker({
+	// Creation of the marker
+	var img = './img/location_me.png';
+	var marker = new google.maps.Marker({
 		position: myLatLng,
 		map: map,
-		title: 'Carte'
+		title: 'Carte',
+		icon: img
 	});
 }
 
@@ -319,6 +409,11 @@ function recup_liste(recup_movie){
 	}
 }
 
+// Retourn la note arrondie à 0.5 près pour la mettre dans une classe
+function rateClass(rate){
+	return (Math.round(rate * 2)*0.5)*10;
+}
+
 // Récupère sur chaque page la liste de film et l'ajoute dans le tableau tab_filmsEnSalle
 function recup_liste_films(recup_film){
 	for(k=0; k< recup_film.feed.movie.length; k++){	
@@ -332,17 +427,15 @@ function recup_liste_films(recup_film){
 			tab_filmsEnSalle.push(code_film+";"+film);
 			
 			if (film_recent<6){
-				synopsisShort = recup_film.feed.movie[k].synopsisShort;
-				pressRate = (Math.round(recup_film.feed.movie[k].statistics.pressRating * 2)*0.5)*10;
-				userRate = (Math.round(recup_film.feed.movie[k].statistics.userRating * 2)*0.5)*10;
 
 				// Affichage des éléments du film
 				document.getElementById('titre'+film_recent).innerHTML = film;
 				document.getElementById('affiche'+film_recent).alt = film;
-				document.getElementById('synopsis'+film_recent).innerHTML = synopsisShort;
-				document.getElementById('note-presse'+film_recent).className = "note-presse note-"+pressRate;
-				document.getElementById('note-spectateurs'+film_recent).className = "note-spectateurs note-"+userRate;
+				document.getElementById('synopsis'+film_recent).innerHTML = recup_film.feed.movie[k].synopsisShort;
+				document.getElementById('note-presse'+film_recent).className = "note-presse note-"+rateClass(recup_film.feed.movie[k].statistics.pressRating);
+				document.getElementById('note-spectateurs'+film_recent).className = "note-spectateurs note-"+rateClass(recup_film.feed.movie[k].statistics.userRating);
 				document.getElementById('affiche'+film_recent).addEventListener('click', afficheFilm);
+				document.getElementById('b-a'+film_recent).href= recup_film.feed.movie[k].trailer.href;
 				
 				var allocine_api_recherche = "http://api.allocine.fr/rest/v3/movie?partner="+key_allocine+"&code="+code_film+"&profile=large&format=json";
 				(function(fr){ $.getJSON(allocine_api_recherche, function(d){ showMoviePicture(d, fr) }); })(film_recent)

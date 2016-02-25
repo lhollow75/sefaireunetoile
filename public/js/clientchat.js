@@ -1,10 +1,28 @@
+var listeSeances = document.getElementsByClassName('horaires-liste')[0],
+    seances = listeSeances.getElementsByTagName('li'),
+    numrooms = seances.length;
+for (var i = 0; i < seances.length ; i++){
+    var x = i,
+    y = x.toString();
+    seances[i].setAttribute('class',y);
+    seances[i].addEventListener('click',function(){
+        //numrooms = numrooms.toString();
+        //AJOUTER CONDITION IF
+        socket.emit('generaterooms',numrooms);
+        // Call the server-side function 'adduser' and send one parameter (value of prompt) :
+        socket.emit('adduser', prompt("Quel est votre nom ?"));
+        var myClass = $(this).attr("class");
+        myClass = myClass.toString();
+        socket.emit('roomchoice',myClass);
+    });
+};  
+
 var socket = io.connect('http://localhost:1337');
-	// On connection to server, ask for user's name with an anonymous callback :
-	socket.on('connect', function(){
-		// Call the server-side function 'adduser' and send one parameter (value of prompt) :
-		socket.emit('adduser', prompt("Quel est votre nom ?"));
-	});
-        
+    // On connection to server, ask for user's name with an anonymous callback :
+    /*socket.on('connect', function(){
+		  // Call the server-side function 'adduser' and send one parameter (value of prompt) :
+		  socket.emit('adduser', prompt("Quel est votre nom ?"));
+    }); */
         
 	// Listener, whenever the server emits 'updatechat', this updates the chat body :
 	socket.on('updatechat', function (username, data) {
