@@ -237,6 +237,7 @@ function movieCard(donnees){
 			document.getElementById('showtime-'+donnees).addEventListener('click', function(){
 				// console.log(tab_seances.length);
 				var numrooms = tab_seances.length;
+                console.log(numrooms);
 				socket.emit('generaterooms', numrooms);
 				socket.emit('adduser', prompt("Quel est votre nom ?"));
 				socket.emit('roomchoice', donnees);

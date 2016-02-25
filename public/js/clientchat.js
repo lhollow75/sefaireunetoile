@@ -1,4 +1,4 @@
-var listeSeances = document.getElementsByClassName('horaires-liste')[0],
+/*var listeSeances = document.getElementsByClassName('horaires-liste')[0],
     seances = listeSeances.getElementsByTagName('li'),
     numrooms = seances.length;
 for (var i = 0; i < seances.length ; i++){
@@ -15,7 +15,7 @@ for (var i = 0; i < seances.length ; i++){
         myClass = myClass.toString();
         socket.emit('roomchoice',myClass);
     });
-};  
+}; */ 
 
 var socket = io.connect('http://localhost:1337');
     // On connection to server, ask for user's name with an anonymous callback :
