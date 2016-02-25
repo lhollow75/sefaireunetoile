@@ -448,8 +448,6 @@ footer{
     transition: all 200ms linear; 
 }
 
-
-
 .da-affiche{
     display: block;
     width: 110px;
@@ -457,7 +455,6 @@ footer{
     box-shadow: 0px 0px 2px #888888;
     margin: 10px auto;
     cursor: pointer;
-
     /* Brightness effect */
     filter: brightness(100%);
     -webkit-filter: brightness(100%);
@@ -475,6 +472,7 @@ footer{
 
 ul.da-menu-movies li:hover .da-affiche{
     cursor: pointer;
+
     /* Brightness effect */
     filter: brightness(30%);
     -webkit-filter: brightness(30%);
@@ -513,6 +511,17 @@ ul.da-menu-movies li:hover .da-title{
     -ms-transition: all 200ms ease-in;
     transition: all 200ms ease-in; 
 }
+/*ul.da-menu-movies li:hover .da-langue{
+    opacity: 1 !important;
+    margin-top: -30px;
+    cursor: pointer;
+    -webkit-transition: all 200ms ease-in;
+    -moz-transition: all 200ms ease-in;
+    -o-transition: all 200ms ease-in;
+    -ms-transition: all 200ms ease-in;
+    transition: all 200ms ease-in; 
+}*/
+
 
 
 .ca-title{
@@ -532,10 +541,32 @@ ul.da-menu-movies li:hover .da-title{
     line-height: 1;
     text-align: center;
     display: block;
-    margin-top: -50px;
+    margin-top: -170px;
     width: 110px;
     position: absolute;
     z-index: 10000;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    transition: all 200ms ease; 
+}
+
+.da-langue{
+    opacity: 1;
+    font-size: 9px;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 1;
+    padding: 2px 0px;
+    text-align: center;
+    display: block;
+    margin-top: -30px;
+    width: 30px;
+    position: absolute;
+    z-index: 10000;
+    background-color: #000000;
     -webkit-transition: all 200ms ease;
     -moz-transition: all 200ms ease;
     -o-transition: all 200ms ease;
@@ -572,7 +603,7 @@ ul.da-menu-movies li:hover .da-title{
     position: relative;
 }
 
-.ea-director, .ea-actors{
+.ea-director, .ea-actors, .ea-schedule{
     font-size: 10px;
     font-weight: bold;
     color: #444;
@@ -634,7 +665,7 @@ ul.da-menu-movies li:hover .da-title{
 
 .horaires-liste li{
     width: 80px;
-    margin: 0px 20px;
+    margin: 5px 20px 10px 0px;
 }
 
 .horaires-title{
@@ -735,12 +766,13 @@ ul.da-menu-movies li:hover .da-title{
     display: inline-block; 
     vertical-align: top;
     text-align: left;
-    margin-left: -17px;
+    margin-left: 219px;
+    margin-top: 10px;
 }
 
 .seance{
     width: 960px;
-    text-align: center;
+    text-align: left !important;
 }
 
 .seance li{
