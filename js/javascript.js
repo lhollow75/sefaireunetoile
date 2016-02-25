@@ -122,7 +122,6 @@ function recup_horaire_cinema(horaires){
 	var noMovies = true;
 	// console.log(horaires.feed.theaterShowtimes[0]);
 	showtimes = horaires.feed.theaterShowtimes[0];
-    console.log(showtimes.movieShowtimes.data);
 	if (showtimes.movieShowtimes != undefined){
 		
 		// Look all the movies showing in the theater
