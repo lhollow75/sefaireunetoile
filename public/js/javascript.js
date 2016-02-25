@@ -247,7 +247,7 @@ function movieCard(donnees){
 					socket.emit('roomchoice', donnees);
 					firstGeneration = true;
 				} else {
-                    console.log(numrooms);
+                    var numrooms = tab_seances.length;
                     socket.emit('generaterooms', numrooms);
 					switchRoom(donnees);
 				}
