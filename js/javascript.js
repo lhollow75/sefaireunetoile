@@ -27,7 +27,7 @@ elt_chercher.addEventListener("click", recherche);
 document.getElementById('section2').style.display="block";
 document.getElementById('section3').style.display="none";
 document.getElementById('section4').style.display="none";
-document.getElementById('section5').style.display="none";
+//document.getElementById('section5').style.display="none";
 // document.getElementById('section6').style.display="none";
 
 

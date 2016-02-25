@@ -1,7 +1,7 @@
 html, body {
-  	font-family: 'Open Sans', sans-serif;
-	-webkit-background-size: cover; /* pour anciens Chrome et Safari */
-  	background-size: cover; /* version standardisée */
+ font-family: 'Open Sans', sans-serif;
+ -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+ background-size: cover; /* version standardisée */
 }
 
 /* Importation des polices de caractères */
@@ -9,9 +9,9 @@ html, body {
     font-family: 'icomoon';
     src:    url('../fonts/cine/icomoon.eot');
     src:    url('../fonts/cine/icomoon.eot') format('embedded-opentype'),
-        url('../fonts/cine/icomoon.ttf') format('truetype'),
-        url('../fonts/cine/icomoon.woff') format('woff'),
-        url('../fonts/cine/icomoon.svg') format('svg');
+    url('../fonts/cine/icomoon.ttf') format('truetype'),
+    url('../fonts/cine/icomoon.woff') format('woff'),
+    url('../fonts/cine/icomoon.svg') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -35,32 +35,65 @@ a{
     text-decoration: none;
 }
 
+button{
+    border: none;
+    cursor: pointer !important;
+}
+
 /* icone du logo ciné dans le header*/
 .icon-logo:before {
-    content: "\e931";
-    color: #fff;
-    font-size: 40px;
+    content: "\e913";
+    color: #ffffff;
+    font-size: 60px;
     height: 70px;
     line-height: 70px;
     margin-left: 10px;
+    display: inline-block;
+}
+
+.name-logo{
+    top: 18px;
+    position: absolute;
+    display: inline-block;
+}
+
+.title-logo{
+    text-transform: uppercase;
+    color: #ffffff;
+    line-height: 20px;
+    font-size: 20px;
+}
+
+.sub-logo{
+    color: #ff7e00;
+    font-size: 13px;
+    line-height: 11px;
+    font-weight: 100;
+    display: block;
 }
 
 /* icone du picto de géolocalisation dans la searchbar */
 .icon-location-pin:before {
-    content: "\e930";
+    content: "\e915";
     color: #999;
     font-size: 30px;
     line-height: 30px;
 }
 
+
+
 /* Header */
 header {
-	background-color: rgba(0,0,0,0.5);
-	width: 100%;
-	height: 70px;
-	position: absolute;
-	top:0px;
-	z-index: 10;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: rgba(0,0,0,0.7);
+    width: 100%;
+    height: 70px;
+    position: absolute;
+    top:0px;
+    z-index: 10;
 }
 
 h2 {
@@ -90,13 +123,28 @@ h4 {
 /* Section 4 = Affichage des films à l'affiche actuellement dans la salle sélectionnée */
 /* Section 5 = Affichage des séances pour un film dans un cinéma */
 
+video{
+    width: 100%;
+    min-height: 700px;
+    margin-top: -100px;
+    object-fit: cover;
+        filter: brightness(50%);
+        -webkit-filter: brightness(50%);
+        -moz-filter: brightness(50%);
+        -o-filter: brightness(50%);
+        -ms-filter: brightness(50%);
+}
+
 #section1{
-	height: 400px;
+	height: 600px;
 	position: relative;
 	width: 100%;
     margin: 0px auto 0px auto;
-	background: url("../img/background.jpg") no-repeat left;
+    background: url("../img/background.jpg") no-repeat left;
+    overflow: hidden;
 }
+
+
 
 #section2{
     position: relative;
@@ -113,13 +161,20 @@ h4 {
 }
 
 #section6{
-    position: relative;
-    margin: 50px auto;
-    width: 960px;
-    text-align: center;
-    background-color: red;
+  background-color: #28313e;
+  padding: 20px 0;
+  position: relative;
+  margin: 50px auto;
+  width: 960px;
+  text-align: center;
 }
 
+#section6 .title-section{
+    color: #ffffff !important;
+}
+#section6 .title-section .bordure{
+    border-bottom: 1px solid #ffffff !important;
+}
 .searchbar{
   display: table; 
   width: 100%; 
@@ -154,6 +209,10 @@ h4 {
     user-select: none;
     white-space: nowrap;
     cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
 }
 
 .searchbar_location{
@@ -177,13 +236,15 @@ h4 {
 }
 
 #geolocaliseMoi{
-	width: 47px;
+    border: none;
+
+    height: 44px;
+    width: 47px;
     background-color: #eeeeee;
     margin-left: -4px !important;
 }
 
 #geolocaliseMoi:hover{
-    /*width: 47px;*/
     background-color: #ffbb78;
     margin-left: -4px !important;
     -webkit-transition: all 200ms linear;
@@ -203,14 +264,14 @@ h4 {
 }
 
 
-button{
+#chercher{
 	outline: none;
 	margin:0px 0px 0px 0px;
+    width: 100%;
     height: 44px;
     font-size: 14px;
     color: #ffffff;
     border: none;
-    width: 100%;
     background-color: #ff7e00;
     -webkit-appearance: button;
     cursor: pointer;
@@ -222,8 +283,8 @@ button{
     transition: all 200ms linear; 
 }
 
-button:hover{
-    background-color: #ff5a00;
+#chercher:hover{
+    background-color: #3cb878;
     -webkit-transition: all 200ms linear;
     -moz-transition: all 200ms linear;
     -o-transition: all 200ms linear;
@@ -242,9 +303,10 @@ input{
 }
 
 #footer_section1{
-	background-color: rgba(0,0,0,0.6);
-    bottom: 0;
-	width: 100%;
+	background-color: rgba(0,0,0,0.7);
+    /*bottom: 0;*/
+    bottom: 270px;    
+    width: 100%;
     padding-bottom: 30px;
     padding-top: 30px;
     position: absolute;
@@ -266,7 +328,7 @@ ul, li{
 }
 
 footer{
-	background-color: black;
+	background-color: #000000;
     display: block;
     position: relative;
     width: 100%;
@@ -286,7 +348,7 @@ footer{
 	height: 20px;
 	line-height: 20px;
 	display: inline-block;
-	color: white;
+	color: #ffffff;
 	position: absolute;
 	color: #82888a;
 }
@@ -311,8 +373,24 @@ footer{
 .bordure {
     position: relative;
     top:10px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #000000;
     width: 60px;
+}
+
+.title-main{
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 0.7;
+    margin-left: 70px;
+}
+
+.title-sub{
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-left: 70px;
+    margin-bottom: 20px;
 }
 
 .movies{
@@ -344,22 +422,7 @@ footer{
     vertical-align: top;
 }
 
-.title-main{
-    font-size: 20px;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 0.1em;
-    line-height: 0.7;
-    margin-left: 70px;
-}
 
-
-.title-sub{
-    font-size: 10px;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-left: 70px;
-}
 
 
 .ca-affiche{
@@ -385,11 +448,11 @@ footer{
     cursor: pointer;
 
     /* Brightness effect */
-        filter: brightness(100%);
-        -webkit-filter: brightness(100%);
-        -moz-filter: brightness(50%);
-        -o-filter: brightness(50%);
-        -ms-filter: brightness(50%);
+    filter: brightness(100%);
+    -webkit-filter: brightness(100%);
+    -moz-filter: brightness(50%);
+    -o-filter: brightness(50%);
+    -ms-filter: brightness(50%);
 
     -webkit-transition: all 200ms ease-in-out;
     -moz-transition: all 200ms ease-in-out;
@@ -402,11 +465,11 @@ footer{
 ul.da-menu-movies li:hover .da-affiche{
     cursor: pointer;
     /* Brightness effect */
-        filter: brightness(30%);
-        -webkit-filter: brightness(30%);
-        -moz-filter: brightness(30%);
-        -o-filter: brightness(30%);
-        -ms-filter: brightness(30%);
+    filter: brightness(30%);
+    -webkit-filter: brightness(30%);
+    -moz-filter: brightness(30%);
+    -o-filter: brightness(30%);
+    -ms-filter: brightness(30%);
 
     -webkit-transition: all 200ms ease-in-out;
     -moz-transition: all 200ms ease-in-out;
@@ -479,6 +542,44 @@ ul.da-menu-movies li:hover .da-title{
     color: #444;
     position: relative;
 }
+.ea-presse, .ea-spectateurs{
+    font-size: 10px;
+    font-weight: bold;
+    color: #444;
+    position: relative;
+}
+
+.ea-presse{
+    margin-top: 10px;
+}
+
+
+.ca-director, .ca-actors{
+    font-size: 11px;
+    font-weight: bold;
+    color: #444;
+    position: relative;
+}
+
+.ea-director, .ea-actors{
+    font-size: 10px;
+    font-weight: bold;
+    color: #444;
+    position: relative;
+}
+
+.ea-director span, .ea-actors span{
+    font-weight: normal !important;
+}
+
+.ea-director{
+    margin-top: 4px;
+}
+
+.ea-actors{
+    margin-bottom: 10px;
+}
+
 
 .note-presse{
     display: inline-block;
@@ -513,15 +614,15 @@ ul.da-menu-movies li:hover .da-title{
 .note-50{background: url(../img/stars.png) 0px -110px no-repeat;}
 
 .synopsis{
-    font-size: 10px;
+    font-size: 11px;
     color: #444;
     line-height: 1.3;
     margin: 10px 0px;
-
+    font-weight: normal !important;
 }
 
 .horaires-liste li{
-    width: 130px;
+    width: 80px;
     margin: 0px 20px;
 }
 
@@ -535,15 +636,42 @@ ul.da-menu-movies li:hover .da-title{
 }
 
 .horaires-btn{
-    font-size: 10px;
-    height: 30px;
-    padding: 2px 15px;
-    background-color: #3cb878; /* couleur verte */
-    margin-top: 10px;
+    padding: 10px 20px;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    background-color: #ff7e00;
+    margin-top: 0px;
+    display: block;
+    border: none;
+    border-radius: 0px 2px 2px 2px;
+    -webkit-border-radius: 0px 2px 2px 2px;
+    -moz-border-radius: 0px 2px 2px 2px;
+}
+
+.horaires-btn:hover{
+    background-color: #28313e;
 }
 
 .notifications:after {
     content:attr(data-notification);
+}
+
+.button_contact:hover{
+    background-color: #3cb878;
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    transition: all 200ms linear; 
+}
+.version, .format{
+    color: #ffffff;
+    background-color: #28313e;
+    display: inline-block;
+    padding: 2px 7px;
+    font-size: 11px;
+    margin-top: 5px;
 }
 
 
@@ -564,10 +692,30 @@ ul.da-menu-movies li:hover .da-title{
     position: relative;
 }
 
-.chosen_movie{
-    width: 130px;
-    margin-left: 8px;
+.ea-content{
+    width: 200px;
     display: inline-block;
+    vertical-align: top;
+    margin-left: 20px;
+}
+
+.ea-title{
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.fa-content{
+    width: 400px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 25px;
+    margin-left: 20px;
+}
+
+.chosen_movie{
+    margin-left: 60px;
+    display: block;
     vertical-align: top;
     text-align: left;
 }
@@ -576,7 +724,7 @@ ul.da-menu-movies li:hover .da-title{
     display: inline-block; 
     vertical-align: top;
     text-align: left;
-    width: 700px;
+    margin-left: 40px;
 }
 
 .seance{
@@ -593,9 +741,9 @@ ul.da-menu-movies li:hover .da-title{
     background-color: #fff;
     position: absolute!important;
     z-index: 1000;
-    border-radius: 2px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
+    border-radius: 0px 0px 4px 4px;
+    -webkit-border-radius: 0px 0px 4px 4px;
+    -moz-border-radius: 0px 0px 4px 4px;
     font-family: Arial,sans-serif;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     -moz-box-sizing: border-box;
@@ -630,11 +778,21 @@ ul#movie_list li{
     line-height: 1.5;
     cursor: pointer;
     color: #999;
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    transition: all 200ms linear; 
 }
 
 li.movie-results:hover{
-    background-color: #fafafa; 
+    background-color: #3cb878; 
     color: #222222 !important;
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    transition: all 200ms linear; 
 }
 
 .pac-container{
@@ -649,97 +807,147 @@ li.movie-results:hover{
 .btn-preview{
     background-color: #ff7e00;
     color: #ffffff !important;
-    padding: 4px 10px;
+    padding: 6px 10px;
     display: block;
     font-size: 10px;
     text-align: center;
-}
-
-.btn-preview:hover{
-    background-color: #ff5a00 !important;
-}
-
-
-
-
-form {
-  /* Just to center the form on the page */
-  margin: 0 auto;
-  width: 100%;
-  position: relative;
-}
-
-.div_contact {
-/*To set space between contact form fields*/
-  margin-top: 1em;
-}
-
-.label_contact {
-  /* To make sure that all labels have the same size and are properly align */
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  text-align: right;
-  background-color: #ff5a00;
-  border: none;
-    border-radius: 2px 0 0 2px;
-    -webkit-border-radius: 2px 0 0 2px;
-    -moz-border-radius: 2px 0 0 2px;
-}
-
-.input_contact, .textarea_contact {
-  /* To give bigger size to font in input (same than labels) */
-  font: 1em sans-serif;
-  width: 300px;
-  /* To harmonize text field border */
-  outline: none;
-  margin:0px;
-  height: 30px !important;
-  font-size: 14px;
-  color: #435f71;
-  border: none;
-    border-radius: 0 2px 2px 0;
-    -webkit-border-radius: 0 2px 2px 0;
-    -moz-border-radius: 0 2px 2px 0;
-}
-
-
-.textarea_contact {
-  /* To put label at top of textarea*/
-  vertical-align: top;
-  height: 5em;
-  /*To give posibility to resize verticaly field*/
-  resize: vertical;
-}
-
-.button_contact {
-  outline: none;
-  margin:0px 0px 0px 0px;
-    height: 44px;
-    font-size: 14px;
-    color: #ffffff;
     border: none;
-    width: 370px;
-    background-color: #ff7e00;
-    -webkit-appearance: button;
-    cursor: pointer;
-    text-transform: none;
-    -webkit-transition: all 200ms linear;
-    -moz-transition: all 200ms linear;
-    -o-transition: all 200ms linear;
-    -ms-transition: all 200ms linear;
-    transition: all 200ms linear;
-    position: relative; 
-    left:25px;
-}
-
-.button_contact:hover{
-    background-color: #ff5a00;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
     -webkit-transition: all 200ms linear;
     -moz-transition: all 200ms linear;
     -o-transition: all 200ms linear;
     -ms-transition: all 200ms linear;
     transition: all 200ms linear; 
+}
+
+.btn-preview:hover{
+    background-color: #3cb878 !important;
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    transition: all 200ms linear; 
+}
+
+
+
+
+form{
+  margin: 0 auto;
+  position: relative;
+}
+
+
+
+.label_contact {
+  display: inline-block;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  text-align: right;
+  background-color: #ff7e00;
+  border: none;
+  border-radius: 2px 0 0 2px;
+  -webkit-border-radius: 2px 0 0 2px;
+  -moz-border-radius: 2px 0 0 2px;
+}
+
+.div_contact {
+  width: 300px;
+  margin: 10px auto;
+  position: relative;
+}
+
+.icon-name:before, .icon-mail:before, .icon-msg:before{
+  color: #ffffff;
+  display: block;
+  text-align: center;
+  line-height: 2;
+}
+
+.icon-name:before{
+  content: "\e90a";
+}
+.icon-mail:before{
+  content: "\e901";
+}
+.icon-msg:before{
+  content: "\e90c";
+}
+
+
+.input_contact, .textarea_contact {
+  font-size:12px;
+  width: 300px;
+  height: 30px;
+  outline: none;
+  position: relative;
+  left: 30px;
+  color: #435f71;
+  padding: 0px 7px;
+  border: none;
+  border-radius: 0 2px 2px 0;
+  -webkit-border-radius: 0 2px 2px 0;
+  -moz-border-radius: 0 2px 2px 0;
+}
+
+
+.textarea_contact {
+  resize: none;
+  height: 80px;
+  padding-top: 7px;
+  border-radius: 0 2px 2px 2px;
+  -webkit-border-radius: 0 2px 2px 2px;
+  -moz-border-radius: 0 2px 2px 2px;
+}
+
+.button_contact {
+  margin-left: 245px;
+  padding: 7px 20px;
+
+  font-size: 12px;
+  color: #ffffff;
+  background-color: #ff7e00;
+  border: none;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+
+  cursor: pointer;
+  outline: none;
+
+  -webkit-transition: all 200ms linear;
+  -moz-transition: all 200ms linear;
+  -o-transition: all 200ms linear;
+  -ms-transition: all 200ms linear;
+  transition: all 200ms linear;
+}
+
+.button_contact:hover {
+
+  background-color: #3cb878;
+
+  -webkit-transition: all 200ms linear;
+  -moz-transition: all 200ms linear;
+  -o-transition: all 200ms linear;
+  -ms-transition: all 200ms linear;
+  transition: all 200ms linear;
+}
+
+.cgu-content{
+    width: 850px;
+    text-align: left;
+    font-size: 11px;
+    margin-left: 60px;
+    line-height: 2em;
+}
+
+
+h5{
+    margin: 20px 0px 5px 0px;
+    font-weight: bold;
 }
 
 
