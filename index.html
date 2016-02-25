@@ -256,6 +256,7 @@ $(function() {
    <div class="chosen_movie">
 				<!--for chat integration
                 <img class="ca-affiche" src="static/img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">-->
+<<<<<<< HEAD
                 <img class="ca-affiche" src="img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
                 <div class="ea-content">
                     <h3 class="ea-title">Deadpool</h3>
@@ -285,6 +286,38 @@ $(function() {
              <h3 class="version">VF</h3>
              <h3 class="format">3D</h3>
              <button id="movie-schedule" class="horaires-btn">22h30</button>
+=======
+                <img id="moviePicture" class="ca-affiche" src="img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
+                <div class="ca-content">
+                    <h3 id="movieTitle" class="ca-title">Deadpool</h3>
+
+                    <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
+                    <div class="ca-presse">Presse
+                       <span id="pressRate" class="note-presse note-8"></span>
+                   </div>
+                   <div class="ca-spectateurs">Spectateurs
+                       <span id="userRate" class="note-spectateurs note-9"></span>
+                   </div>
+                   <!-- Fin Notations -->
+                   <a  id="movieTrailer" href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
+
+                   <p class="synopsis">A l'origine, il s'appelle Wade Wilson : un ancien militaire des Forces Spéciales devenu mercenaire. Après avoir subi une expérimentation hors norme qui va accélérer ses pouvoirs de guérison, il va devenir Deadpool. Armé de ses nouvelles capacités et d'un humour noir survolté, Deadpool va traquer l'homme qui a bien failli anéantir sa vie.</p>
+                   <!--<button>Sélectionner</button>-->
+
+                   <div class="director">Réalisateur : <span id="director">Tim Miller</span></div>
+                   <div class="actors">Acteurs : <span id="actors">Ryan Reynolds, Morena Baccarin, Ed Skrein...</span></div>
+               </div>
+               
+           </div>
+           <!-- Fin infos film -->
+           <div class="liste-seances">
+             <ul class="horaires-liste">
+                <li>
+                   <h3 class="version">VF</h3>
+                   <h3 class="format">3D</h3>
+                   <button id="movie-schedule" class="horaires-btn">22h30</button>
+
+>>>>>>> f2a976f30d3ea4e49183fa86089f34157d651307
 					<!--<div class="circle">
 						<span data-notification="0" class="notifications"></span>
 					</div>-->
@@ -370,6 +403,7 @@ $(function() {
                 <input class="input_contact" type="text" id="name" name="user_name" placeholder="Nom">
             </div>
 
+<<<<<<< HEAD
             <div class="div_contact">
                 <label class="label_contact icon-mail" for="mail"></label>
                 <input class="input_contact" type="email" id="mail" name="user_email" placeholder="E-mail">
@@ -386,6 +420,22 @@ $(function() {
         </form>
         
     </div>
+=======
+<!-- A PROPOS
+<div id="section8">
+            <div class="title-section">
+                <div class="bordure"></div>
+                <div class="title-main">A propos</div>
+                <div class="title-sub">Découvrer l'équipe d'Une toile ensemble</div>
+             </div>
+
+            <div id="apropos">
+                Notre équipe est formé de 4 étudiants issu de l'IESA Multimédia. Lors d'un de nos projets de développement, l'idée d'une toile ensemble est née. Après avoir eu une très bonne note pour ce projet, nous avons décidé de continuer à le développer. Nous vous présentons ainsi le V1 de notre site. Rester à l'écoute car nous avançons à grand pas vers la V2 !
+            </div>
+            <img src="#" alt="Photo de l'équipe d'une toile ensemble">
+    </div>
+    FIN A PROPOS -->
+>>>>>>> f2a976f30d3ea4e49183fa86089f34157d651307
 
 <!-- FIN FORMULAIRE -->
 
