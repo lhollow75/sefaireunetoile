@@ -27,7 +27,7 @@ var template_filmEnSalle = function(code, title, source, langue, format){
 	return _tpl.join('');
 }
 
-// Affichage des films
+// Template of movie's list
 var template = function(list, id){
 	var _tpl = [
 		'<li class="movie-results">',
