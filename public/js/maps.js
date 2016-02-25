@@ -1,3 +1,6 @@
+elt_geolocalisation.addEventListener("click", geolocalisation);
+elt_chercher.addEventListener("click", recherche);
+
 // Initialisation de la carte lors du clique sur le bouton recherche
 function recherche(){
 	

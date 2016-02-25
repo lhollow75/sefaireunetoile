@@ -22,9 +22,9 @@ var tab_seances = [];
 var tab_rates = [];
 
 elt_autocomplete.addEventListener("focus", geolocate);
-elt_geolocalisation.addEventListener("click", geolocalisation);
+
 elt_movie.addEventListener("keyup", movieFinder);
-elt_chercher.addEventListener("click", recherche);
+
 
 
 // Hide all sections beside the search bar
@@ -35,7 +35,7 @@ document.getElementById('section5').style.display="none";
 document.getElementById('section6').style.display="none";
 document.getElementById('section7').style.display="none";
 document.getElementById('section8').style.display="none";
-// document.getElementById('chatroom').style.display="none";
+document.getElementById('chatroom').style.display="none";
 
 
 // Lance la récupération de la liste des films dès la chargement de la page
