@@ -17,6 +17,7 @@ var k;
 var position;
 var bounds;
 
+var tab_seances = [];
 var tab_rates = [];
 
 elt_autocomplete.addEventListener("focus", geolocate);
@@ -30,6 +31,7 @@ document.getElementById('section4').style.display="none";
 document.getElementById('section5').style.display="none";
 document.getElementById('section6').style.display="none";
 document.getElementById('section7').style.display="none";
+document.getElementById('section8').style.display="none";
 
 
 // Lance la récupération de la liste des films dès la chargement de la page
@@ -122,6 +124,7 @@ function recup_horaire_cinema(horaires){
 	var noMovies = true;
 	// console.log(horaires.feed.theaterShowtimes[0]);
 	showtimes = horaires.feed.theaterShowtimes[0];
+
 	if (showtimes.movieShowtimes != undefined){
 		
 		// Look all the movies showing in the theater
@@ -129,7 +132,7 @@ function recup_horaire_cinema(horaires){
 
 			onShow = showtimes.movieShowtimes[h].onShow.movie;
 
-			console.log(showtimes.movieShowtimes[h]);
+			// console.log(showtimes.movieShowtimes[h]);
 			
 			// Show the informations only if there is showtimes on today's date
 			if (isTodaysDate(showtimes.movieShowtimes[h].scr[0].d)){ 
@@ -141,6 +144,7 @@ function recup_horaire_cinema(horaires){
 					(function(donnees){
 						document.getElementById('afficheEnSalle'+onShow.code).addEventListener('click', function(){
 							document.getElementById('section5').style.display="block";
+							$(".showtime-btn").remove();
 							movieCard(donnees);
 						});
 					})(showtimes.movieShowtimes[h])
@@ -177,9 +181,11 @@ function num3d(code){
 		else return "3D";
 }
 
-// Show all the information about a movie when click on the poster
+// Show all the informations about a movie when click on the poster
 function movieCard(donnees){
-	console.log(donnees);
+	
+	// console.log(donnees);
+	seances = donnees.scr[0];
 	donnees = donnees.onShow.movie;
 	document.getElementById('moviePicture').src = donnees.poster.href;
 	document.getElementById('movieTitle').innerHTML = donnees.title;
@@ -196,6 +202,29 @@ function movieCard(donnees){
 	document.getElementById('director').innerHTML = donnees.castingShort.directors;
 	document.getElementById('actors').innerHTML = donnees.castingShort.actors;
 	
+	tab_seances = [];
+	// console.log("longueur: "+seances.t.length);
+	for (s=0; s<seances.t.length; s++){
+		// console.log(seances.t[s].$);
+		$("#showtimesList").append(template_showtimes(seances.t[s].code, seances.t[s].$));
+		tab_seances.push(seances.t[s].code);
+	}
+	console.log(tab_seances);
+	
+}
+
+// Template of movie's showtime
+var template_showtimes = function(id, showtime){
+	var _tpl = [
+		'<li class="showtime-btn">',
+		   '<button id="movie-schedule-'+id+'" class="horaires-btn">'+showtime+'</button>',
+
+			'<!--<div class="circle">',
+				'<span data-notification="0" class="notifications"></span>',
+			'</div>-->',
+		'</li>'
+	]
+	return _tpl.join('');
 }
 
 // Template of movie's on show in a theater
