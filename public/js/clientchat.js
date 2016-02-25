@@ -32,21 +32,6 @@ var socket = io.connect('http://localhost:1337');
 	});
         
         
-	// When the server emits 'updaterooms', this updates the room the client is in :
-	socket.on('updaterooms', function(rooms, current_room) {
-        //We clean the rooms list.
-		$('#rooms').empty();
-        //Loop for each room element.
-		$.each(rooms, function(key, value) {
-            //We are reseting the HTML decoration for all rooms. TESTING PURPOSES.
-			if(value == current_room){
-				$('#rooms').append('<div>' + value + '</div>');
-			}
-			else {
-				$('#rooms').append('<div><a href="#" onclick="switchRoom(\''+value+'\')">' + value + '</a></div>');
-			}
-		});
-	});
        
         
         
