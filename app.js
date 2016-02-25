@@ -32,7 +32,7 @@ server.listen(1337);
 // Usernames which are currently connected to the chat. Rooms generation variables.
 var usernames = {},
     rooms = [],
-    roomsGenerated = 0
+    roomsGenerated = 0,
     divroom = [];
 
 
@@ -78,11 +78,18 @@ io.sockets.on('connection', function (socket) {
   
     socket.on('generaterooms',function(maxrooms){
     socket.roomGeneration = roomsGenerated;
-    if (socket.roomGeneration === 0){
+        if (socket.roomGeneration === 0){
             for (var i = 0 ; i < maxrooms ; i++){
                 var x = i.toString();
                 rooms.push("room"+x);
                 roomsGenerated = 1;
+                socket.roomGeneration = roomsGenerated;
+            }
+        } else {
+            rooms = [];
+            for (var i = 0 ; i < maxrooms ; i++){
+                var x = i.toString();
+                rooms.push("room"+x);
             }
         }   
     });
@@ -119,8 +126,6 @@ io.sockets.on('connection', function (socket) {
 		socket.room = newroom;
         //We broadcast for all users, a notification for a new user incoming.
 		socket.broadcast.to(newroom).emit('updatechat', 'Chat', socket.username+' a rejoint la conversation.');
-        //Call for the 'updaterooms' event, send var rooms, event appearing in the new selected room.
-		socket.emit('updaterooms', socket.roomGeneration, newroom);
 	});
 	
 
