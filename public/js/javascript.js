@@ -25,13 +25,16 @@ elt_geolocalisation.addEventListener("click", geolocalisation);
 elt_movie.addEventListener("keyup", movieFinder);
 elt_chercher.addEventListener("click", recherche);
 
+
+// Hide all sections beside the search bar
 document.getElementById('section2').style.display="block";
 document.getElementById('section3').style.display="none";
 document.getElementById('section4').style.display="none";
 document.getElementById('section5').style.display="none";
 document.getElementById('section6').style.display="none";
 document.getElementById('section7').style.display="none";
-// document.getElementById('section8').style.display="none";
+document.getElementById('section8').style.display="none";
+// document.getElementById('chatroom').style.display="none";
 
 
 // Lance la récupération de la liste des films dès la chargement de la page
@@ -110,6 +113,7 @@ function recup_liste_cinema(liste_cinema){
                 infoWindow.open(map, marker);
 				$(".en-salle").remove();
 				document.getElementById('section4').style.display="block";
+				document.getElementById('section5').style.display="none";
 				var api_allocine_rechercheFilmSalle = "http://api.allocine.fr/rest/v3/showtimelist?partner="+key_allocine+"&q=&format=json&theaters="+_code;
 				$.getJSON(api_allocine_rechercheFilmSalle, recup_horaire_cinema);
             }
@@ -142,7 +146,7 @@ function recup_horaire_cinema(horaires){
 					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href, VOVF(showtimes.movieShowtimes[h].version), num3d(showtimes.movieShowtimes[h].screenFormat.$)));
 					
 					(function(donnees){
-						document.getElementById('afficheEnSalle'+onShow.code).addEventListener('click', function(){
+						document.getElementById('filmEnSalle'+onShow.code).addEventListener('click', function(){
 							document.getElementById('section5').style.display="block";
 							$(".showtime-btn").remove();
 							movieCard(donnees);
@@ -189,7 +193,7 @@ function movieCard(donnees){
 	_donnees = donnees;
 	seances = donnees.scr[0];
 	donnees = donnees.onShow.movie;
-	document.getElementById('moviePicture').src = donnees.poster.href;
+	
 	document.getElementById('movieTitle').innerHTML = donnees.title;
 	
 	// If there is no rate, show a ligne
@@ -200,9 +204,23 @@ function movieCard(donnees){
 		document.getElementById('userRate').className = "note-spectateurs note-"+rateClass(donnees.statistics.userRating);
 	} else document.getElementById('userRate').className = "";
 	
-	document.getElementById('movieTrailer').href = donnees.trailer.href;
-	document.getElementById('director').innerHTML = donnees.castingShort.directors;
-	document.getElementById('actors').innerHTML = donnees.castingShort.actors;
+	
+	if (donnees.trailer.href != undefined){
+		document.getElementById('movieTrailer').href = donnees.trailer.href;
+	} else document.getElementById('movieTrailer').visibility = "hidden";
+	
+	if (donnees.trailer.href != undefined){
+		document.getElementById('director').innerHTML = donnees.castingShort.directors;
+	} else document.getElementById('director').innerHTML = "Non Renseigné";
+	
+	if (donnees.castingShort.actors != undefined){
+		document.getElementById('actors').innerHTML = donnees.castingShort.actors;
+	} else document.getElementById('actors').innerHTML = "Non Renseigné";
+	
+	if (donnees.poster.href != undefined){
+		document.getElementById('moviePicture').src = donnees.poster.href;
+	} else document.getElementById('moviePicture').src = "static/img/affiches/nan.png";
+	
 	document.getElementById('movieVersion').innerHTML = _donnees.screenFormat.$;
 	document.getElementById('movieFormat').innerHTML = VOVF(_donnees.version);
 	
@@ -215,6 +233,14 @@ function movieCard(donnees){
 		// console.log(seances.t[s].$);
 		$("#showtimesList").append(template_showtimes(seances.t[s].code, seances.t[s].$));
 		tab_seances.push(seances.t[s].code);
+		(function(donnees){
+			document.getElementById('showtime-'+onShow.code).addEventListener('click', function(){
+				var numrooms = seances.t.length;
+				socket.emit('generaterooms', numrooms);
+				socket.emit('adduser', prompt("Quel est votre nom ?"));
+				socket.emit('roomchoice', donnees);
+			});
+		})(seances.t[s].code)
 	}
 	// console.log(tab_seances);
 	//socket.emit('addingkeyroom',tab_seances);
@@ -223,7 +249,7 @@ function movieCard(donnees){
 // Template of movie's showtime
 var template_showtimes = function(id, showtime){
 	var _tpl = [
-		'<li class="showtime-btn">',
+		'<li id="showtime-'+id+'" class="showtime-btn">',
 		   '<button id="movie-schedule-'+id+'" class="horaires-btn">'+showtime+'</button>',
 
 			'<!--<div class="circle">',
@@ -241,7 +267,7 @@ var template_filmEnSalle = function(code, title, source, langue, format){
 				'<img id = "afficheEnSalle'+code+'" class="da-affiche" src="'+source+'" alt="'+title+'">',
 				'<h3 class="da-title">'+title+'</h3>',
 				'<h4 class="da-langue">'+langue+'</h4>',
-				'<h4 class="da-langue">'+format+'</h4>',
+				'<h4 class="da-format">'+format+'</h4>',
 		'</li>'
 	]
 	
@@ -270,7 +296,7 @@ function initMap(latitude, longitude) {
 	});
 		
 	// Creation of the marker
-	var img = './img/location_me.png';
+	var img = 'static/img/location_me.png';
 	var marker = new google.maps.Marker({
 		position: myLatLng,
 		map: map,
