@@ -168,6 +168,7 @@ function recup_horaire_cinema(horaires){
 
 // Return the language version of the movie (VF or VOST)
 function VOVF(code){
+	console.log(code);
 	langue = code.$;
 	original = code.original;
 
@@ -184,7 +185,8 @@ function num3d(code){
 // Show all the informations about a movie when click on the poster
 function movieCard(donnees){
 	
-	// console.log(donnees);
+	console.log(donnees);
+	_donnees = donnees;
 	seances = donnees.scr[0];
 	donnees = donnees.onShow.movie;
 	document.getElementById('moviePicture').src = donnees.poster.href;
@@ -201,7 +203,12 @@ function movieCard(donnees){
 	document.getElementById('movieTrailer').href = donnees.trailer.href;
 	document.getElementById('director').innerHTML = donnees.castingShort.directors;
 	document.getElementById('actors').innerHTML = donnees.castingShort.actors;
+	document.getElementById('movieVersion').innerHTML = _donnees.screenFormat.$;
+	document.getElementById('movieFormat').innerHTML = VOVF(_donnees.version);
 	
+	
+	
+	// Collect showtime's informations
 	tab_seances = [];
 	// console.log("longueur: "+seances.t.length);
 	for (s=0; s<seances.t.length; s++){
@@ -209,8 +216,8 @@ function movieCard(donnees){
 		$("#showtimesList").append(template_showtimes(seances.t[s].code, seances.t[s].$));
 		tab_seances.push(seances.t[s].code);
 	}
-	console.log(tab_seances);
-	
+	// console.log(tab_seances);
+	//socket.emit('addingkeyroom',tab_seances);
 }
 
 // Template of movie's showtime
