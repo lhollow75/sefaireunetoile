@@ -51,6 +51,15 @@ button{
     display: inline-block;
 }
 
+.icon-logo2:before{
+    content: "\e913";
+    font-size: 20px;
+    color: #ccc;
+    top: 10px;
+    position: absolute;
+}
+
+
 .name-logo{
     top: 18px;
     position: absolute;
@@ -153,7 +162,7 @@ video{
     text-align: center;
 }
 
-#section3, #section4, #section5, #section7{
+#section3, #section4, #section5, #section7, #section8{
     position: relative;
     margin: 50px auto;
     width: 960px;
@@ -332,7 +341,7 @@ footer{
     display: block;
     position: relative;
     width: 100%;
-    height: 20px;
+    height: 40px;
     bottom: 0px;
 }
 
@@ -344,13 +353,15 @@ footer{
 }
 
 #copyright, #MadeBy{
-	font-size: 8px;
-	height: 20px;
-	line-height: 20px;
+	font-size: 10px;
+	line-height: 40px;
 	display: inline-block;
-	color: #ffffff;
 	position: absolute;
 	color: #82888a;
+}
+
+#copyright a, #MadeBy a{
+    color: #82888a;
 }
 
 #copyright{
@@ -840,7 +851,6 @@ form{
 }
 
 
-
 .label_contact {
   display: inline-block;
   position: absolute;
@@ -944,10 +954,19 @@ form{
     line-height: 2em;
 }
 
+.team-content{
+    width: 850px;
+    text-align: left;
+    font-size: 11px;
+    margin-left: 60px;
+    line-height: 2em;
+}
 
 h5{
     margin: 20px 0px 5px 0px;
     font-weight: bold;
 }
 
-
+.copyright-text{
+    margin-left: 25px;
+}
