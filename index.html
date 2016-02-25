@@ -27,28 +27,11 @@
 -->
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/html5lightbox.js"></script>
-<script>
+<script type="text/javascript" src="js/smooth.js"></script>
 
-/*Fonction smooth scrolldown*/
-$(function() {
-    $('a[href*="#"]:not([href="#"])').click(function() {
-      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-        var target = $(this.hash);
-        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-        if (target.length) {
-          $('html, body').animate({
-            scrollTop: target.offset().top
-        }, 1000);
-          return false;
-      }
-  }
-});
-});
-</script>
 </head>
 <body>
 	<header>
-        
 		<a href="javascript:window.location.reload()">
             <span class="icon-logo"></span>
             <div class="name-logo">
@@ -57,52 +40,52 @@ $(function() {
             </div>
         </a>
 
-        <!-- liens ancré
-        <a href="#se-movies">Films actuels</a>
-        <a href="#se-map">Carte</a>
-        <a href="#se-cinema">Films dans le cinéma</a>
-        <a href="#se-sessions">Séances</a>
-        <a href="#se-contact">Contact</a>
-        <a href="#se-cgu">CGU</a>
+        <!-- liens ancrés
+        <a href="#section2">Films actuels</a>
+        <a href="#section3">Carte</a>
+        <a href="#section4">Films dans le cinéma</a>
+        <a href="#section5">Séances</a>
+        <a href="#section6">Contact</a>
+        <a href="#section7">CGU</a>
     -->
-
-
 </header>
 
+<!-- Search section -->
 <div id="section1">
     <div class="video">
-    <video autoplay loop muted>
-        <source src="video/video.mp4" type="video/mp4">
-        <source src="video/video.ogg" type="video/ogg">
-        <source src="video/video.webm" type="video/webm">
-    </video>
-</div>
+        <video autoplay loop muted>
+            <source src="video/video.mp4" type="video/mp4">
+                <source src="video/video.ogg" type="video/ogg">
+                    <source src="video/video.webm" type="video/webm">
+                    </video>
+                </div>
 
-  <div id="footer_section1">	
-     <div id="searchbar">
-        <div class="case-input searchbar_location">
-           <input type="text" id="autocomplete" placeholder="Entrez une adresse">
-       </div>
-       <div class="case-input">
-           <button type="button" id="geolocaliseMoi" class="btn-location">
-              <span class="icon-location-pin"></span>
-          </button>
-      </div>
-      <div class="case-input searchbar_movies">
-       <input type="text" id="movie" placeholder="Entrez un film (facultatif)">
-       <ul id="movie_list">
+                <div id="footer_section1">	
+                 <div id="searchbar">
+                    <div class="case-input searchbar_location">
+                       <input type="text" id="autocomplete" placeholder="Entrez une adresse">
+                   </div>
+                   <div class="case-input">
+                       <button type="button" id="geolocaliseMoi" class="btn-location">
+                          <span class="icon-location-pin"></span>
+                      </button>
+                  </div>
+                  <div class="case-input searchbar_movies">
+                   <input type="text" id="movie" placeholder="Entrez un film (facultatif)">
+                   <ul id="movie_list">
 
-       </ul>
-   </div>
-   <div class="case-input search_button btn">
-     <button type="submit" id="chercher">Chercher</button>
+                   </ul>
+               </div>
+               <div class="case-input search_button btn">
+                 <button type="submit" id="chercher">Chercher</button>
+             </div>
+         </div>
+     </div>
  </div>
-</div>
-</div>
-</div>
+ <!-- End Search section -->
 
-
-<div id="section2">
+ <!-- Movies playing section -->
+ <div id="section2">
   <div class="movies">
    <div class="title-section" id="se-movies">
     <div class="bordure"></div>
@@ -112,84 +95,56 @@ $(function() {
 <ul class="ca-menu-movies">
     <li>
         <div class="ca-content">
-            <!-- affiche du film (ajouter le titre du film en alt)-->
             <img id="affiche1" class="ca-affiche" src="" alt="">
-            <!-- Titre du film -->
             <h3 id="titre1" class="ca-title"></h3>
-
-            <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
             <div class="ca-presse">Presse
                 <span id="note-presse1" class="note-presse"></span>
             </div>
             <div class="ca-spectateurs">Spectateurs
                 <span id="note-spectateurs1" class="note-spectateurs"></span>
             </div>
-            <!-- Fin Notations -->
             <p id="synopsis1" class="synopsis"></p>
         </div>
         <a  href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" id = "b-a1" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
     </li>
     <li>
         <div class="ca-content">
-            <!-- affiche du film (ajouter le titre du film en alt)-->
             <img id="affiche2" class="ca-affiche" src="" alt="">
-
-            <!-- Titre du film -->
             <h3 id="titre2" class="ca-title"></h3>
-
-            <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
             <div class="ca-presse">Presse
                 <span id="note-presse2" class="note-presse"></span>
             </div>
             <div class="ca-spectateurs">Spectateurs
                 <span id="note-spectateurs2" class="note-spectateurs"></span>
             </div>
-            <!-- Fin Notations -->
-
             <p id="synopsis2" class="synopsis"></p>
         </div>
         <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" id = "b-a2" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
     </li>
     <li>
         <div class="ca-content">
-
-            <!-- affiche du film (ajouter le titre du film en alt)-->
             <img id="affiche3" class="ca-affiche" src="" alt="">
-
-            <!-- Titre du film -->
             <h3 id="titre3" class="ca-title"></h3>
-
-            <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
             <div class="ca-presse">Presse
                 <span id="note-presse3" class="note-presse"></span>
             </div>
             <div class="ca-spectateurs">Spectateurs
                 <span id="note-spectateurs3" class="note-spectateurs"></span>
             </div>
-            <!-- Fin Notations -->
-
             <p id="synopsis3" class="synopsis"></p>
         </div>
-
         <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" id = "b-a3" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
     </li>
     <li>
         <div class="ca-content">
-            <!-- affiche du film (ajouter le titre du film en alt)-->
             <img id="affiche4" class="ca-affiche" src="" alt="">
-
-            <!-- Titre du film -->
             <h3 id="titre4" class="ca-title"></h3>
-
-            <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
             <div class="ca-presse">Presse
                 <span id="note-presse4" class="note-presse"></span>
             </div>
             <div class="ca-spectateurs">Spectateurs
                 <span id="note-spectateurs4" class="note-spectateurs"></span>
             </div>
-            <!-- Fin Notations -->
-
             <p id="synopsis4" class="synopsis"></p>
         </div>
         <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" id = "b-a4" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
@@ -197,21 +152,14 @@ $(function() {
     </li>
     <li>
         <div class="ca-content">
-            <!-- affiche du film (ajouter le titre du film en alt)-->
             <img id="affiche5" class="ca-affiche" src="" alt="">
-
-            <!-- Titre du film -->
             <h3 id="titre5" class="ca-title"></h3>
-
-            <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
             <div class="ca-presse">Presse
                 <span id="note-presse5" class="note-presse"></span>
             </div>
             <div class="ca-spectateurs">Spectateurs
                 <span id="note-spectateurs5" class="note-spectateurs"></span>
             </div>
-            <!-- Fin Notations -->
-
             <p id="synopsis5" class="synopsis"></p>
         </div>
         <a href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" id = "b-a5" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a> 
@@ -220,7 +168,11 @@ $(function() {
 </ul>
 </div>
 </div>
-<div id="section3" id="se-map">
+<!-- End movies playing section -->
+
+
+<!-- Map section -->
+<div id="section3">
    <div class="title-section">
     <div class="bordure"></div>
     <div class="title-main">Cinémas à proximité</div>
@@ -229,9 +181,10 @@ $(function() {
 
 <div id="map"></div>
 </div>
+<!-- End map section -->
 
-
-<div id="section4" id="se-cinema">
+<!-- Film movies list section -->
+<div id="section4">
   <div class="movies">
    <div class="title-section">
     <div class="bordure"></div>
@@ -242,9 +195,10 @@ $(function() {
 </ul>
 </div>
 </div>
+<!-- Search film movies list section -->
 
-
-<div id="section5" id="se-sessions">
+<!-- Movies sessions section -->
+<div id="section5">
   <div id="movies">
    <div class="title-section">
     <div class="bordure"></div>
@@ -260,40 +214,28 @@ $(function() {
                 <img id="moviePicture" class="ca-affiche" src="img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
                 <div class="ea-content">
                     <h3 id="movieTitle" class="ea-title">Deadpool</h3>
-
-                    <!-- Notations du film : indiquer une classe "note-x" (x étant un nombre entre 0 et 10) -->
                     <div class="ea-presse">Presse
                        <span id="pressRate" class="note-presse note-8"></span>
                    </div>
-
                    <div class="ea-spectateurs">Spectateurs
                        <span id="userRate" class="note-spectateurs note-9"></span>
                    </div>
-
                    <div class="ea-director">Réalisateur : <span id="director">Tim Miller</span></div>
                    <div class="ea-actors">Acteurs : <span id="actors">Ryan Reynolds, Morena Baccarin, Ed Skrein...</span></div>
-
-                   <!-- Fin Notations -->
                    <a  id="movieTrailer" href="http://www.allocine.fr/_video/iblogvision.aspx?cmedia=19559754&amp;isApp=true" class="html5lightbox btn-preview" data-group="mygroup"  data-thumbnail="" data-width="480" data-height="240" title="Vidéo">Voir la bande-annonce</a>
-                 </div>
-
-
-             <div class="fa-content">
-              <div class="ea-director">Synopsis
+               </div>
+               <div class="fa-content">
+                  <div class="ea-director">Synopsis
                    <p class="synopsis">A l'origine, il s'appelle Wade Wilson : un ancien militaire des Forces Spéciales devenu mercenaire. Après avoir subi une expérimentation hors norme qui va accélérer ses pouvoirs de guérison, il va devenir Deadpool. Armé de ses nouvelles capacités et d'un humour noir survolté, Deadpool va traquer l'homme qui a bien failli anéantir sa vie.</p>
-                   <!--<button>Sélectionner</button>-->
-                 </div></div>
-
-
-               
+               </div>
            </div>
-           <!-- Fin infos film -->
-           <div class="liste-seances">
-             <ul class="horaires-liste">
-                <li>
-                   <h3 class="version">VF</h3>
-                   <h3 class="format">3D</h3>
-                   <button id="movie-schedule" class="horaires-btn">22h30</button>
+       </div>
+       <div class="liste-seances">
+         <ul class="horaires-liste">
+            <li>
+               <h3 class="version">VF</h3>
+               <h3 class="format">3D</h3>
+               <button id="movie-schedule" class="horaires-btn">22h30</button>
 
 					<!--<div class="circle">
 						<span data-notification="0" class="notifications"></span>
@@ -363,56 +305,56 @@ $(function() {
 
 </div>
 </div>
+<!-- End Movies sessions section -->
 
-<!-- FORMULAIRE -->
-
+<!-- Contact form -->
 <div id="section6">
-        
-        <div class="title-section">
-            <div class="bordure"></div>
-            <div class="title-main">Nous contacter</div>
-            <div class="title-sub">Nous sommes à votre écoute</div>
+
+    <div class="title-section">
+        <div class="bordure"></div>
+        <div class="title-main">Nous contacter</div>
+        <div class="title-sub">Nous sommes à votre écoute</div>
+    </div>
+
+    <form action="#" method="post">
+        <div class="div_contact">
+            <label class="label_contact" for="name"><span class="icon-name"></span></label>
+            <input class="input_contact" type="text" id="name" name="user_name" placeholder="Nom">
         </div>
 
-        <form action="#" method="post">
-            <div class="div_contact">
-                <label class="label_contact" for="name"><span class="icon-name"></span></label>
-                <input class="input_contact" type="text" id="name" name="user_name" placeholder="Nom">
-            </div>
+        <div class="div_contact">
+            <label class="label_contact icon-mail" for="mail"></label>
+            <input class="input_contact" type="email" id="mail" name="user_email" placeholder="E-mail">
+        </div>
 
-            <div class="div_contact">
-                <label class="label_contact icon-mail" for="mail"></label>
-                <input class="input_contact" type="email" id="mail" name="user_email" placeholder="E-mail">
-            </div>
+        <div class="div_contact">
+            <label class="label_contact icon-msg" for="msg"></label>
+            <textarea class="textarea_contact" id="msg" name="user_message"placeholder="Message..."></textarea>
+        </div>
 
-            <div class="div_contact">
-                <label class="label_contact icon-msg" for="msg"></label>
-                <textarea class="textarea_contact" id="msg" name="user_message"placeholder="Message..."></textarea>
-            </div>
-            
-            <div class="div_contact">
-                <button class="button_contact" type="submit">Envoyer</button>
-            </div>
-        </form>
-        
-    </div>
+        <div class="div_contact">
+            <button class="button_contact" type="submit">Envoyer</button>
+        </div>
+    </form>
 
-<!-- A PROPOS
+</div>
+<!-- End contact form -->
+
+<!-- Team section -->
 <div id="section8">
-            <div class="title-section">
-                <div class="bordure"></div>
-                <div class="title-main">A propos</div>
-                <div class="title-sub">Découvrer l'équipe d'Une toile ensemble</div>
-             </div>
-
-            <div id="apropos">
-                Notre équipe est formé de 4 étudiants issu de l'IESA Multimédia. Lors d'un de nos projets de développement, l'idée d'une toile ensemble est née. Après avoir eu une très bonne note pour ce projet, nous avons décidé de continuer à le développer. Nous vous présentons ainsi le V1 de notre site. Rester à l'écoute car nous avançons à grand pas vers la V2 !
-            </div>
-            <img src="#" alt="Photo de l'équipe d'une toile ensemble">
+    <div class="title-section">
+        <div class="bordure"></div>
+        <div class="title-main">A propos</div>
+        <div class="title-sub">Découvrer l'équipe d'Une toile ensemble</div>
     </div>
-    FIN A PROPOS -->
 
-<!-- FIN FORMULAIRE -->
+    <div id="apropos">
+        Notre équipe est formé de 4 étudiants issu de l'IESA Multimédia. Lors d'un de nos projets de développement, l'idée d'une toile ensemble est née. Après avoir eu une très bonne note pour ce projet, nous avons décidé de continuer à le développer. Nous vous présentons ainsi le V1 de notre site. Rester à l'écoute car nous avançons à grand pas vers la V2 !
+    </div>
+    <img src="#" alt="Photo de l'équipe d'une toile ensemble">
+</div>
+<!-- End Team section -->
+
 
 
 <!-- CGU -->
@@ -425,66 +367,66 @@ $(function() {
     </div>
 
     <div class="cgu-content">
-    <h4>Informations légales</h4>
-    <h5>1. Présentation du site.</h5>
-    <p>En vertu de l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, il est précisé aux utilisateurs du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi :</p>
-    <p><strong>Propriétaire</strong> : Une toile ensemble – Startup – 6 rue Froment, 75011 Paris<br />
-        <strong>Créateur</strong> : <a href="www.unetoileensemble.fr">Une toile ensemble</a><br />
-        <strong>Responsable publication</strong> : Une toile ensemble – contact@unetoileensemble.fr<br />
-        Le responsable publication est une personne physique ou une personne morale.<br />
-        <strong>Webmaster</strong> : Une toile ensemble – webmaster@unetoileensemble.fr<br />
-        <strong>Hébergeur</strong> : OVH – 2 rue Kellermann 59100 Roubaix<br />
-        Crédits : les mentions légales ont été générées et offertes par Subdelirium <a target="_blank" href="http://www.subdelirium.com/creation-site-wordpress/" alt="creation site internet wordpress">création de site wordpress</a></p>
+        <h4>Informations légales</h4>
+        <h5>1. Présentation du site.</h5>
+        <p>En vertu de l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, il est précisé aux utilisateurs du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi :</p>
+        <p><strong>Propriétaire</strong> : Une toile ensemble – Startup – 6 rue Froment, 75011 Paris<br />
+            <strong>Créateur</strong> : <a href="www.unetoileensemble.fr">Une toile ensemble</a><br />
+            <strong>Responsable publication</strong> : Une toile ensemble – contact@unetoileensemble.fr<br />
+            Le responsable publication est une personne physique ou une personne morale.<br />
+            <strong>Webmaster</strong> : Une toile ensemble – webmaster@unetoileensemble.fr<br />
+            <strong>Hébergeur</strong> : OVH – 2 rue Kellermann 59100 Roubaix<br />
+            Crédits : les mentions légales ont été générées et offertes par Subdelirium <a target="_blank" href="http://www.subdelirium.com/creation-site-wordpress/" alt="creation site internet wordpress">création de site wordpress</a></p>
 
-        <h5>2. Conditions générales d’utilisation du site et des services proposés.</h5>
-        <p>L’utilisation du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> implique l’acceptation pleine et entière des conditions générales d’utilisation ci-après décrites. Ces conditions d’utilisation sont susceptibles d’être modifiées ou complétées à tout moment, les utilisateurs du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> sont donc invités à les consulter de manière régulière.</p>
-        <p>Ce site est normalement accessible à tout moment aux utilisateurs. Une interruption pour raison de maintenance technique peut être toutefois décidée par Une toile ensemble, qui s’efforcera alors de communiquer préalablement aux utilisateurs les dates et heures de l’intervention.</p>
-        <p>Le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> est mis à jour régulièrement par Une toile ensemble. De la même façon, les mentions légales peuvent être modifiées à tout moment : elles s’imposent néanmoins à l’utilisateur qui est invité à s’y référer le plus souvent possible afin d’en prendre connaissance.</p>
-        <h5>3. Description des services fournis.</h5>
-        <p>Le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> a pour objet de fournir une information concernant l’ensemble des activités de la société.</p>
-        <p>Une toile ensemble s’efforce de fournir sur le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> des informations aussi précises que possible. Toutefois, il ne pourra être tenue responsable des omissions, des inexactitudes et des carences dans la mise à jour, qu’elles soient de son fait ou du fait des tiers partenaires qui lui fournissent ces informations.</p>
-        <p>Tous les informations indiquées sur le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> sont données à titre indicatif, et sont susceptibles d’évoluer. Par ailleurs, les renseignements figurant sur le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> ne sont pas exhaustifs. Ils sont donnés sous réserve de modifications ayant été apportées depuis leur mise en ligne.</p>
-        <h5>4. Limitations contractuelles sur les données techniques.</h5>
-        <p>Le site utilise la technologie JavaScript.</p>
-        <p>Le site Internet ne pourra être tenu responsable de dommages matériels liés à l’utilisation du site. De plus, l’utilisateur du site s’engage à accéder au site en utilisant un matériel récent, ne contenant pas de virus et avec un navigateur de dernière génération mis-à-jour</p>
-        <h5>5. Propriété intellectuelle et contrefaçons.</h5>
-        <p>Une toile ensemble est propriétaire des droits de propriété intellectuelle ou détient les droits d’usage sur tous les éléments accessibles sur le site, notamment les textes, images, graphismes, logo, icônes, sons, logiciels.</p>
-        <p>Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable de : Une toile ensemble.</p>
-        <p>Toute exploitation non autorisée du site ou de l’un quelconque des éléments qu’il contient sera considérée comme constitutive d’une contrefaçon et poursuivie conformément aux dispositions des articles L.335-2 et suivants du Code de Propriété Intellectuelle.</p>
-        <h5>6. Limitations de responsabilité.</h5>
-        <p>Une toile ensemble ne pourra être tenue responsable des dommages directs et indirects causés au matériel de l’utilisateur, lors de l’accès au site www.unetoileensemble.fr, et résultant soit de l’utilisation d’un matériel ne répondant pas aux spécifications indiquées au point 4, soit de l’apparition d’un bug ou d’une incompatibilité.</p>
-        <p>Une toile ensemble ne pourra également être tenue responsable des dommages indirects (tels par exemple qu’une perte de marché ou perte d’une chance) consécutifs à l’utilisation du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a>.</p>
-        <p>Des espaces interactifs (possibilité de poser des questions dans l’espace contact) sont à la disposition des utilisateurs. Une toile ensemble se réserve le droit de supprimer, sans mise en demeure préalable, tout contenu déposé dans cet espace qui contreviendrait à la législation applicable en France, en particulier aux dispositions relatives à la protection des données. Le cas échéant, Une toile ensemble se réserve également la possibilité de mettre en cause la responsabilité civile et/ou pénale de l’utilisateur, notamment en cas de message à caractère raciste, injurieux, diffamant, ou pornographique, quel que soit le support utilisé (texte, photographie…).</p>
-        <h5>7. Gestion des données personnelles.</h5>
-        <p>En France, les données personnelles sont notamment protégées par la loi n° 78-87 du 6 janvier 1978, la loi n° 2004-801 du 6 août 2004, l'article L. 226-13 du Code pénal et la Directive Européenne du 24 octobre 1995.</p>
-        <p>A l'occasion de l'utilisation du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a>, peuvent êtres recueillies : l'URL des liens par l'intermédiaire desquels l'utilisateur a accédé au site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a>, le fournisseur d'accès de l'utilisateur, l'adresse de protocole Internet (IP) de l'utilisateur.</p>
-        <p> En tout état de cause Une toile ensemble ne collecte des informations personnelles relatives à l'utilisateur que pour le besoin de certains services proposés par le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a>. L'utilisateur fournit ces informations en toute connaissance de cause, notamment lorsqu'il procède par lui-même à leur saisie. Il est alors précisé à l'utilisateur du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> l’obligation ou non de fournir ces informations.</p>
-        <p>Conformément aux dispositions des articles 38 et suivants de la loi 78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés, tout utilisateur dispose d’un droit d’accès, de rectification et d’opposition aux données personnelles le concernant, en effectuant sa demande écrite et signée, accompagnée d’une copie du titre d’identité avec signature du titulaire de la pièce, en précisant l’adresse à laquelle la réponse doit être envoyée.</p>
-        <p>Aucune information personnelle de l'utilisateur du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> n'est publiée à l'insu de l'utilisateur, échangée, transférée, cédée ou vendue sur un support quelconque à des tiers. Seule l'hypothèse du rachat de Une toile ensemble et de ses droits permettrait la transmission des dites informations à l'éventuel acquéreur qui serait à son tour tenu de la même obligation de conservation et de modification des données vis à vis de l'utilisateur du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a>.</p>
-        <p>Le site n'est pas déclaré à la CNIL car il ne recueille pas d'informations personnelles. .</p>
-        <p>Les bases de données sont protégées par les dispositions de la loi du 1er juillet 1998 transposant la directive 96/9 du 11 mars 1996 relative à la protection juridique des bases de données.</p>
-        <h5>8. Liens hypertextes et cookies.</h5>
-        <p>Le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> contient un certain nombre de liens hypertextes vers d’autres sites, mis en place avec l’autorisation de Une toile ensemble. Cependant, Une toile ensemble n’a pas la possibilité de vérifier le contenu des sites ainsi visités, et n’assumera en conséquence aucune responsabilité de ce fait.</p>
-        <p>La navigation sur le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> est susceptible de provoquer l’installation de cookie(s) sur l’ordinateur de l’utilisateur. Un cookie est un fichier de petite taille, qui ne permet pas l’identification de l’utilisateur, mais qui enregistre des informations relatives à la navigation d’un ordinateur sur un site. Les données ainsi obtenues visent à faciliter la navigation ultérieure sur le site, et ont également vocation à permettre diverses mesures de fréquentation.</p>
-        <p>Le refus d’installation d’un cookie peut entraîner l’impossibilité d’accéder à certains services. L’utilisateur peut toutefois configurer son ordinateur de la manière suivante, pour refuser l’installation des cookies :</p>
-        <p>Sous Internet Explorer : onglet outil (pictogramme en forme de rouage en haut a droite) / options internet. Cliquez sur Confidentialité et choisissez Bloquer tous les cookies. Validez sur Ok.</p>
-        <p>Sous Firefox : en haut de la fenêtre du navigateur, cliquez sur le bouton Firefox, puis aller dans l'onglet Options. Cliquer sur l'onglet Vie privée.
-            Paramétrez les Règles de conservation sur : utiliser les paramètres personnalisés pour l'historique. Enfin décochez-la pour désactiver les cookies.</p>
-            <p>Sous Safari : Cliquez en haut à droite du navigateur sur le pictogramme de menu (symbolisé par un rouage). Sélectionnez Paramètres. Cliquez sur Afficher les paramètres avancés. Dans la section "Confidentialité", cliquez sur Paramètres de contenu. Dans la section "Cookies", vous pouvez bloquer les cookies.</p>
-            <p>Sous Chrome : Cliquez en haut à droite du navigateur sur le pictogramme de menu (symbolisé par trois lignes horizontales). Sélectionnez Paramètres. Cliquez sur Afficher les paramètres avancés. Dans la section "Confidentialité", cliquez sur préférences. Dans l'onglet "Confidentialité", vous pouvez bloquer les cookies.</p>
+            <h5>2. Conditions générales d’utilisation du site et des services proposés.</h5>
+            <p>L’utilisation du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> implique l’acceptation pleine et entière des conditions générales d’utilisation ci-après décrites. Ces conditions d’utilisation sont susceptibles d’être modifiées ou complétées à tout moment, les utilisateurs du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> sont donc invités à les consulter de manière régulière.</p>
+            <p>Ce site est normalement accessible à tout moment aux utilisateurs. Une interruption pour raison de maintenance technique peut être toutefois décidée par Une toile ensemble, qui s’efforcera alors de communiquer préalablement aux utilisateurs les dates et heures de l’intervention.</p>
+            <p>Le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> est mis à jour régulièrement par Une toile ensemble. De la même façon, les mentions légales peuvent être modifiées à tout moment : elles s’imposent néanmoins à l’utilisateur qui est invité à s’y référer le plus souvent possible afin d’en prendre connaissance.</p>
+            <h5>3. Description des services fournis.</h5>
+            <p>Le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> a pour objet de fournir une information concernant l’ensemble des activités de la société.</p>
+            <p>Une toile ensemble s’efforce de fournir sur le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> des informations aussi précises que possible. Toutefois, il ne pourra être tenue responsable des omissions, des inexactitudes et des carences dans la mise à jour, qu’elles soient de son fait ou du fait des tiers partenaires qui lui fournissent ces informations.</p>
+            <p>Tous les informations indiquées sur le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> sont données à titre indicatif, et sont susceptibles d’évoluer. Par ailleurs, les renseignements figurant sur le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> ne sont pas exhaustifs. Ils sont donnés sous réserve de modifications ayant été apportées depuis leur mise en ligne.</p>
+            <h5>4. Limitations contractuelles sur les données techniques.</h5>
+            <p>Le site utilise la technologie JavaScript.</p>
+            <p>Le site Internet ne pourra être tenu responsable de dommages matériels liés à l’utilisation du site. De plus, l’utilisateur du site s’engage à accéder au site en utilisant un matériel récent, ne contenant pas de virus et avec un navigateur de dernière génération mis-à-jour</p>
+            <h5>5. Propriété intellectuelle et contrefaçons.</h5>
+            <p>Une toile ensemble est propriétaire des droits de propriété intellectuelle ou détient les droits d’usage sur tous les éléments accessibles sur le site, notamment les textes, images, graphismes, logo, icônes, sons, logiciels.</p>
+            <p>Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable de : Une toile ensemble.</p>
+            <p>Toute exploitation non autorisée du site ou de l’un quelconque des éléments qu’il contient sera considérée comme constitutive d’une contrefaçon et poursuivie conformément aux dispositions des articles L.335-2 et suivants du Code de Propriété Intellectuelle.</p>
+            <h5>6. Limitations de responsabilité.</h5>
+            <p>Une toile ensemble ne pourra être tenue responsable des dommages directs et indirects causés au matériel de l’utilisateur, lors de l’accès au site www.unetoileensemble.fr, et résultant soit de l’utilisation d’un matériel ne répondant pas aux spécifications indiquées au point 4, soit de l’apparition d’un bug ou d’une incompatibilité.</p>
+            <p>Une toile ensemble ne pourra également être tenue responsable des dommages indirects (tels par exemple qu’une perte de marché ou perte d’une chance) consécutifs à l’utilisation du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a>.</p>
+            <p>Des espaces interactifs (possibilité de poser des questions dans l’espace contact) sont à la disposition des utilisateurs. Une toile ensemble se réserve le droit de supprimer, sans mise en demeure préalable, tout contenu déposé dans cet espace qui contreviendrait à la législation applicable en France, en particulier aux dispositions relatives à la protection des données. Le cas échéant, Une toile ensemble se réserve également la possibilité de mettre en cause la responsabilité civile et/ou pénale de l’utilisateur, notamment en cas de message à caractère raciste, injurieux, diffamant, ou pornographique, quel que soit le support utilisé (texte, photographie…).</p>
+            <h5>7. Gestion des données personnelles.</h5>
+            <p>En France, les données personnelles sont notamment protégées par la loi n° 78-87 du 6 janvier 1978, la loi n° 2004-801 du 6 août 2004, l'article L. 226-13 du Code pénal et la Directive Européenne du 24 octobre 1995.</p>
+            <p>A l'occasion de l'utilisation du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a>, peuvent êtres recueillies : l'URL des liens par l'intermédiaire desquels l'utilisateur a accédé au site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a>, le fournisseur d'accès de l'utilisateur, l'adresse de protocole Internet (IP) de l'utilisateur.</p>
+            <p> En tout état de cause Une toile ensemble ne collecte des informations personnelles relatives à l'utilisateur que pour le besoin de certains services proposés par le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a>. L'utilisateur fournit ces informations en toute connaissance de cause, notamment lorsqu'il procède par lui-même à leur saisie. Il est alors précisé à l'utilisateur du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> l’obligation ou non de fournir ces informations.</p>
+            <p>Conformément aux dispositions des articles 38 et suivants de la loi 78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés, tout utilisateur dispose d’un droit d’accès, de rectification et d’opposition aux données personnelles le concernant, en effectuant sa demande écrite et signée, accompagnée d’une copie du titre d’identité avec signature du titulaire de la pièce, en précisant l’adresse à laquelle la réponse doit être envoyée.</p>
+            <p>Aucune information personnelle de l'utilisateur du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> n'est publiée à l'insu de l'utilisateur, échangée, transférée, cédée ou vendue sur un support quelconque à des tiers. Seule l'hypothèse du rachat de Une toile ensemble et de ses droits permettrait la transmission des dites informations à l'éventuel acquéreur qui serait à son tour tenu de la même obligation de conservation et de modification des données vis à vis de l'utilisateur du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a>.</p>
+            <p>Le site n'est pas déclaré à la CNIL car il ne recueille pas d'informations personnelles. .</p>
+            <p>Les bases de données sont protégées par les dispositions de la loi du 1er juillet 1998 transposant la directive 96/9 du 11 mars 1996 relative à la protection juridique des bases de données.</p>
+            <h5>8. Liens hypertextes et cookies.</h5>
+            <p>Le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> contient un certain nombre de liens hypertextes vers d’autres sites, mis en place avec l’autorisation de Une toile ensemble. Cependant, Une toile ensemble n’a pas la possibilité de vérifier le contenu des sites ainsi visités, et n’assumera en conséquence aucune responsabilité de ce fait.</p>
+            <p>La navigation sur le site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> est susceptible de provoquer l’installation de cookie(s) sur l’ordinateur de l’utilisateur. Un cookie est un fichier de petite taille, qui ne permet pas l’identification de l’utilisateur, mais qui enregistre des informations relatives à la navigation d’un ordinateur sur un site. Les données ainsi obtenues visent à faciliter la navigation ultérieure sur le site, et ont également vocation à permettre diverses mesures de fréquentation.</p>
+            <p>Le refus d’installation d’un cookie peut entraîner l’impossibilité d’accéder à certains services. L’utilisateur peut toutefois configurer son ordinateur de la manière suivante, pour refuser l’installation des cookies :</p>
+            <p>Sous Internet Explorer : onglet outil (pictogramme en forme de rouage en haut a droite) / options internet. Cliquez sur Confidentialité et choisissez Bloquer tous les cookies. Validez sur Ok.</p>
+            <p>Sous Firefox : en haut de la fenêtre du navigateur, cliquez sur le bouton Firefox, puis aller dans l'onglet Options. Cliquer sur l'onglet Vie privée.
+                Paramétrez les Règles de conservation sur : utiliser les paramètres personnalisés pour l'historique. Enfin décochez-la pour désactiver les cookies.</p>
+                <p>Sous Safari : Cliquez en haut à droite du navigateur sur le pictogramme de menu (symbolisé par un rouage). Sélectionnez Paramètres. Cliquez sur Afficher les paramètres avancés. Dans la section "Confidentialité", cliquez sur Paramètres de contenu. Dans la section "Cookies", vous pouvez bloquer les cookies.</p>
+                <p>Sous Chrome : Cliquez en haut à droite du navigateur sur le pictogramme de menu (symbolisé par trois lignes horizontales). Sélectionnez Paramètres. Cliquez sur Afficher les paramètres avancés. Dans la section "Confidentialité", cliquez sur préférences. Dans l'onglet "Confidentialité", vous pouvez bloquer les cookies.</p>
 
-            <h5>9. Droit applicable et attribution de juridiction.</h5>
-            <p>Tout litige en relation avec l’utilisation du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> est soumis au droit français. Il est fait attribution exclusive de juridiction aux tribunaux compétents de Paris.</p>
-            <h5>10. Les principales lois concernées.</h5>
-            <p>Loi n° 78-17 du 6 janvier 1978, notamment modifiée par la loi n° 2004-801 du 6 août 2004 relative à l'informatique, aux fichiers et aux libertés.</p>
-            <p> Loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique.</p>
-            <h5>11. Lexique.</h5>
-            <p>Utilisateur : Internaute se connectant, utilisant le site susnommé.</p>
-            <p>Informations personnelles : « les informations qui permettent, sous quelque forme que ce soit, directement ou non, l'identification des personnes physiques auxquelles elles s'appliquent » (article 4 de la loi n° 78-17 du 6 janvier 1978).</p>
+                <h5>9. Droit applicable et attribution de juridiction.</h5>
+                <p>Tout litige en relation avec l’utilisation du site <a href="http://www.unetoileensemble.fr/" title="Une toile ensemble - www.unetoileensemble.fr">www.unetoileensemble.fr</a> est soumis au droit français. Il est fait attribution exclusive de juridiction aux tribunaux compétents de Paris.</p>
+                <h5>10. Les principales lois concernées.</h5>
+                <p>Loi n° 78-17 du 6 janvier 1978, notamment modifiée par la loi n° 2004-801 du 6 août 2004 relative à l'informatique, aux fichiers et aux libertés.</p>
+                <p> Loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique.</p>
+                <h5>11. Lexique.</h5>
+                <p>Utilisateur : Internaute se connectant, utilisant le site susnommé.</p>
+                <p>Informations personnelles : « les informations qui permettent, sous quelque forme que ce soit, directement ou non, l'identification des personnes physiques auxquelles elles s'appliquent » (article 4 de la loi n° 78-17 du 6 janvier 1978).</p>
+            </div>
         </div>
-    </div>
 
-<!-- FIN CGU -->
+        <!-- End CGU -->
 
 
 
