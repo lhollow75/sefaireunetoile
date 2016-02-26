@@ -29,15 +29,6 @@ elt_movie.addEventListener("keyup", movieFinder);
 
 
 
-// Hide sections beside the search bar
-document.getElementById('section2').style.display="block";
-document.getElementById('section3').style.display="none";
-document.getElementById('section4').style.display="none";
-document.getElementById('section5').style.display="none";
-document.getElementById('section6').style.display="none";
-document.getElementById('section7').style.display="none";
-document.getElementById('section8').style.display="none";
-document.getElementById('chatroom').style.display="none";
 
 
 // Lance la récupération de la liste des films dès la chargement de la page
