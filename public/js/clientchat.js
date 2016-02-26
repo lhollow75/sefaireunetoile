@@ -28,18 +28,15 @@ var socket = io.connect('http://localhost:1337');
 		  // Call the server-side function 'adduser' and send one parameter (value of prompt) :
 		  socket.emit('adduser', prompt("Quel est votre nom ?"));
     }); */
+    /*Counting in room
     socket.on('usersinroom', function(users){
-        users = users - 1;
-        if(users = 1){    
-            document.getElementById('connected-number').innerHTML = users; 
-            document.getElementById('chat-people').style.visibility = "visible";
-        } else if (users > 1) {
+        if(users > 1) {
             document.getElementById('connected-number').innerHTML = users;
             document.getElementById('chat-people').style.visibility = "visible";
-            document.getElementById('letter-s').style.visibility = "visible";
         }
             
     });
+    */
         
 	// Listener, whenever the server emits 'updatechat', this updates the chat body :
 	socket.on('updatechat', function (username, data) {

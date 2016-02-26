@@ -43,14 +43,16 @@ module.exports = function(app){
                         socket.join('room'+roomnumber);
                         tab_room.push(roomnumber);
                         console.log(tab_room);
+                        /*Counting in room
                         var numberroom = 0;
                         for (var i = 0 ; i < tab_room.length ; i++){
                             if (tab_room[0] === tab_room[i]){
                                 numberroom++;
-                                var y = numberroom.toString();
+                                var y = numberroom;
                             }
                         }
                         socket.emit('usersinroom',y);
+                        */
                         socket.emit('updatechat', 'Chat', 'Vous avez rejoint la room !');
                         socket.broadcast.to('room'+roomnumber).emit('updatechat', 'Chat', socket.username + ' a rejoint la conversation.');
                         socket.emit('updaterooms', rooms, 'room'+roomnumber);
