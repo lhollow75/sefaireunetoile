@@ -17,6 +17,7 @@ for (var i = 0; i < seances.length ; i++){
     });
 }; */ 
 
+
 document.getElementById('chat-btn-close').addEventListener('click', function(){
 	document.getElementById('chatroom').style.display='none';
 });
@@ -27,6 +28,9 @@ var socket = io.connect('http://localhost:1337');
 		  // Call the server-side function 'adduser' and send one parameter (value of prompt) :
 		  socket.emit('adduser', prompt("Quel est votre nom ?"));
     }); */
+    socket.on('usersinroom', function(users){
+       document.getElementById('connected-number').innerHTML(users); 
+    });
         
 	// Listener, whenever the server emits 'updatechat', this updates the chat body :
 	socket.on('updatechat', function (username, data) {
