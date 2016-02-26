@@ -108,7 +108,7 @@ function collect_movies_theater(infos){
 			nom = cinema.place.theater.name;
 			marker = new google.maps.Marker({
 				position: myLatLng,
-				label: (c+1).toString(),
+				label: (t+1).toString(),
 				map: map,
 				title: nom
 			});
@@ -321,10 +321,6 @@ function searchStringInArray (str, strArray) {
 	return -1;
 }
 
-function movieSearch(){
-	console.log(current_movie);
-}
-
 // Write the title of the movie into the search bar
 function afficheFilm(film){
 	
@@ -425,12 +421,15 @@ function showMeFiveMovies(array){
 
 // Put the 5 movies on the home page
 function showMoviePicture(recup_info, _id, _titre){
-	// console.log(recup_info.movie);
+	console.log("titre: "+_titre);
+	console.log("user: "+rateClass(recup_info.movie.statistics.userRating));
+	console.log("press: "+rateClass(recup_info.movie.statistics.pressRating));
 	info = recup_info.movie;
+	// console.log(rateClass(recup_info.movie.statistics.userRating));
 	if (info.synopsisShort == undefined){
 		synopsis = info.synopsis;
 	} else synopsis = info.synopsisShort;
-	$("#movieOfTheWeek").append(template_moviesOfTheWeek(_id, _titre, giveUpTag(synopsis), rateClass(info.statistics.pressRating), rateClass(info.statistics.urserRating), info.trailer.href, info.media[0].thumbnail.href));
+	$("#movieOfTheWeek").append(template_moviesOfTheWeek(_id, _titre, giveUpTag(synopsis), rateClass(info.statistics.pressRating), rateClass(info.statistics.userRating), info.trailer.href, info.media[0].thumbnail.href));
 	(function(donnees){
 		document.getElementById('affiche'+donnees).addEventListener('click', afficheFilm);
 	})(_id)

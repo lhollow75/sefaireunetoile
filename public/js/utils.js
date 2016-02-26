@@ -45,7 +45,13 @@ function traitementChaine(chaine){
 
 // Return the rate rounded close to 0.5
 function rateClass(rate){
-	return (Math.round(rate * 2)*0.5)*10;
+	console.log(rate);
+	if (rate==undefined){
+		return 0;
+	} else {
+		return (Math.round(rate * 2)*0.5)*10;
+	}
+	
 }
 
 // Return a random number between 0 and max (include)
