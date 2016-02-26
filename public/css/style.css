@@ -38,6 +38,7 @@ a{
 button{
     border: none;
     cursor: pointer !important;
+    outline: none;
 }
 
 input{
@@ -163,8 +164,6 @@ video{
 .icon-msg:before{
   content: "\e90c";
 }
-
-
 
 
 
@@ -678,6 +677,7 @@ ul.da-menu-movies li:hover .da-title{
     right: 0;
 }
 
+.note-0{background: url(../img/stars.png) 0px -121px no-repeat;}
 .note-00{background: url(../img/stars.png) 0px 0px no-repeat;}
 .note-05{background: url(../img/stars.png) 0px -11px no-repeat;}
 .note-10{background: url(../img/stars.png) 0px -22px no-repeat;}
