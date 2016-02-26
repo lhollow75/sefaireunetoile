@@ -28,7 +28,6 @@
 /* Définition générale du chat */
 
 #chatroom {
-    display: block;
     z-index: 100000;
     font-family: Lato, helvetica;
     font-size: 12px;
