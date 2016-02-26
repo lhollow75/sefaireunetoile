@@ -40,58 +40,39 @@ button{
     cursor: pointer !important;
 }
 
-/* icone du logo ciné dans le header*/
-.icon-logo:before {
-    content: "\e913";
-    color: #ffffff;
-    font-size: 60px;
-    height: 70px;
-    line-height: 70px;
-    margin-left: 10px;
+input{
+    outline: none;
+    margin:0px;
+    height: 44px;
+    font-size: 14px;
+    color: #435f71;
+    border: none;
+    width: 100%;
+}
+
+ul, li{
     display: inline-block;
 }
 
-.icon-logo2:before{
-    content: "\e913";
-    font-size: 20px;
-    color: #ccc;
-    top: 10px;
-    position: absolute;
-}
-
-
-.name-logo{
-    top: 18px;
-    position: absolute;
-    display: inline-block;
-}
-
-.title-logo{
-    text-transform: uppercase;
-    color: #ffffff;
-    line-height: 20px;
-    font-size: 20px;
-}
-
-.sub-logo{
-    color: #ff7e00;
-    font-size: 13px;
-    line-height: 11px;
-    font-weight: 100;
+footer{
+    background-color: #000000;
     display: block;
+    position: relative;
+    width: 100%;
+    height: 40px;
+    bottom: 0px;
 }
 
-/* icone du picto de géolocalisation dans la searchbar */
-.icon-location-pin:before {
-    content: "\e915";
-    color: #999;
-    font-size: 30px;
-    line-height: 30px;
+form{
+  margin: 0 auto;
+  position: relative;
 }
 
+h5{
+    margin: 20px 0px 5px 0px;
+    font-weight: bold;
+}
 
-
-/* Header */
 header {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -124,14 +105,6 @@ h4 {
     margin-bottom: 10px;
     text-align: left;
 }
-
-
-/* Section 1 = recherche */
-/* Section 2 = Films à l'affiche actuellement */
-/* Section 3 = cinémas à proximité */
-/* Section 4 = Affichage des films à l'affiche actuellement dans la salle sélectionnée */
-/* Section 5 = Affichage des séances pour un film dans un cinéma */
-
 video{
     width: 100%;
     min-height: 700px;
@@ -143,6 +116,92 @@ video{
         -o-filter: brightness(50%);
         -ms-filter: brightness(50%);
 }
+
+/* ICONS */
+
+/* Icon logo Unetoileensemble */
+.icon-logo:before {
+    content: "\e913";
+    color: #ffffff;
+    font-size: 60px;
+    height: 70px;
+    line-height: 70px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+/* Icon logo Unetoileensemble */
+.icon-logo2:before{
+    content: "\e913";
+    font-size: 20px;
+    color: #ccc;
+    top: 10px;
+    position: absolute;
+}
+
+/* icone du picto de géolocalisation dans la searchbar */
+.icon-location-pin:before {
+    content: "\e915";
+    color: #999;
+    font-size: 30px;
+    line-height: 30px;
+}
+
+.icon-name:before, .icon-mail:before, .icon-msg:before{
+  color: #ffffff;
+  display: block;
+  text-align: center;
+  line-height: 2;
+}
+
+.icon-name:before{
+  content: "\e90a";
+}
+.icon-mail:before{
+  content: "\e901";
+}
+.icon-msg:before{
+  content: "\e90c";
+}
+
+
+
+
+
+.name-logo{
+    top: 18px;
+    position: absolute;
+    display: inline-block;
+}
+
+.title-logo{
+    text-transform: uppercase;
+    color: #ffffff;
+    line-height: 20px;
+    font-size: 20px;
+}
+
+.sub-logo{
+    color: #ff7e00;
+    font-size: 13px;
+    line-height: 11px;
+    font-weight: 100;
+    display: block;
+}
+
+
+
+
+
+
+
+/* Section 1 = recherche */
+/* Section 2 = Films à l'affiche actuellement */
+/* Section 3 = cinémas à proximité */
+/* Section 4 = Affichage des films à l'affiche actuellement dans la salle sélectionnée */
+/* Section 5 = Affichage des séances pour un film dans un cinéma */
+
+
 
 #section1{
 	height: 600px;
@@ -301,15 +360,6 @@ video{
     transition: all 200ms linear; 
 }
 
-input{
-	outline: none;
-	margin:0px;
-    height: 44px;
-    font-size: 14px;
-    color: #435f71;
-    border: none;
-    width: 100%;
-}
 
 #footer_section1{
 	background-color: rgba(0,0,0,0.7);
@@ -332,18 +382,7 @@ input{
     z-index: 1000;
 }
 
-ul, li{
-	display: inline-block;
-}
 
-footer{
-	background-color: #000000;
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 40px;
-    bottom: 0px;
-}
 
 #map{
     width: 840px;
@@ -356,23 +395,19 @@ footer{
 	font-size: 10px;
 	line-height: 40px;
 	display: inline-block;
-	position: absolute;
 	color: #82888a;
+}
+
+#copyright{
+    text-align: left;
+    margin-left: 20px;
 }
 
 #copyright a, #MadeBy a{
     color: #82888a;
 }
 
-#copyright{
-	text-align: left;
-	left: 2%;
-}
 
-#MadeBy{
-	text-align: right;
-	right: 2%;
-}
 
 .title-section{
     margin-left: 60px; 
@@ -876,13 +911,6 @@ li.movie-results:hover{
 
 
 
-
-form{
-  margin: 0 auto;
-  position: relative;
-}
-
-
 .label_contact {
   display: inline-block;
   position: absolute;
@@ -902,22 +930,7 @@ form{
   position: relative;
 }
 
-.icon-name:before, .icon-mail:before, .icon-msg:before{
-  color: #ffffff;
-  display: block;
-  text-align: center;
-  line-height: 2;
-}
 
-.icon-name:before{
-  content: "\e90a";
-}
-.icon-mail:before{
-  content: "\e901";
-}
-.icon-msg:before{
-  content: "\e90c";
-}
 
 
 .input_contact, .textarea_contact {
@@ -994,10 +1007,8 @@ form{
     line-height: 2em;
 }
 
-h5{
-    margin: 20px 0px 5px 0px;
-    font-weight: bold;
-}
+
+
 
 .copyright-text{
     margin-left: 25px;
