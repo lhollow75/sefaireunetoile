@@ -29,7 +29,16 @@ var socket = io.connect('http://localhost:1337');
 		  socket.emit('adduser', prompt("Quel est votre nom ?"));
     }); */
     socket.on('usersinroom', function(users){
-       document.getElementById('connected-number').innerHTML(users); 
+        users = users - 1;
+        if(users = 1){    
+            document.getElementById('connected-number').innerHTML = users; 
+            document.getElementById('chat-people').style.visibility = "visible";
+        } else if (users > 1) {
+            document.getElementById('connected-number').innerHTML = users;
+            document.getElementById('chat-people').style.visibility = "visible";
+            document.getElementById('letter-s').style.visibility = "visible";
+        }
+            
     });
         
 	// Listener, whenever the server emits 'updatechat', this updates the chat body :
