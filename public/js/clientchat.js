@@ -54,6 +54,7 @@ var socket = io.connect('http://localhost:1337');
 			if(e.which == 13) {
 				$(this).blur();
 				$('#envoi_message').focus().click();
+                $(this).focus();
 			}
 		});
 	});
