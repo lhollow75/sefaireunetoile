@@ -1,11 +1,45 @@
+/* Importation des polices de caractères */
+@font-face {
+    font-family: 'icomoon';
+    src:    url('../fonts/cine/icomoon.eot');
+    src:    url('../fonts/cine/icomoon.eot') format('embedded-opentype'),
+    url('../fonts/cine/icomoon.ttf') format('truetype'),
+    url('../fonts/cine/icomoon.woff') format('woff'),
+    url('../fonts/cine/icomoon.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 /* Définition générale du chat */
-#chatroom{
+
+#chatroom {
+    display: block !important;
+    position: absolute;
+    z-index: 100000;
     font-family: Lato, helvetica;
     font-size: 12px;
     height: 400px;
     width: 230px;
     border: 1px solid #e6ecf1;
+    right: 20px;
+    bottom: 0;
 }
+
 
 /* Liens vers les autres rooms */
 #rooms{
@@ -168,14 +202,25 @@
 }
 
 /* Bouton d'envoi d'un message */
-#envoi_message{
+#envoi_message {
+    outline: none;
     border: 1px solid #ffffff;
-    background-color: #ffffff; 
-    width: 32px;
-    height: 31px;
+    border-left: : 1px solid #ccc;
+    width: 42px;
+    height: 44px;
     vertical-align: top;
     display: inline-block;
     word-spacing: normal;
     position: absolute;
     cursor: pointer;
+}
+
+/* Icone du bouton d'envoi d'un message */
+.icon-send-pin:before{
+    content: "\e90d";
+    font-size: 20px;
+    color: #7fb8e4;;
+    top: 10px;
+    right: 9px;
+    position: absolute;
 }
