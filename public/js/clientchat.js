@@ -57,3 +57,24 @@ var socket = io.connect('http://localhost:1337');
 			}
 		});
 	});
+
+
+//Show_Hide
+function show_hide()
+{
+    if(document.getElementById('chatroom').style.visibility=="hidden")
+    {
+        document.getElementById('chatroom').style.visibility="visible";
+    }
+    else
+    {
+        document.getElementById('chatroom').style.visibility="hidden";
+    }
+    return true;
+}
+
+
+
+
+
+
