@@ -68,7 +68,7 @@
 
     /* Chat informations */
     #chat-infos{
-        width: 160px;
+        width: 165px;
         height: 80px;
         display: inline-block;
         vertical-align: top;
@@ -248,6 +248,19 @@
     color: #7fb8e4;;
 }
 
+/* Icone de l'horloge */
+.icon-close-pin:before{
+    content: "\e916";
+    font-size: 10px;
+    color: #28313e;
+    -webkit-transition: all 100ms linear;
+    -moz-transition: all 100ms linear;
+    -o-transition: all 100ms linear;
+    -ms-transition: all 100ms linear;
+    transition: all 100ms linear; 
+}
+
+
 /* Effet au survol du bouton envoi */
 #envoi_message:hover {
     background-color: #0ad9b2;
@@ -271,9 +284,51 @@
     transition: all 100ms linear; 
 }
 
-.chat-btn-close{
+/* Bouton fermer */
+#chat-btn-close{
+    outline: none;
     display: inline-block;
+    z-index: 100000000;
+    position: absolute;
+    top:0;
+    right: 0;
+    padding: 5px 10px;
+    width: 30px;
+    height: 30px;
+    background-color: #0ad9b2;
+    overflow: hidden;
+    -webkit-transition: all 100ms linear;
+    -moz-transition: all 100ms linear;
+    -o-transition: all 100ms linear;
+    -ms-transition: all 100ms linear;
+    transition: all 100ms linear; 
 }
+
+/* Mise en forme du champs de saisie */
+input#message{
+    font-size: 12px;
+    padding:0 10px;
+}
+
+#chat-btn-close:hover {
+    background-color: #ff7e00;
+    -webkit-transition: all 100ms linear;
+    -moz-transition: all 100ms linear;
+    -o-transition: all 100ms linear;
+    -ms-transition: all 100ms linear;
+    transition: all 100ms linear; 
+}
+
+#chat-btn-close:hover .icon-close-pin:before{
+    color: #fff;
+
+    -webkit-transition: all 100ms linear;
+    -moz-transition: all 100ms linear;
+    -o-transition: all 100ms linear;
+    -ms-transition: all 100ms linear;
+    transition: all 100ms linear; 
+}
+
 
 
 
