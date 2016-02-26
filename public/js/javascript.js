@@ -258,6 +258,7 @@ function movieCard(donnees){
 			document.getElementById('showtime-'+donnees).addEventListener('click', function(){
 				console.log(firstGeneration);
 				document.getElementById('chatroom').style.display="block";
+                var messages = document.getElementById("zone_chat");
 				if (!firstGeneration){
 					var numrooms = tab_seances.length;
 					// console.log(numrooms);
@@ -269,7 +270,8 @@ function movieCard(donnees){
                     numrooms = tab_seances.length;
                     console.log(numrooms);
                     socket.emit('generaterooms', numrooms);
-					switchRoom(donnees);
+                    messages.innerHTML = '';
+					socket.emit('switchRoom', donnees);
 				}
 				
 				

@@ -1,7 +1,7 @@
 // Template of movie's showtime
 var template_showtimes = function(id, showtime){
 	var _tpl = [
-		'<li id="showtime-'+id+'" class="showtime-btn">',
+		'<li id="showtime-'+id+'" class="showtime-btn"  onclick="javascript:show_hide();">',
 		   '<button id="movie-schedule-'+id+'" class="horaires-btn">'+showtime+'</button>',
 
 			'<!--<div class="circle">',

@@ -54,6 +54,28 @@ var socket = io.connect('http://localhost:1337');
 			if(e.which == 13) {
 				$(this).blur();
 				$('#envoi_message').focus().click();
+                $(this).focus();
 			}
 		});
 	});
+
+
+//Show_Hide
+function show_hide()
+{
+    if(document.getElementById('chatroom').style.visibility=="hidden")
+    {
+        document.getElementById('chatroom').style.visibility="visible";
+    }
+    else
+    {
+        document.getElementById('chatroom').style.visibility="hidden";
+    }
+    return true;
+}
+
+
+
+
+
+

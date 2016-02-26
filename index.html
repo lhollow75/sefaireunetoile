@@ -3,36 +3,17 @@
 	<title>Une toile ensemble</title>
     
     <link rel="icon" type="image/png" href="static/img/favicon.png" />
-
-<!--for chat integration
-<link rel="icon" type="image/png" href="img/favicon.png" />
--->
-<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /><![endif]-->
-
-    
     <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
     <link rel="stylesheet" type="text/css" href="/static/css/lightbox.css">
     <link rel="stylesheet" type="text/css" href="/static/css/chat2.css">
-    <!--for chat integration
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/lightbox.css">
-    -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,600,600italic,700italic,700' rel='stylesheet' type='text/css'>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script type="text/javascript" src="/static/js/jquery.js"></script>
     <script type="text/javascript" src="/static/js/html5lightbox.js"></script>
     <script type="text/javascript" src="/static/js/smooth.js"></script>
-
-<!--for chat integration
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/html5lightbox.js"></script>
-<script type="text/javascript" src="js/smooth.js"></script>
--->
 </head>
 <body>
 	<header>
@@ -58,10 +39,10 @@
 <!-- Search section -->
 <div id="section1">
     <div class="video">
-        <video autoplay loop muted poster="/img/background.jpg">
-            <source src="video/video.mp4" type="video/mp4">
-            <source src="video/video-480.mp4" type="video/mp4">
-            <source src="video/video.webm" type="video/webm">
+        <video autoplay loop muted poster="/static/img/background.jpg">
+            <source src="/static/video/video.mp4" type="video/mp4">
+            <source src="/static/video/video-480.mp4" type="video/mp4">
+            <source src="/static/video/video.webm" type="video/webm">
         </video>
     </div>
 
@@ -92,13 +73,17 @@
 <div id="chatroom">
 
         <div id="chat-header">
+            <button type="button" id="chat-btn-close" onclick="javascript:show_hide();"><span class="icon-close-pin"></span></button>
+
+
+
             <div id="chat-poster">
                 <img src="http://fr.web.img5.acsta.net/cx_160_213/pictures/16/01/19/16/49/249124.jpg" alt="Deadpool">
             </div>
             <div id="chat-infos">
                 <div id="chat-movie-title">Deadpool</div>
                 <div id="chat-movie-schedule"><span class="icon-schedule-pin"></span> 20h30</div>
-                <div id="chat-people">Il y a actuellement <span>8 personnes</span> intéressées par cette séance.</div>
+                <!--<div id="chat-people">Il y a actuellement <span><span id="connected-number">8</span> personnes</span> intéressées par cette séance.</div>-->
             </div>
         </div>
     
@@ -178,9 +163,6 @@
 <div class="seance">
    <!-- infos film -->
    <div class="chosen_movie">
-				<!--for chat integration
-                <img class="ca-affiche" src="static/img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">-->
-
                 <img id="moviePicture" class="ca-affiche" src="/static/img/affiches/249124.jpg-cx_160_213_x-f_jpg-q_x-xxyxx.jpg" alt="">
                 <div class="ea-content">
                     <h3 id="movieTitle" class="ea-title">Deadpool</h3>
@@ -346,21 +328,23 @@
 
 
           <div id="copyright">
-            <a href="#section1"><span class="icon-logo2"></span>
-                <span class="copyright-text">© 2016 Une toile ensemble</span></a>
+            <a href="#section1">
+                <span class="icon-logo2"></span>
+                <span class="copyright-text">© 2016 Une toile ensemble </span>
+            </a>-
+                <a href="#"><span id="APropos"> A propos </span></a>|
+                <a href="#"><span id="CGU"> CGU </span></a>|
+                <a href="#"><span id="Contact"> Nous contacter</span></a>|
+                <span id="MadeBy"> Made with love by Mathilde - Ophélie - Julien - Vincent</span>
+
         </div>
-          <div id="MadeBy">Made with love by Mathilde | Ophélie | Julien | Vincent</div>
       </footer>
   </body>
-    
-    <script type="text/javascript" src="/static/js/clientchat.js"></script>
     <script type="text/javascript" src="/static/js/javascript.js"></script>
+    <script type="text/javascript" src="/static/js/clientchat.js"></script>
     <script type="text/javascript" src="/static/js/templates.js"></script>
     <script type="text/javascript" src="/static/js/maps.js"></script>
     <script type="text/javascript" src="/static/js/utils.js"></script>
-    <!--for chat integration
-    <script type="text/javascript" src="js/javascript.js"></script>
-    -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEIF4I4xIgInAxD6qxo52UzbTvi6KlO1k&signed_in=true&libraries=places"
     async defer></script>
     </html>
