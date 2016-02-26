@@ -37,7 +37,7 @@ module.exports = function(app){
                     }   
                 });
                 socket.on('roomchoice',function(roomnumber){
-                    socket.room = 'room'+roomnumber;
+                        socket.room = 'room'+roomnumber;
                         socket.join('room'+roomnumber);
                         socket.emit('updatechat', 'Chat', 'Vous avez rejoint la room !');
                         socket.broadcast.to('room'+roomnumber).emit('updatechat', 'Chat', socket.username + ' a rejoint la conversation.');
@@ -47,20 +47,21 @@ module.exports = function(app){
                     //If there is a message typed:
                     if(data != ''){
 		              // Calling 'updatechat', displaying the message with 2 parameters, username and date = message.
-                        socket.in(socket.room).emit('updatechat', socket.username, data);
+                      socket.in(socket.room).emit('updatechat', socket.username, data);
+                      socket.emit('updatechat', socket.username, data);
                     }
 	            });
                 socket.on('switchRoom', function(newroom){
                     //We disconnect the user from the current room.
 		            socket.leave(socket.room);
                     //We define a variable, 'newroom' which is the new room selected.
-		            socket.join(newroom);
+		            socket.join('room'+newroom);
                     //We display a message for the user
 		            socket.emit('updatechat', 'SERVER', 'Vous avez changé de conversation.');
 		            // We send a message to the OLD room, broadcasted for all users.
-		            socket.broadcast.to(socket.room).emit('updatechat', 'Chat', socket.username+' a quitté cette conversation.');
+		            socket.broadcast.to(socket.room).emit('updatechat', 'Chat', socket.username+' a quitté cette séance.');
 		            // Update socket session room title
-		            socket.room = newroom;
+		            socket.room = 'room'+newroom;
                     //We broadcast for all users, a notification for a new user incoming.
 		            socket.broadcast.to(newroom).emit('updatechat', 'Chat', socket.username+' a rejoint la conversation.');
 	           });
@@ -70,7 +71,7 @@ module.exports = function(app){
 		          // Update list of users in chat, client-side :
 		          socket.emit('updateusers', usernames);
 		          // Broadcast that this client has left :
-		          socket.broadcast.emit('updatechat', 'Chat', socket.username + ' a quitté le chat.');
+		          socket.broadcast.to(socket.room).emit('updatechat', 'Chat', socket.username + ' a quitté le chat.');
                   //Quitting the current room :
 		          socket.leave(socket.room);
 	           });
