@@ -14,7 +14,6 @@ var tab_thisWeeksRelease = [];
 var parcours = 1;
 var nb_pages;
 var film_recent=0;
-var k;
 var position;
 var bounds;
 var firstGeneration = false;
@@ -135,12 +134,13 @@ function collect_movies_theater(infos){
 				}
 			})(marker, contenu, code, current_movie));
 	
-		} else {
-			console.log("Ce film ne passe pas dans ce cinéma aujourd'hui");
 		}
 	}
 	if (atLeastOne){
 		map.fitBounds(bounds);
+		document.getElementById("select-theater").innerHTML= "Ces cinémas passent votre film près de chez vous";
+	} else {
+		document.getElementById("select-theater").innerHTML= "Aucun cinéma à proximité ne passe le film choisi";
 	}
 	
 }
