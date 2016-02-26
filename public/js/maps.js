@@ -4,6 +4,11 @@ elt_chercher.addEventListener("click", recherche);
 
 // Initialisation de la carte lors du clique sur le bouton recherche
 function recherche(){
+	// Choice of the parcours (1: without movie; 2: with a movie)
+	if (current_movie == undefined) parcours = 1; else parcours = 2;
+	
+	console.log(current_movie);
+	console.log(parcours);
 	
 	// Si on clique sur la recherche sans avoir entré de localisation, lance la géolocalisation
 	if (elt_autocomplete.value == ""){
@@ -11,8 +16,14 @@ function recherche(){
 	}
 
 	// Récupération des cinémas aux alentours
-	var api_allocine_cinema = "http://api.allocine.fr/rest/v3/theaterlist?partner="+key_allocine+"&count=5&page=1&lat="+latitude+"&long="+longitude+"&format=json&radius=5";
-	$.getJSON(api_allocine_cinema, recup_liste_cinema);
+	if (parcours == 1){
+		var api_allocine_cinema = "http://api.allocine.fr/rest/v3/theaterlist?partner="+key_allocine+"&count=5&page=1&lat="+latitude+"&long="+longitude+"&format=json&radius=5";
+		$.getJSON(api_allocine_cinema, recup_liste_cinema);
+	} else {
+		var api_allocine_cinema = "http://api.allocine.fr/rest/v3/showtimelist?partner="+key_allocine+"&format=json&count=5&radius=50&lat="+latitude+"&long="+longitude+"&movie="+current_movie;
+		$.getJSON(api_allocine_cinema, collect_movies_theater);
+	}
+
 	
 	initMap(latitude, longitude);
 	document.getElementById('section2').style.display="none";

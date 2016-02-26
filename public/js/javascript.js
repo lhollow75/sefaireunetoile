@@ -3,7 +3,7 @@ var marker;
 var myLatLng;
 var startPos;
 var elt_autocomplete = document.getElementById('autocomplete');
-
+var current_movie;
 var elt_movie = document.getElementById('movie');
 var elt_chercher = document.getElementById('chercher');
 var elt_movie_list = document.getElementById('movie_list');
@@ -11,7 +11,7 @@ var elt_listFilmEnSalle = document.getElementById('listFilmEnSalle');
 var key_allocine = "YW5kcm9pZC12Mg";
 var tab_filmsEnSalle = [];
 var tab_thisWeeksRelease = [];
-
+var parcours = 1;
 var nb_pages;
 var film_recent=0;
 var k;
@@ -29,7 +29,7 @@ elt_movie.addEventListener("keyup", movieFinder);
 
 
 
-// Hide all sections beside the search bar
+// Hide sections beside the search bar
 document.getElementById('section2').style.display="block";
 document.getElementById('section3').style.display="none";
 document.getElementById('section4').style.display="none";
@@ -50,7 +50,7 @@ function recup_liste_cinema(liste_cinema){
 	
 	// console.log(liste_cinema.feed);
 	for (var c = 0; ((c < liste_cinema.feed.totalResults) && (c < liste_cinema.feed.count)) ; c++){
-		// console.log(c);
+		console.log(liste_cinema.feed.theater[c]);
 		nom = liste_cinema.feed.theater[c].name;
 		
 		
@@ -89,6 +89,71 @@ function recup_liste_cinema(liste_cinema){
 	map.fitBounds(bounds);
 }
 
+function collect_movies_theater(infos){
+	bounds = new google.maps.LatLngBounds();
+	// console.log(infos.feed);
+	var atLeastOne = false;
+	// Liste tous les cinémas
+	for (t=0; t<infos.feed.theaterShowtimes.length; t++){
+		var flag = 0;
+		console.log(infos.feed.theaterShowtimes[t].movieShowtimes);
+		cinema = infos.feed.theaterShowtimes[t];
+		
+		// Liste des salles de cinémas
+		for (s=0; s<cinema.movieShowtimes.length; s++){
+			if (isTodaysDate(cinema.movieShowtimes[s].scr[0].d)){
+				// lat = cinema.place.theater.geoloc.lat;
+				// lon = cinema.place.theater.geoloc.long;
+				// console.log(cinema.movieShowtimes[s].scr[0].d);
+				flag = 1;
+				atLeastOne = true;
+			}
+		}
+		if (flag ==1){
+			
+				// Showing of the markers
+			myLatLng = {lat: cinema.place.theater.geoloc.lat, lng: cinema.place.theater.geoloc.long};
+			position = new google.maps.LatLng(myLatLng);
+			bounds.extend(position);
+			nom = cinema.place.theater.name;
+			marker = new google.maps.Marker({
+				position: myLatLng,
+				label: (c+1).toString(),
+				map: map,
+				title: nom
+			});
+			
+			// Add information's card into the marker with we click on it
+			address = cinema.place.theater.address
+			code = cinema.place.theater.code
+			city = cinema.place.theater.city
+			contenu = "<div id= 'theaterName"+t+"'>"+nom+"</div><div id= 'theaterAddress"+t+"'>"+address+"</div><div id= 'theaterCity"+t+"'>"+city+"</div><div id= 'theaterCode"+t+"' valeur = '"+code+"'></div>";
+			
+			// Show informations in infowindow
+			var infoWindow = new google.maps.InfoWindow(), marker, c;
+			google.maps.event.addListener(marker, 'click', (function(marker, _c, _code, id) {
+				
+				return function() {
+					infoWindow.setContent(_c);
+					infoWindow.open(map, marker);
+					$(".en-salle").remove();
+					document.getElementById('section4').style.display="block";
+					document.getElementById('section5').style.display="none";
+					var api_allocine_rechercheFilmSalle = "http://api.allocine.fr/rest/v3/showtimelist?partner="+key_allocine+"&q=&format=json&movie="+id+"&theaters="+_code;
+					$.getJSON(api_allocine_rechercheFilmSalle, recup_horaire_cinema);
+				}
+			})(marker, contenu, code, current_movie));
+	
+		} else {
+			console.log("Ce film ne passe pas dans ce cinéma aujourd'hui");
+		}
+	}
+	if (atLeastOne){
+		map.fitBounds(bounds);
+	}
+	
+}
+
 // Collect movie's showtimes
 function recup_horaire_cinema(horaires){
 	var tab_moviesList = [];
@@ -109,16 +174,20 @@ function recup_horaire_cinema(horaires){
 			if (isTodaysDate(showtimes.movieShowtimes[h].scr[0].d)){ 
 				// Show the informations only if we haven't show them yet --> giving up for now
 				// if (tab_moviesList.indexOf(onShow.code) == -1){
+					console.log(onShow.code);
+					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href, VOVF(showtimes.movieShowtimes[h].version), showtimes.movieShowtimes[h].screenFormat.$));
 					
-					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href, VOVF(showtimes.movieShowtimes[h].version), num3d(showtimes.movieShowtimes[h].screenFormat.$)));
-					
-					(function(donnees){
-						document.getElementById('filmEnSalle'+onShow.code).addEventListener('click', function(){
+					(function(donnees, langue, format){
+						console.log(donnees);
+						console.log('id: '+donnees.onShow.movie.code);
+						console.log('langue: '+langue);
+						console.log('format: '+format);
+						document.getElementById('filmEnSalle'+donnees.onShow.movie.code+'-'+langue+'-'+format).addEventListener('click', function(){
 							document.getElementById('section5').style.display="block";
 							$(".showtime-btn").remove();
 							movieCard(donnees);
 						});
-					})(showtimes.movieShowtimes[h])
+					})(showtimes.movieShowtimes[h], VOVF(showtimes.movieShowtimes[h].version), showtimes.movieShowtimes[h].screenFormat.$)
 					
 					tab_moviesList.push(onShow.code);
 					noMovies = false;
@@ -213,7 +282,7 @@ function movieCard(donnees){
 var autocomplete;
 
 
-// Autocomplete l'adresse lorsqu'on la tape
+// Autocomplete the value when you click on the address
 function geolocate() {
 	  autocomplete = new google.maps.places.Autocomplete(
 		  /** @type {!HTMLInputElement} */(elt_autocomplete),
@@ -259,14 +328,29 @@ function searchStringInArray (str, strArray) {
 	return -1;
 }
 
+function movieSearch(){
+	console.log(current_movie);
+}
+
 // Write the title of the movie into the search bar
 function afficheFilm(film){
+	
+	console.log(film);
+	
 	if (film.toElement.innerHTML == ""){
+		id = film.srcElement.id.split("affiche")[1];
 		film = film.srcElement.alt;
+		
 	} else {
+		id = film.toElement.id;
 		film = film.toElement.innerHTML;
+		
+
 	}
 	movie.value = film;
+	current_movie = id;
+	console.log(id);
+	// document.getElementById("movie").value = id;
 	$(".movie-results").remove();
 }
 
