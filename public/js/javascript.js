@@ -200,7 +200,7 @@ function movieCard(donnees){
                     numrooms = tab_seances.length;
                     console.log(numrooms);
                     socket.emit('generaterooms', numrooms);
-					switchRoom(donnees);
+					socket.emit('switchRoom', donnees);
 				}
 				
 				
