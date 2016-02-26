@@ -17,6 +17,10 @@ for (var i = 0; i < seances.length ; i++){
     });
 }; */ 
 
+document.getElementById('chat-btn-close').addEventListener('click', function(){
+	document.getElementById('chatroom').style.display='none';
+});
+
 var socket = io.connect('http://localhost:1337');
     // On connection to server, ask for user's name with an anonymous callback :
     /*socket.on('connect', function(){
