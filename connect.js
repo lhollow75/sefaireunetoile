@@ -47,7 +47,7 @@ module.exports = function(app){
                         for (var i = 0 ; i < tab_room.length ; i++){
                             if (tab_room[0] === tab_room[i]){
                                 numberroom++;
-                                var y = numberroom.toString();
+                                var y = numberroom;
                             }
                         }
                         socket.emit('usersinroom',y);
