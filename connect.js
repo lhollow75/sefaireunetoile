@@ -63,7 +63,7 @@ module.exports = function(app){
 		            // Update socket session room title
 		            socket.room = 'room'+newroom;
                     //We broadcast for all users, a notification for a new user incoming.
-		            socket.broadcast.to(newroom).emit('updatechat', 'Chat', socket.username+' a rejoint la conversation.');
+		            socket.broadcast.to(socket.room).emit('updatechat', 'Chat', socket.username+' a rejoint la conversation.');
 	           });
                socket.on('disconnect', function(){
 		          // Remove the username from the usernames list :
