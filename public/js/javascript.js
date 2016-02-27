@@ -260,7 +260,8 @@ function movieCard(donnees){
 				// console.log(firstGeneration);
 				document.getElementById('chatroom').style.display="block";
                 var messages = document.getElementById("zone_chat");
-				if (!firstGeneration){
+
+    				if (!firstGeneration){
 					var numrooms = tab_seances.length;
 					// console.log(numrooms);
 					socket.emit('generaterooms', numrooms);
