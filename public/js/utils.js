@@ -98,7 +98,7 @@ function isTodaysDate(date){
 
 // Return the language version of the movie (VF or VOST)
 function VOVF(code){
-	console.log(code);
+	// console.log(code);
 	langue = code.$;
 	original = code.original;
 

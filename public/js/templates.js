@@ -30,8 +30,8 @@ var template_filmEnSalle = function(code, title, source, langue, format){
 // Template of movie's list
 var template = function(list, id){
 	var _tpl = [
-		'<li class="movie-results">',
-			'<span id="'+id+'">'+list+'</span>',
+		'<li id="'+id+'" class="movie-results">',
+			'<span>'+list+'</span>',
 		'</li>'
 	]
 	return _tpl.join('');

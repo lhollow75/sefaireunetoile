@@ -72,7 +72,7 @@ function recup_liste_cinema(liste_cinema){
 				document.getElementById('section4').style.display="block";
 				document.getElementById('section5').style.display="none";
 				$('body').scrollTo('#section3',{duration:'fast'});
-				console.log("clique sur la map");
+				// console.log("clique sur la map");
 				var api_allocine_rechercheFilmSalle = "http://api.allocine.fr/rest/v3/showtimelist?partner="+key_allocine+"&q=&format=json&theaters="+_code;
 				$.getJSON(api_allocine_rechercheFilmSalle, recup_horaire_cinema);
             }
@@ -181,7 +181,7 @@ function recup_horaire_cinema(horaires){
 						document.getElementById('filmEnSalle'+donnees.onShow.movie.code+'-'+langue+'-'+format).addEventListener('click', function(){
 							document.getElementById('section5').style.display="block";
 							$('body').scrollTo('#section5',{duration:'slow'});
-							console.log('Tu viens de choisir un film à l affiche du cinéma');
+							// console.log('Tu viens de choisir un film à l affiche du cinéma');
 							$(".showtime-btn").remove();
 							movieCard(donnees);
 							document.getElementById('chosenMovieSynospis').innerHTML = "";
@@ -208,7 +208,7 @@ function recup_horaire_cinema(horaires){
 // Show all the informations about a movie when click on the poster
 function movieCard(donnees){
 	
-	console.log(donnees);
+	// console.log(donnees);
 	_donnees = donnees;
 	seances = donnees.scr[0];
 	donnees = donnees.onShow.movie;
@@ -286,7 +286,7 @@ function movieCard(donnees){
 // Display Synopsis of the movie into the movie's card
 function showSynopsis(movieData){
 	movieData = movieData.movie;
-	console.log(movieData);
+	// console.log(movieData);
 	if (movieData.synopsis != undefined){
 		synopsis = movieData.synopsis;
 	} else if (movieData.synopsisShort != undefined){
@@ -319,6 +319,8 @@ function geolocate() {
 
 // Lance la recherche du film dans la tableau à chaque ajout d'une lettre
 function movieFinder(){
+	document.getElementById("select-theater").innerHTML= "Sélectionnez un cinéma proche de chez vous";
+	// current_movie = "undefined";
 	$(".movie-results").remove();
 	if (elt_movie.value.length >= 2){
 		// console.log(tab_rates.length);
@@ -361,7 +363,7 @@ function afficheFilm(film){
 		
 
 	}
-	movie.value = film;
+	movie.value = giveUpTag(film);
 	current_movie = id;
 	// console.log(id);
 	// document.getElementById("movie").value = id;
