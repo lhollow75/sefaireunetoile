@@ -35,19 +35,13 @@ function recherche(){
 			initMap(latitude, longitude);
 			document.getElementById('section2').style.display="none";
 			document.getElementById('section3').style.display="block";
+			$('body').scrollTo('#section3',{duration:'slow'});
+
 		} else {
 			
 		}
 	}, 1000);
 	
-	
-<<<<<<< HEAD
-	initMap(latitude, longitude);
-	document.getElementById('section2').style.display="none";
-	document.getElementById('section3').style.display="block";
-	$('body').scrollTo('#section3',{duration:'fast'});
-=======
->>>>>>> 3a42cb151482159913c7de106e813f23841607d3
 }
 
 
