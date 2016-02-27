@@ -45,7 +45,7 @@ function traitementChaine(chaine){
 
 // Return the rate rounded close to 0.5
 function rateClass(rate){
-	console.log(rate);
+	// console.log(rate);
 	if (rate==undefined){
 		return 0;
 	} else {

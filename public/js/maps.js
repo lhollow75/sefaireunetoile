@@ -5,10 +5,11 @@ elt_chercher.addEventListener("click", recherche);
 // Initialisation de la carte lors du clique sur le bouton recherche
 function recherche(){
 	// Choice of the parcours (1: without movie; 2: with a movie)
-	if (current_movie == undefined) parcours = 1; else parcours = 2;
+	if (current_movie == undefined || document.getElementById('movie').value == "") parcours = 1; else parcours = 2;
 	
-	console.log(current_movie);
-	console.log(parcours);
+	// console.log("current_movie: "+current_movie);
+	// console.log("movie: "+document.getElementById('movie').value);
+	// console.log("parcours: "+parcours);
 	
 	// Si on clique sur la recherche sans avoir entré de localisation, lance la géolocalisation
 	if (elt_autocomplete.value == ""){
