@@ -14,7 +14,6 @@ var tab_thisWeeksRelease = [];
 var parcours = 1;
 var nb_pages;
 var film_recent=0;
-var k;
 var position;
 var bounds;
 var firstGeneration = false;
@@ -29,15 +28,6 @@ elt_movie.addEventListener("keyup", movieFinder);
 
 
 
-// Hide sections beside the search bar
-document.getElementById('section2').style.display="block";
-document.getElementById('section3').style.display="none";
-document.getElementById('section4').style.display="none";
-document.getElementById('section5').style.display="none";
-document.getElementById('section6').style.display="none";
-document.getElementById('section7').style.display="none";
-document.getElementById('section8').style.display="none";
-document.getElementById('chatroom').style.display="none";
 
 
 // Lance la récupération de la liste des films dès la chargement de la page
@@ -50,7 +40,7 @@ function recup_liste_cinema(liste_cinema){
 	
 	// console.log(liste_cinema.feed);
 	for (var c = 0; ((c < liste_cinema.feed.totalResults) && (c < liste_cinema.feed.count)) ; c++){
-		console.log(liste_cinema.feed.theater[c]);
+		// console.log(liste_cinema.feed.theater[c]);
 		nom = liste_cinema.feed.theater[c].name;
 		
 		
@@ -99,7 +89,7 @@ function collect_movies_theater(infos){
 	// Liste tous les cinémas
 	for (t=0; t<infos.feed.theaterShowtimes.length; t++){
 		var flag = 0;
-		console.log(infos.feed.theaterShowtimes[t].movieShowtimes);
+		// console.log(infos.feed.theaterShowtimes[t].movieShowtimes);
 		cinema = infos.feed.theaterShowtimes[t];
 		
 		// Liste des salles de cinémas
@@ -121,7 +111,7 @@ function collect_movies_theater(infos){
 			nom = cinema.place.theater.name;
 			marker = new google.maps.Marker({
 				position: myLatLng,
-				label: (c+1).toString(),
+				label: (t+1).toString(),
 				map: map,
 				title: nom
 			});
@@ -149,12 +139,13 @@ function collect_movies_theater(infos){
 				}
 			})(marker, contenu, code, current_movie));
 	
-		} else {
-			console.log("Ce film ne passe pas dans ce cinéma aujourd'hui");
 		}
 	}
 	if (atLeastOne){
 		map.fitBounds(bounds);
+		document.getElementById("select-theater").innerHTML= "Ces cinémas passent votre film près de chez vous";
+	} else {
+		document.getElementById("select-theater").innerHTML= "Aucun cinéma à proximité ne passe le film choisi";
 	}
 	
 }
@@ -179,20 +170,21 @@ function recup_horaire_cinema(horaires){
 			if (isTodaysDate(showtimes.movieShowtimes[h].scr[0].d)){ 
 				// Show the informations only if we haven't show them yet --> giving up for now
 				// if (tab_moviesList.indexOf(onShow.code) == -1){
-					console.log(onShow.code);
+					// console.log(onShow.code);
 					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href, VOVF(showtimes.movieShowtimes[h].version), showtimes.movieShowtimes[h].screenFormat.$));
 					
 					(function(donnees, langue, format){
-						console.log(donnees);
-						console.log('id: '+donnees.onShow.movie.code);
-						console.log('langue: '+langue);
-						console.log('format: '+format);
+						// console.log(donnees);
+						// console.log('id: '+donnees.onShow.movie.code);
+						// console.log('langue: '+langue);
+						// console.log('format: '+format);
 						document.getElementById('filmEnSalle'+donnees.onShow.movie.code+'-'+langue+'-'+format).addEventListener('click', function(){
 							document.getElementById('section5').style.display="block";
 							$('body').scrollTo('#section5',{duration:'slow'});
 							console.log('Tu viens de choisir un film à l affiche du cinéma');
 							$(".showtime-btn").remove();
 							movieCard(donnees);
+							document.getElementById('chosenMovieSynospis').innerHTML = "";
 						});
 					})(showtimes.movieShowtimes[h], VOVF(showtimes.movieShowtimes[h].version), showtimes.movieShowtimes[h].screenFormat.$)
 					
@@ -203,7 +195,7 @@ function recup_horaire_cinema(horaires){
 		}
 	}
 	
-	// If noMovies is style true, there is no movies in this theater today so the title change
+	// If noMovies is still true, there is no movies in this theater today so the title change
 	if (noMovies){
 		document.getElementById('filmEnSalle').innerHTML = "Pas de films dans ce cinéma aujourd'hui";
 		// console.log("Pas de films dans ce cinéma aujourd'hui");
@@ -224,25 +216,26 @@ function movieCard(donnees){
 	document.getElementById('movieTitle').innerHTML = donnees.title;
 	
 	// If there is no rate, show a ligne
-	if (donnees.statistics.pressRating != undefined){
-		document.getElementById('pressRate').className = "note-presse note-"+rateClass(donnees.statistics.pressRating);
-	}
-	if (donnees.statistics.userRating != undefined){
-		document.getElementById('userRate').className = "note-spectateurs note-"+rateClass(donnees.statistics.userRating);
-	} else document.getElementById('userRate').className = "";
+	document.getElementById('pressRate').className = "note-presse note-"+rateClass(donnees.statistics.pressRating);
+	document.getElementById('userRate').className = "note-spectateurs note-"+rateClass(donnees.statistics.userRating);
 	
 	
 	if (donnees.trailer.href != undefined){
 		document.getElementById('movieTrailer').href = donnees.trailer.href;
 	} else document.getElementById('movieTrailer').visibility = "hidden";
 	
-	if (donnees.trailer.href != undefined){
-		document.getElementById('director').innerHTML = donnees.castingShort.directors;
-	} else document.getElementById('director').innerHTML = "Non Renseigné";
+	if (donnees.castingShort != undefined){
+		if (donnees.castingShort.directors != undefined){
+			document.getElementById('director').innerHTML = donnees.castingShort.directors;
+		} else document.getElementById('director').innerHTML = "Non Renseigné";
 	
-	if (donnees.castingShort.actors != undefined){
-		document.getElementById('actors').innerHTML = donnees.castingShort.actors;
-	} else document.getElementById('actors').innerHTML = "Non Renseigné";
+		if (donnees.castingShort.actors != undefined){
+			document.getElementById('actors').innerHTML = donnees.castingShort.actors;
+		} else document.getElementById('actors').innerHTML = "Non Renseigné";
+	} else {
+		document.getElementById('director').innerHTML = "Non Renseigné";
+		document.getElementById('actors').innerHTML = "Non Renseigné";
+	}
 	
 	if (donnees.poster.href != undefined){
 		document.getElementById('moviePicture').src = donnees.poster.href;
@@ -251,7 +244,8 @@ function movieCard(donnees){
 	document.getElementById('movieVersion').innerHTML = _donnees.screenFormat.$;
 	document.getElementById('movieFormat').innerHTML = VOVF(_donnees.version);
 	
-	
+	var allocine_api_recherche = "http://api.allocine.fr/rest/v3/movie?partner="+key_allocine+"&code="+donnees.code+"&profile=medium&format=json";
+	$.getJSON(allocine_api_recherche, showSynopsis);
 	
 	// Collect showtime's informations
 	tab_seances = [];
@@ -263,7 +257,7 @@ function movieCard(donnees){
 		
 		(function(donnees){
 			document.getElementById('showtime-'+donnees).addEventListener('click', function(){
-				console.log(firstGeneration);
+				// console.log(firstGeneration);
 				document.getElementById('chatroom').style.display="block";
                 var messages = document.getElementById("zone_chat");
 				if (!firstGeneration){
@@ -275,7 +269,7 @@ function movieCard(donnees){
 					firstGeneration = true;
 				} else {
                     numrooms = tab_seances.length;
-                    console.log(numrooms);
+                    // console.log(numrooms);
                     socket.emit('generaterooms', numrooms);
                     messages.innerHTML = '';
 					socket.emit('switchRoom', donnees);
@@ -285,7 +279,22 @@ function movieCard(donnees){
 			});
 		})(seances.t[s].code)
 	}
-	console.log(tab_seances);
+	// console.log(tab_seances);
+}
+
+
+// Display Synopsis of the movie into the movie's card
+function showSynopsis(movieData){
+	movieData = movieData.movie;
+	console.log(movieData);
+	if (movieData.synopsis != undefined){
+		synopsis = movieData.synopsis;
+	} else if (movieData.synopsisShort != undefined){
+		synopsis = movieData.synopsisShort;
+	} else {
+		synopsis = "";
+	}
+	document.getElementById('chosenMovieSynospis').innerHTML = giveUpTag(synopsis);
 }
 
 var autocomplete;
@@ -337,14 +346,10 @@ function searchStringInArray (str, strArray) {
 	return -1;
 }
 
-function movieSearch(){
-	console.log(current_movie);
-}
-
 // Write the title of the movie into the search bar
 function afficheFilm(film){
 	
-	console.log(film);
+	// console.log(film);
 	
 	if (film.toElement.innerHTML == ""){
 		id = film.srcElement.id.split("affiche")[1];
@@ -358,7 +363,7 @@ function afficheFilm(film){
 	}
 	movie.value = film;
 	current_movie = id;
-	console.log(id);
+	// console.log(id);
 	// document.getElementById("movie").value = id;
 	$(".movie-results").remove();
 }
@@ -441,12 +446,15 @@ function showMeFiveMovies(array){
 
 // Put the 5 movies on the home page
 function showMoviePicture(recup_info, _id, _titre){
-	// console.log(recup_info.movie);
+	// console.log("titre: "+_titre);
+	// console.log("user: "+rateClass(recup_info.movie.statistics.userRating));
+	// console.log("press: "+rateClass(recup_info.movie.statistics.pressRating));
 	info = recup_info.movie;
+	// console.log(rateClass(recup_info.movie.statistics.userRating));
 	if (info.synopsisShort == undefined){
 		synopsis = info.synopsis;
 	} else synopsis = info.synopsisShort;
-	$("#movieOfTheWeek").append(template_moviesOfTheWeek(_id, _titre, giveUpTag(synopsis), rateClass(info.statistics.pressRating), rateClass(info.statistics.urserRating), info.trailer.href, info.media[0].thumbnail.href));
+	$("#movieOfTheWeek").append(template_moviesOfTheWeek(_id, _titre, giveUpTag(synopsis), rateClass(info.statistics.pressRating), rateClass(info.statistics.userRating), info.trailer.href, info.media[0].thumbnail.href));
 	(function(donnees){
 		document.getElementById('affiche'+donnees).addEventListener('click', afficheFilm);
 	})(_id)

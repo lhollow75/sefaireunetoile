@@ -1,5 +1,28 @@
 var tab_split = [" Bande-annonce"," - BANDE-ANNONCE", " Teaser", " TEASER", " - EXTRAIT", " - Extrait", " Extrait"];
 
+// Hide sections beside the search bar
+cleanScreen();
+document.getElementById('section2').style.display="block";
+document.getElementById('chatroom').style.display="none";
+
+
+document.getElementById('CGU').addEventListener('click', function(){ 
+	cleanScreen();
+	document.getElementById('section7').style.display="block";
+}); 
+document.getElementById('APropos').addEventListener('click', function(){ 
+	cleanScreen();
+	document.getElementById('section8').style.display="block";
+});
+document.getElementById('chercher').addEventListener('click', function(){ 
+	cleanScreen();
+	document.getElementById('section3').style.display="block";
+}); 
+document.getElementById('Contact').addEventListener('click', function(){ 
+	cleanScreen();
+	document.getElementById('section6').style.display="block";
+});
+
 // Remove accents and uppercase
 function traitementChaine(chaine){
     var accent = [
@@ -22,7 +45,13 @@ function traitementChaine(chaine){
 
 // Return the rate rounded close to 0.5
 function rateClass(rate){
-	return (Math.round(rate * 2)*0.5)*10;
+	// console.log(rate);
+	if (rate==undefined){
+		return 0;
+	} else {
+		return (Math.round(rate * 2)*0.5)*10;
+	}
+	
 }
 
 // Return a random number between 0 and max (include)
@@ -79,4 +108,14 @@ function VOVF(code){
 function num3d(code){
 	if (code == "Numérique") return " ";
 		else return "3D";
+}
+
+function cleanScreen(){
+	document.getElementById('section2').style.display="none";
+	document.getElementById('section3').style.display="none";
+	document.getElementById('section4').style.display="none";
+	document.getElementById('section5').style.display="none";
+	document.getElementById('section6').style.display="none";
+	document.getElementById('section7').style.display="none";
+	document.getElementById('section8').style.display="none";
 }

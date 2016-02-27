@@ -17,6 +17,7 @@ for (var i = 0; i < seances.length ; i++){
     });
 }; */ 
 
+
 document.getElementById('chat-btn-close').addEventListener('click', function(){
 	document.getElementById('chatroom').style.display='none';
 });
@@ -27,6 +28,15 @@ var socket = io.connect('http://localhost:1337');
 		  // Call the server-side function 'adduser' and send one parameter (value of prompt) :
 		  socket.emit('adduser', prompt("Quel est votre nom ?"));
     }); */
+    /*Counting in room
+    socket.on('usersinroom', function(users){
+        if(users > 1) {
+            document.getElementById('connected-number').innerHTML = users;
+            document.getElementById('chat-people').style.visibility = "visible";
+        }
+            
+    });
+    */
         
 	// Listener, whenever the server emits 'updatechat', this updates the chat body :
 	socket.on('updatechat', function (username, data) {
