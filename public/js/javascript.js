@@ -217,13 +217,18 @@ function movieCard(donnees){
 		document.getElementById('movieTrailer').href = donnees.trailer.href;
 	} else document.getElementById('movieTrailer').visibility = "hidden";
 	
-	if (donnees.trailer.href != undefined){
-		document.getElementById('director').innerHTML = donnees.castingShort.directors;
-	} else document.getElementById('director').innerHTML = "Non Renseigné";
+	if (donnees.castingShort != undefined){
+		if (donnees.castingShort.directors != undefined){
+			document.getElementById('director').innerHTML = donnees.castingShort.directors;
+		} else document.getElementById('director').innerHTML = "Non Renseigné";
 	
-	if (donnees.castingShort.actors != undefined){
-		document.getElementById('actors').innerHTML = donnees.castingShort.actors;
-	} else document.getElementById('actors').innerHTML = "Non Renseigné";
+		if (donnees.castingShort.actors != undefined){
+			document.getElementById('actors').innerHTML = donnees.castingShort.actors;
+		} else document.getElementById('actors').innerHTML = "Non Renseigné";
+	} else {
+		document.getElementById('director').innerHTML = "Non Renseigné";
+		document.getElementById('actors').innerHTML = "Non Renseigné";
+	}
 	
 	if (donnees.poster.href != undefined){
 		document.getElementById('moviePicture').src = donnees.poster.href;
