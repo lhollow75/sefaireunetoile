@@ -238,9 +238,9 @@ function movieCard(donnees){
 	}
 	
 	if (donnees.poster.href != undefined){
-		document.getElementById('moviePicture').src = donnees.poster.href;
-	} else document.getElementById('moviePicture').src = "static/img/affiches/nan.png";
-	
+		poster = donnees.poster.href;
+	} else poster = "static/img/affiches/nan.png";
+	document.getElementById('moviePicture').src = poster;
 	document.getElementById('movieVersion').innerHTML = _donnees.screenFormat.$;
 	document.getElementById('movieFormat').innerHTML = VOVF(_donnees.version);
 	
@@ -255,30 +255,34 @@ function movieCard(donnees){
 		$("#showtimesList").append(template_showtimes(seances.t[s].code, seances.t[s].$));
 		tab_seances.push(seances.t[s].code);
 		
-		(function(donnees){
-			document.getElementById('showtime-'+donnees).addEventListener('click', function(){
+		(function(id, title, showtime, poster){
+			document.getElementById('showtime-'+id).addEventListener('click', function(){
 				// console.log(firstGeneration);
 				document.getElementById('chatroom').style.display="block";
                 var messages = document.getElementById("zone_chat");
 
-    				if (!firstGeneration){
+				if (!firstGeneration){
 					var numrooms = tab_seances.length;
 					// console.log(numrooms);
 					socket.emit('generaterooms', numrooms);
 					socket.emit('adduser', prompt("Quel est votre nom ?"));
-					socket.emit('roomchoice', donnees);
+					socket.emit('roomchoice', id);
 					firstGeneration = true;
 				} else {
                     numrooms = tab_seances.length;
                     // console.log(numrooms);
                     socket.emit('generaterooms', numrooms);
                     messages.innerHTML = '';
-					socket.emit('switchRoom', donnees);
+					socket.emit('switchRoom', id);
 				}
 				
+				document.getElementById('chat-movie-title').innerHTML = title;
+				document.getElementById('chat-movie-schedule').innerHTML = showtime;
+				document.getElementById('chat-movie-poster').src = poster;
+				document.getElementById('chat-movie-poster').alt = title;
 				
 			});
-		})(seances.t[s].code)
+		})(seances.t[s].code, donnees.title, seances.t[s].$, poster)
 	}
 	// console.log(tab_seances);
 }
