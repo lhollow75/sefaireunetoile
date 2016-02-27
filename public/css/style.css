@@ -7,11 +7,11 @@ html, body {
 /* Importation des polices de caractères */
 @font-face {
     font-family: 'icomoon';
-    src:    url('../fonts/cine/icomoon.eot');
-    src:    url('../fonts/cine/icomoon.eot') format('embedded-opentype'),
-    url('../fonts/cine/icomoon.ttf') format('truetype'),
-    url('../fonts/cine/icomoon.woff') format('woff'),
-    url('../fonts/cine/icomoon.svg') format('svg');
+    src:    url('../fonts/cine/icomoon.eot?itn9qu');
+    src:    url('../fonts/cine/icomoon.eot?itn9qu#iefix') format('embedded-opentype'),
+    url('../fonts/cine/icomoon.ttf?itn9qu') format('truetype'),
+    url('../fonts/cine/icomoon.woff?itn9qu') format('woff'),
+    url('../fonts/cine/icomoon.svg?itn9qu#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -178,7 +178,12 @@ video{
 .icon-msg:before{
   content: "\e90c";
 }
-
+.icon-sound_no:before {
+    content: "\e917";
+}
+.icon-sound_ok:before {
+    content: "\e918";
+}
 
 
 .name-logo{
@@ -201,10 +206,6 @@ video{
     font-weight: 100;
     display: block;
 }
-
-
-
-
 
 
 
@@ -316,9 +317,33 @@ video{
 	margin-left: -4px;
 }
 
+#mute{
+    width: 50px;
+    height: 25px;
+    display: inline-block;
+    position: absolute;
+    bottom: -25px;
+    right: 0;
+    background-color: rgba(255,255,255,0.1);
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    transition: all 200ms linear; 
+}
+
+#mute:hover{
+    background-color: rgba(255,255,255,0.5);
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    transition: all 200ms linear; 
+}
+
+
 #geolocaliseMoi{
     border: none;
-
     height: 44px;
     width: 47px;
     background-color: #eeeeee;
@@ -376,8 +401,7 @@ video{
 
 #footer_section1{
 	background-color: rgba(0,0,0,0.7);
-    /*bottom: 0;*/
-    bottom: 270px;    
+    bottom: 0;
     width: 100%;
     padding-bottom: 30px;
     padding-top: 30px;
@@ -557,17 +581,6 @@ ul.da-menu-movies li:hover .da-title{
     -ms-transition: all 200ms ease-in;
     transition: all 200ms ease-in; 
 }
-/*ul.da-menu-movies li:hover .da-langue{
-    opacity: 1 !important;
-    margin-top: -30px;
-    cursor: pointer;
-    -webkit-transition: all 200ms ease-in;
-    -moz-transition: all 200ms ease-in;
-    -o-transition: all 200ms ease-in;
-    -ms-transition: all 200ms ease-in;
-    transition: all 200ms ease-in; 
-}*/
-
 
 
 .ca-title{
@@ -601,15 +614,35 @@ ul.da-menu-movies li:hover .da-title{
 .da-langue{
     opacity: 1;
     font-size: 9px;
+    color: #28313e;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    display: block;
+    margin-top: -43px;
+    padding: 2px 10px;
+    position: absolute;
+    z-index: 10000;
+    background-color: #0ad9b2;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    transition: all 200ms ease; 
+}
+
+.da-format{
+    opacity: 1;
+    font-size: 9px;
     color: #ffffff;
     text-transform: uppercase;
     font-weight: bold;
     line-height: 1;
-    padding: 2px 0px;
     text-align: center;
     display: block;
     margin-top: -30px;
-    width: 30px;
+    padding: 2px 10px;
     position: absolute;
     z-index: 10000;
     background-color: #000000;
@@ -795,7 +828,7 @@ ul.da-menu-movies li:hover .da-title{
 }
 
 .fa-content{
-    width: 400px;
+    width: 460px;
     display: inline-block;
     vertical-align: top;
     margin-top: 25px;
