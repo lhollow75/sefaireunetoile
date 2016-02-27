@@ -35,6 +35,16 @@ html, body {
  font-weight: bold
 }
 
+[id^="theaterAddress"], [id*=" theaterAddress"], [id^="theaterCity"], [id*=" theaterCity"] {
+ font-weight: normal;
+ font-size: 11px;
+}
+
+.gm-style .gm-style-iw {
+    font-family: 'OpenSans';
+    text-align: left;
+}
+
 a{
     text-decoration: none;
 }

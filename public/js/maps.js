@@ -2,6 +2,7 @@ var elt_geolocalisation = document.getElementById('geolocaliseMoi');
 elt_geolocalisation.addEventListener("click", geolocalisation);
 elt_chercher.addEventListener("click", recherche);
 
+
 // Initialisation de la carte lors du clique sur le bouton recherche
 function recherche(){
 	// Choice of the parcours (1: without movie; 2: with a movie)
@@ -28,6 +29,7 @@ function recherche(){
 	initMap(latitude, longitude);
 	document.getElementById('section2').style.display="none";
 	document.getElementById('section3').style.display="block";
+	$('body').scrollTo('#section3',{duration:'fast'});
 }
 
 

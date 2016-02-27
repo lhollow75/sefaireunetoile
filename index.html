@@ -13,7 +13,7 @@
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script type="text/javascript" src="/static/js/jquery.js"></script>
     <script type="text/javascript" src="/static/js/html5lightbox.js"></script>
-    <script type="text/javascript" src="/static/js/smooth.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.scrollTo.min.js"></script>
 </head>
 <body>
 	<header>
@@ -33,18 +33,21 @@
         <a href="#section5">Séances</a>
         <a href="#section6">Contact</a>
         <a href="#section7">CGU</a>
-    -->
+        -->
+
 </header>
 
 <!-- Search section -->
 <div id="section1">
     <div class="video">
-        <video autoplay loop muted poster="/static/img/background.jpg">
+        <video autoplay loop muted poster="/static/img/background.jpg" id="vid">
             <source src="/static/video/video.mp4" type="video/mp4">
             <source src="/static/video/video-480.mp4" type="video/mp4">
             <source src="/static/video/video.webm" type="video/webm">
+            <p>Votre navigateur ne supporte pas l'élément vidéo.</p> 
         </video>
     </div>
+
 
                 <div id="footer_section1">	
                  <div id="searchbar">
@@ -64,11 +67,15 @@
                </div>
                <div class="case-input search_button btn">
                  <button type="submit" id="chercher">Chercher</button>
+                  
+
              </div>
          </div>
      </div>
  </div>
  <!-- End Search section -->
+
+    
 
 <div id="chatroom">
 
@@ -83,7 +90,7 @@
             <div id="chat-infos">
                 <div id="chat-movie-title">Deadpool</div>
                 <div id="chat-movie-schedule"><span class="icon-schedule-pin"></span> 20h30</div>
-                <!--<div id="chat-people">Il y a actuellement <span><span id="connected-number">8</span> personnes</span> intéressées par cette séance.</div>-->
+                <div id="chat-people">Il y a actuellement <span><span id="connected-number">8</span> personnes</span> intéressées par cette séance.</div>
             </div>
         </div>
     

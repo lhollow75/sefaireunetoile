@@ -81,12 +81,15 @@ function recup_liste_cinema(liste_cinema){
 				$(".en-salle").remove();
 				document.getElementById('section4').style.display="block";
 				document.getElementById('section5').style.display="none";
+				$('body').scrollTo('#section3',{duration:'fast'});
+				console.log("clique sur la map");
 				var api_allocine_rechercheFilmSalle = "http://api.allocine.fr/rest/v3/showtimelist?partner="+key_allocine+"&q=&format=json&theaters="+_code;
 				$.getJSON(api_allocine_rechercheFilmSalle, recup_horaire_cinema);
             }
         })(marker, contenu, code));
 	}
 	map.fitBounds(bounds);
+
 }
 
 function collect_movies_theater(infos){
@@ -139,6 +142,8 @@ function collect_movies_theater(infos){
 					$(".en-salle").remove();
 					document.getElementById('section4').style.display="block";
 					document.getElementById('section5').style.display="none";
+					//vincent
+					$('body').scrollTo('#section4',{duration:'slow', offsetTop : '150'});
 					var api_allocine_rechercheFilmSalle = "http://api.allocine.fr/rest/v3/showtimelist?partner="+key_allocine+"&q=&format=json&movie="+id+"&theaters="+_code;
 					$.getJSON(api_allocine_rechercheFilmSalle, recup_horaire_cinema);
 				}
@@ -184,6 +189,8 @@ function recup_horaire_cinema(horaires){
 						console.log('format: '+format);
 						document.getElementById('filmEnSalle'+donnees.onShow.movie.code+'-'+langue+'-'+format).addEventListener('click', function(){
 							document.getElementById('section5').style.display="block";
+							$('body').scrollTo('#section5',{duration:'slow'});
+							console.log('Tu viens de choisir un film à l affiche du cinéma');
 							$(".showtime-btn").remove();
 							movieCard(donnees);
 						});
