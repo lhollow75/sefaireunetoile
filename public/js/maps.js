@@ -35,6 +35,8 @@ function recherche(){
 			initMap(latitude, longitude);
 			document.getElementById('section2').style.display="none";
 			document.getElementById('section3').style.display="block";
+			$('body').scrollTo('#section3',{duration:'slow'});
+
 		} else {
 			
 		}
