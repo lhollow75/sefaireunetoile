@@ -43,7 +43,6 @@ function recherche(){
 	}, 1000);
 }
 
-
 // Geolocates user based on the navigator position
 function geolocalisation() {
 	console.log("geolocalisation");
@@ -75,4 +74,4 @@ function initMap(latitude, longitude) {
 		title: 'Carte',
 		icon: img
 	});
-}
+};
