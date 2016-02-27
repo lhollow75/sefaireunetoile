@@ -5,6 +5,8 @@ cleanScreen();
 document.getElementById('section2').style.display="block";
 document.getElementById('chatroom').style.display="none";
 
+document.getElementById("mute").addEventListener("click", function(){ document.getElementById("vid").muted = !document.getElementById("vid").muted;});
+
 
 document.getElementById('CGU').addEventListener('click', function(){ 
 	cleanScreen();
