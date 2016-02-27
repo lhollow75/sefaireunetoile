@@ -320,7 +320,7 @@ function geolocate() {
 // Lance la recherche du film dans la tableau à chaque ajout d'une lettre
 function movieFinder(){
 	document.getElementById("select-theater").innerHTML= "Sélectionnez un cinéma proche de chez vous";
-	current_movie = "undefined";
+	// current_movie = "undefined";
 	$(".movie-results").remove();
 	if (elt_movie.value.length >= 2){
 		// console.log(tab_rates.length);

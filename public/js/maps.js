@@ -9,9 +9,9 @@ function recherche(){
 	// Choice of the parcours (1: without movie; 2: with a movie)
 	if (current_movie == undefined || document.getElementById('movie').value == "") parcours = 1; else parcours = 2;
 	
-	// console.log("current_movie: "+current_movie);
-	// console.log("movie: "+document.getElementById('movie').value);
-	// console.log("parcours: "+parcours);
+	console.log("current_movie: "+current_movie);
+	console.log("movie: "+document.getElementById('movie').value);
+	console.log("parcours: "+parcours);
 	
 	// Si on clique sur la recherche sans avoir entré de localisation, lance la géolocalisation
 	if (elt_autocomplete.value == "" || elt_autocomplete.value == "Ma position"){
