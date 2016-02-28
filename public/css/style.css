@@ -7,11 +7,11 @@ html, body {
 /* Importation des polices de caractères */
 @font-face {
     font-family: 'icomoon';
-    src:    url('../fonts/cine/icomoon.eot?itn9qu');
-    src:    url('../fonts/cine/icomoon.eot?itn9qu#iefix') format('embedded-opentype'),
-    url('../fonts/cine/icomoon.ttf?itn9qu') format('truetype'),
-    url('../fonts/cine/icomoon.woff?itn9qu') format('woff'),
-    url('../fonts/cine/icomoon.svg?itn9qu#icomoon') format('svg');
+    src:    url('../fonts/cine/icomoon.eot?dr3h5d');
+    src:    url('../fonts/cine/icomoon.eot?dr3h5d#iefix') format('embedded-opentype'),
+    url('../fonts/cine/icomoon.ttf?dr3h5d') format('truetype'),
+    url('../fonts/cine/icomoon.woff?dr3h5d') format('woff'),
+    url('../fonts/cine/icomoon.svg?dr3h5d#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -178,10 +178,10 @@ video{
 .icon-msg:before{
   content: "\e90c";
 }
-.icon-sound_no:before {
+.icon-sound:before {
     content: "\e917";
 }
-.icon-sound_ok:before {
+.icon-mute:before {
     content: "\e918";
 }
 

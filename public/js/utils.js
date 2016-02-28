@@ -7,6 +7,13 @@ document.getElementById('chatroom').style.display="none";
 
 document.getElementById("mute").addEventListener("click", function(){ document.getElementById("vid").muted = !document.getElementById("vid").muted;});
 
+//Si le son est coupé
+//document.getElementById("sound").className = "icon-mute";
+//Sinon
+//document.getElementById("sound").className = "icon-sound";
+
+
+
 
 document.getElementById('CGU').addEventListener('click', function(){ 
 	cleanScreen();
