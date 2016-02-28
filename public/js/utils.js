@@ -5,15 +5,14 @@ cleanScreen();
 document.getElementById('section2').style.display="block";
 document.getElementById('chatroom').style.display="none";
 
-document.getElementById("mute").addEventListener("click", function(){ document.getElementById("vid").muted = !document.getElementById("vid").muted;});
-
-//Si le son est coupé
-//document.getElementById("sound").className = "icon-mute";
-//Sinon
-//document.getElementById("sound").className = "icon-sound";
-
-
-
+document.getElementById("mute").addEventListener("click", function(){ 
+	if (document.getElementById("vid").muted == false){
+		document.getElementById("sound").className = "icon-mute";	
+	} else {
+		document.getElementById("sound").className = "icon-sound";
+	}
+	document.getElementById("vid").muted = !document.getElementById("vid").muted;
+});
 
 document.getElementById('CGU').addEventListener('click', function(){ 
 	cleanScreen();
