@@ -68,7 +68,7 @@
 
     /* Chat informations */
     #chat-infos{
-        width: 160px;
+        width: 135px;
         height: 80px;
         display: inline-block;
         vertical-align: top;
@@ -117,7 +117,7 @@
 
 /* Dialogue 1 */
 .dialogue{
-    margin-bottom: 5px;
+    margin-bottom: -5px;
 }
 
 /* Dialogue 2 */

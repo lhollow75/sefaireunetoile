@@ -277,7 +277,7 @@ function movieCard(donnees){
 				}
 				
 				document.getElementById('chat-movie-title').innerHTML = title;
-				document.getElementById('chat-movie-schedule').innerHTML = showtime;
+				document.getElementById('chat-movie-schedule').innerHTML = "<span class="+"icon-schedule-pin"+"></span> "+showtime;
 				document.getElementById('chat-movie-poster').src = poster;
 				document.getElementById('chat-movie-poster').alt = title;
 				
