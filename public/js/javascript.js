@@ -165,7 +165,7 @@ function recup_horaire_cinema(horaires){
 			if (isTodaysDate(showtimes.movieShowtimes[h].scr[0].d)){ 
 				// Show the informations only if we haven't show them yet --> giving up for now
 				// if (tab_moviesList.indexOf(onShow.code) == -1){
-
+					console.log(onShow);
 					$("#listFilmEnSalle").append(template_filmEnSalle(onShow.code, onShow.title, onShow.poster.href, VOVF(showtimes.movieShowtimes[h].version), showtimes.movieShowtimes[h].screenFormat.$));
 					
 					(function(donnees, langue, format){
@@ -303,7 +303,7 @@ function geolocate() {
 	
 }
 
-// Lance la recherche du film dans la tableau à chaque ajout d'une lettre
+// Search in the array each time a letter is added in the search bar
 function movieFinder(){
 	document.getElementById("select-theater").innerHTML= "Sélectionnez un cinéma proche de chez vous";
 	$(".movie-results").remove();
@@ -325,6 +325,7 @@ function searchStringInArray (str, strArray) {
 			
 			$("#movie_list").append(template(titre_film, id_film));
 			document.getElementById(id_film).addEventListener('click', afficheFilm);
+			document.getElementById('span-'+id_film).addEventListener('click', afficheFilm);
 			fin++;
 		}
 	}
@@ -343,21 +344,28 @@ function afficheFilm(film){
 	}
 	movie.value = giveUpTag(film);
 	current_movie = id;
+	console.log(current_movie);
 	$(".movie-results").remove();
 }
 
-// Appel à l'api allociné pour récupérer le nombre de pages de films en salle
+
+// Call the Allocine API to collect the number of pages it will returns
 function recup_liste_films_en_salle(){
 	var allocine_api = "http://api.allocine.fr/rest/v3/movielist?partner="+key_allocine+"&filter=nowshowing&format=json&order=datedesc";
 	$.getJSON(allocine_api, recup_liste);
 }
 
-// Appel à l'api allociné en fonction du nombre de page
+
+// Call the Allocine API according to the number of pages
 function recup_liste(recup_movie){
-	
+	// If there are results...
 	if (recup_movie.feed.totalResults > 0) {
+		
+		// Round up the number of pages
 		nb_pages = Math.ceil(recup_movie.feed.totalResults/10);
 		lastRelease = recup_movie.feed.movie[0].release.releaseDate;
+		
+		// Call the Allocine API as long as there is page's result
 		for(var j=1; j<= nb_pages; j++){	
 			var allocine_api_page = "http://api.allocine.fr/rest/v3/movielist?partner="+key_allocine+"&filter=nowshowing&order=datedesc&format=json&page="+j;
 			$.getJSON(allocine_api_page, recup_liste_films);
@@ -366,19 +374,21 @@ function recup_liste(recup_movie){
 }
 
 
-// Récupère sur chaque page la liste de film et l'ajoute dans le tableau tab_filmsEnSalle
+// Collect on each pages the movie's list and add it into the tab_filmsEnSalle array
 function recup_liste_films(recup_film){
 
+	// As long as there are movies to collect...
 	for(k=0; k< recup_film.feed.movie.length; k++){	
 		film_recent++;
 		
+		// We put them in the array, only if we can collect the array
 		if ((recup_film.feed.movie[k].defaultMedia != undefined) && (recup_film.feed.movie[k].defaultMedia.media.title != undefined)) {
 			film = splitNom(recup_film.feed.movie[k].defaultMedia.media.title);
 			
 			code_film = recup_film.feed.movie[k].code;
 			tab_filmsEnSalle.push(code_film+";"+film);
 			
-			
+			// If the movie's release is this week, we add the movie's id into the tab_thisWeeksRelease array to show 5 movies on the home page
 			if ((!fin) && (recup_film.feed.movie[k].release.releaseDate ==  lastRelease)){
 
 				tab_thisWeeksRelease.push(code_film+";"+film);
@@ -389,6 +399,7 @@ function recup_liste_films(recup_film){
 			}
 			
 		} else {
+			// We put all the id of movies we couldn't collect the title into the tab_rates array in the purpose of verification
 			tab_rates.push(recup_film.feed.movie[k].code);
 		}
 		
@@ -396,6 +407,7 @@ function recup_liste_films(recup_film){
 
 }
 
+// Random into the tab_thisWeeksRelease's array to show 5 movies on the home page
 function showMeFiveMovies(array){
 	var tab_alreadyThere = [];
 	
@@ -414,14 +426,19 @@ function showMeFiveMovies(array){
 }
 
 
-// Put the 5 movies on the home page
+// Put the 5 movies on the home page with the help of the template: template_moviesOfTheWeek
 function showMoviePicture(recup_info, _id, _titre){
 
 	info = recup_info.movie;
+	
+	// If the short's synopsis is not here, we collect the regular one
 	if (info.synopsisShort == undefined){
 		synopsis = info.synopsis;
 	} else synopsis = info.synopsisShort;
+	
 	$("#movieOfTheWeek").append(template_moviesOfTheWeek(_id, _titre, giveUpTag(synopsis), rateClass(info.statistics.pressRating), rateClass(info.statistics.userRating), info.trailer.href, info.media[0].thumbnail.href));
+	
+	// Add the click on the poster
 	(function(donnees){
 		document.getElementById('affiche'+donnees).addEventListener('click', afficheFilm);
 	})(_id)

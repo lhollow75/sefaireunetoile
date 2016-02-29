@@ -16,7 +16,7 @@ var template_showtimes = function(id, showtime){
 var template_filmEnSalle = function(code, title, source, langue, format){
 	var _tpl = [
 		'<li id="filmEnSalle'+code+'-'+langue+'-'+format+'" class="en-salle">',
-							'<img id = "afficheEnSalle'+code+'" class="da-affiche" src="'+source+'" alt="'+title+'">',
+				'<img id = "afficheEnSalle'+code+'" class="da-affiche" src="'+source+'" alt="'+title+'">',
 				'<h3 class="da-title">'+title+'</h3>',
 				'<h4 class="da-langue">'+langue+'</h4>',
 				'<h4 class="da-format">'+format+'</h4>',
