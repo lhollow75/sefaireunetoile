@@ -28,7 +28,6 @@ module.exports = function(){
         
         listen : function(){
             this._server.listen(1337);
-            console.log('Now listening');
         }
     }
 };
