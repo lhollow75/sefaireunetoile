@@ -1,17 +1,20 @@
+//Button close, for the chat div.
 document.getElementById('chat-btn-close').addEventListener('click', function(){
 	document.getElementById('chatroom').style.display='none';
 });
 
+//Connecting socket to the 1337 port.
 var socket = io.connect('http://localhost:1337');
         
 	// Listener, whenever the server emits 'updatechat', this updates the chat body :
 	socket.on('updatechat', function (username, data) {
         $('#zone_chat').append('<p class="dialogue"><span class="contact_nickname">'+username + '</span><span class="arrow"></span><span class="contact_message">' + data + '</p>');
+        //Locking scroll to the bottom of the chat
         var chat = document.getElementById('zone_chat');
         chat.scrollTop = chat.scrollHeight;
 	});
         
-        
+    //On every user moving (connecting, disconnecting, or chatroom switch), this updates the number of users connected.
     socket.on('updateconnected', function(usernumber){
         $('#chat-people').css('visibility','visible');
         $('#connected-number').empty();
