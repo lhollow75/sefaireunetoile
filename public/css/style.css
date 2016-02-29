@@ -122,8 +122,10 @@ h4 {
 }
 video{
     width: 100%;
+    height: 600px;
     min-height: 700px;
     margin-top: -100px;
+    overflow: hidden;
     object-fit: cover;
         filter: brightness(50%);
         -webkit-filter: brightness(50%);
@@ -223,7 +225,7 @@ video{
 	width: 100%;
     margin: 0px auto 0px auto;
     background: url("../img/background.jpg") no-repeat left;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 
