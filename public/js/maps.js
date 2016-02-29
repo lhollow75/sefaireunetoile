@@ -9,10 +9,6 @@ function recherche(){
 	// Choice of the parcours (1: without movie; 2: with a movie)
 	if (current_movie == undefined || document.getElementById('movie').value == "") parcours = 1; else parcours = 2;
 	
-	console.log("current_movie: "+current_movie);
-	console.log("movie: "+document.getElementById('movie').value);
-	console.log("parcours: "+parcours);
-	
 	// Si on clique sur la recherche sans avoir entré de localisation, lance la géolocalisation
 	if (elt_autocomplete.value == "" || elt_autocomplete.value == "Ma position"){
 		geolocalisation();
@@ -21,7 +17,6 @@ function recherche(){
 	
 
 	setTimeout(function() {
-		console.log("lat/long: "+latitude+"/"+longitude);
 		if (latitude != undefined && longitude != undefined){
 			// Récupération des cinémas aux alentours
 			if (parcours == 1){
@@ -45,7 +40,6 @@ function recherche(){
 
 // Geolocates user based on the navigator position
 function geolocalisation() {
-	console.log("geolocalisation");
 	elt_autocomplete.value = "Ma position";
 	var geoSuccess = function(position) {
 		latitude = position.coords.latitude;
