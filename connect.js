@@ -19,7 +19,6 @@ module.exports = function(app){
                 socket.on('adduser',function(username){
                     socket.username = username;
                     usernames[username] = username;
-                   
                 });
                 socket.on('generaterooms',function(maxrooms){
                     socket.roomGeneration = roomsGenerated;
@@ -41,20 +40,14 @@ module.exports = function(app){
                 socket.on('roomchoice',function(roomnumber){
                         socket.room = 'room'+roomnumber;
                         socket.join('room'+roomnumber);
-                        tab_room.push(roomnumber);
-                        console.log(tab_room);
-                        /*Counting in room
-                        var numberroom = 0;
-                        for (var i = 0 ; i < tab_room.length ; i++){
-                            if (tab_room[0] === tab_room[i]){
-                                numberroom++;
-                                var y = numberroom;
-                            }
-                        }
-                        socket.emit('usersinroom',y);
-                        */
+                        /*Couting users in room*/
+                        var clients = socket.adapter.rooms[socket.room];
+                        var numClients = (typeof clients !== 'undefined') ? Object.keys(clients).length : 0;
+                        socket.in(socket.room).emit('updateconnected', numClients);
+                        socket.emit('updateconnected', numClients);
+                        /*Couting users in room*/
                         socket.emit('updatechat', 'Chat', 'Vous avez rejoint la room !');
-                        socket.broadcast.to('room'+roomnumber).emit('updatechat', 'Chat', socket.username + ' a rejoint la conversation.');
+                        socket.broadcast.emit('updatechat', 'Chat', socket.username + ' a rejoint la conversation.');
                         socket.emit('updaterooms', rooms, 'room'+roomnumber);
                 });
                 socket.on('sendchat', function (data) {
@@ -66,6 +59,12 @@ module.exports = function(app){
                     }
 	            });
                 socket.on('switchRoom', function(newroom){
+                    /*Couting users in room*/
+                    var clients = socket.adapter.rooms[socket.room];
+                    var numClients = (typeof clients !== 'undefined') ? Object.keys(clients).length : 0;
+                    socket.in(socket.room).emit('updateconnected', numClients);
+                    socket.emit('updateconnected', numClients);
+                    /*Couting users in room*/
                     //We disconnect the user from the current room.
 		            socket.leave(socket.room);
                     //We define a variable, 'newroom' which is the new room selected.
@@ -83,9 +82,14 @@ module.exports = function(app){
 		          // Remove the username from the usernames list :
 		          delete usernames[socket.username];
 		          // Update list of users in chat, client-side :
-		          socket.emit('updateusers', usernames);
+		          socket.emit('updateusers', usernames); 
 		          // Broadcast that this client has left :
 		          socket.broadcast.to(socket.room).emit('updatechat', 'Chat', socket.username + ' a quitté le chat.');
+                  /*Couting users in room*/
+                  var clients = socket.adapter.rooms[socket.room];
+                  var numClients = (typeof clients !== 'undefined') ? Object.keys(clients).length : 0;
+                  socket.broadcast.emit('updateconnected', numClients);
+                  /*Couting users in room*/
                   //Quitting the current room :
 		          socket.leave(socket.room);
 	           });
